@@ -28,7 +28,7 @@ requirements:
     - enum-compat >=0.0.1
     - funcsigs
     - future
-    - gevent 1.3.7.*
+    - gevent
     - python-graphviz >=0.8.4
     - pathlib2 >=2.3.4  # [py2k]
     - psutil >=1.0  # [win]
