@@ -1,5 +1,5 @@
 {% set name = "dagster" %}
-{% set version = "0.6.5" %}
+{% set version = "0.6.6" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: b71ed0318a5a663b124e59909e017d0237ec1cfd56a4575c3607872972ed02cf
+  sha256: 89a45e15f1005e42b025abbd8c071ac95dd83e9eefda4c01646e1e9f83ce5d86
 
 build:
   number: 0
@@ -27,6 +27,7 @@ requirements:
     - contextlib2 >=0.5.4
     - enum-compat >=0.0.1
     - funcsigs
+    - functools32  # [py2k]
     - future
     - gevent
     - python-graphviz >=0.8.4
@@ -37,7 +38,7 @@ requirements:
     - pywin32 !=226  # [win]
     - pyyaml >=3.10,<5
     - rx 1.6.1.*
-    - six >=1.11.0
+    - six
     - sqlalchemy >=1.0
     - toposort >=1.0
     - typing  # [py2k]
