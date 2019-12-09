@@ -27,6 +27,7 @@ requirements:
     - contextlib2 >=0.5.4
     - enum-compat >=0.0.1
     - funcsigs
+    - functools32  # [py2k]
     - future
     - gevent
     - python-graphviz >=0.8.4
@@ -37,7 +38,7 @@ requirements:
     - pywin32 !=226  # [win]
     - pyyaml >=3.10,<5
     - rx 1.6.1.*
-    - six >=1.11.0
+    - six
     - sqlalchemy >=1.0
     - toposort >=1.0
     - typing  # [py2k]
