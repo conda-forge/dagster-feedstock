@@ -45,6 +45,8 @@ requirements:
     - watchdog >=0.8.3
 
 test:
+  requires:
+    - pip
   imports:
     - dagster
     - dagster.check
@@ -69,6 +71,7 @@ test:
     - dagster.utils
   commands:
     - dagster --help
+    - pip check
 
 about:
   home: "https://github.com/dagster-io/dagster"
