@@ -21,6 +21,7 @@ requirements:
     - python
     - setuptools
   run:
+    - alembic
     - backports.tempfile  # [py2k]
     - click >=5.0
     - coloredlogs >=6.1
