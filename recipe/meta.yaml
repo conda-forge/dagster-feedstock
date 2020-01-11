@@ -1,5 +1,5 @@
 {% set name = "dagster" %}
-{% set version = "0.6.6" %}
+{% set version = "0.6.7" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 89a45e15f1005e42b025abbd8c071ac95dd83e9eefda4c01646e1e9f83ce5d86
+  sha256: 4a0fe2009b1f8809bde4767a82cc08f17472ea887f91ae2d4b2607b9aa2ee20c
 
 build:
   number: 0
@@ -21,6 +21,7 @@ requirements:
     - python
     - setuptools
   run:
+    - alembic
     - backports.tempfile  # [py2k]
     - click >=5.0
     - coloredlogs >=6.1
@@ -45,6 +46,8 @@ requirements:
     - watchdog >=0.8.3
 
 test:
+  requires:
+    - pip
   imports:
     - dagster
     - dagster.check
@@ -69,6 +72,7 @@ test:
     - dagster.utils
   commands:
     - dagster --help
+    - pip check
 
 about:
   home: "https://github.com/dagster-io/dagster"
