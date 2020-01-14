@@ -1,5 +1,5 @@
 {% set name = "dagster" %}
-{% set version = "0.6.7" %}
+{% set version = "0.6.7.post0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 4a0fe2009b1f8809bde4767a82cc08f17472ea887f91ae2d4b2607b9aa2ee20c
+  sha256: 1352d0d7d13bb2207a37c91a5acf0cede200ac08258f4b8490b974def99d753d
 
 build:
   number: 0
