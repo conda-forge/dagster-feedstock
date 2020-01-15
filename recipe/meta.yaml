@@ -234,7 +234,6 @@ outputs:
   - name: dagster-aws
     build:
       number: {{ build_number }}
-      noarch: python
       entry_points:
         - dagster-aws = dagster_aws.cli.cli:main
       script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -246,9 +245,11 @@ outputs:
       run:
         - boto3 1.9.*
         - dagster {{ version }}.*
+        - mock  # [py2k]
         - python
         - requests
         - terminaltables
+        - win-unicode-console  # [win]
 
     test:
       requires:
@@ -699,6 +700,7 @@ outputs:
         - python
         - slackclient <2
         - websocket-client <0.55.0,>=0.35
+        - ssl_match_hostname
 
     test:
       requires:
