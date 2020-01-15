@@ -834,8 +834,9 @@ outputs:
       summary: "A Dagster integration for twilio"
 
 about:
-  home: https://dagster.io
-  dev_url: https://github.com/dagster-io
+  home: https://github.com/dagster-io
+  license: Apache-2.0
+  license_family: APACHE
   doc_url: https://dagster.readthedocs.io
   description: >-
     Dagster is a system for building modern data applications. Combining an
