@@ -11,7 +11,8 @@ build:
 requirements:
   host:
     - python
-    - pip
+  run:
+    - python
 
 source:
   - folder: dagit
@@ -123,7 +124,7 @@ outputs:
       run:
         - click >=7.0
         - dagster {{ version }}.*
-        - dagster_graphql {{ version }}.*
+        - dagster-graphql {{ version }}.*
         - enum-compat >=0.0.1
         - flask >=0.12.4
         - flask-cors >=3.0.6
@@ -251,7 +252,7 @@ outputs:
 
     test:
       requires:
-        - dagster_pyspark
+        - dagster-pyspark
         - pip
         - python <3.8.0a0
       imports:
@@ -343,7 +344,7 @@ outputs:
       run:
         - bokeh
         - dagster {{ version}}.*
-        - dagster_graphql  {{ version }}.*
+        - dagster-graphql {{ version }}.*
         - dask >=1.2.2
         - distributed >=1.28.1
         - python >=3
@@ -436,7 +437,7 @@ outputs:
         - python
       run:
         - dagster
-        - dagster_pandas
+        - dagster-pandas
         - google-api-python-client
         - google-cloud-bigquery >=1.19
         - google-cloud-storage
@@ -636,12 +637,13 @@ outputs:
         - python
 
     test:
-      requires:
-        - pip
+      # this cannot be `pip check`ed because of the psycopg2[-binary] fiasco
+      # requires:
+      #   - pip
       imports:
         - dagster_postgres
-      commands:
-        - pip check
+      # commands:
+      #   - pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-postgres"
@@ -662,7 +664,7 @@ outputs:
         - python
       run:
         - dagster {{ version }}.*
-        - dagster_spark {{ version }}.*
+        - dagster-spark {{ version }}.*
         - pyspark
         - python
 
@@ -696,6 +698,7 @@ outputs:
         - dagster {{ version }}.*
         - python
         - slackclient <2
+        - websocket-client <0.55.0,>=0.35
 
     test:
       requires:
@@ -726,7 +729,7 @@ outputs:
         - azure-storage-blob <12
         - dagster {{ version }}.*
         - python
-        - snowflake-connector-python 2.0.1.*
+        - snowflake-connector-python >=2.1.0
 
     test:
       requires:
