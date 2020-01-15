@@ -148,7 +148,7 @@ outputs:
         - dagit.schema
         - dagit.templates
       commands:
-        - pip check
+        - python -m pip check
         - dagit-cli --help
         - dagit --help
 
@@ -222,7 +222,7 @@ outputs:
         - dagster.utils
       commands:
         - dagster --help
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster"
@@ -255,16 +255,16 @@ outputs:
       requires:
         - dagster-pyspark
         - pip
-        - python <3.8.0a0
+        - python
       imports:
         - dagster_aws
         - dagster_aws.cli
         - dagster_aws.cloudwatch
-        - dagster_aws.emr
+        - dagster_aws.emr  # [not py38]
         - dagster_aws.s3
       commands:
         - dagster-aws --help
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws"
@@ -293,7 +293,7 @@ outputs:
       imports:
         - dagster_bash
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-bash"
@@ -323,7 +323,7 @@ outputs:
       imports:
         - dagster_cron
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-cron"
@@ -356,7 +356,7 @@ outputs:
       imports:
         - dagster_dask
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dask"
@@ -387,7 +387,7 @@ outputs:
       imports:
         - dagster_datadog
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-datadog"
@@ -417,7 +417,7 @@ outputs:
       imports:
         - dagster_dbt
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dbt"
@@ -455,7 +455,7 @@ outputs:
         - dagster_gcp.dataproc
         - dagster_gcp.gcs
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-gcp"
@@ -485,7 +485,7 @@ outputs:
       imports:
         - dagster_ge
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster"
@@ -523,7 +523,7 @@ outputs:
         - dagster_graphql.schema
       commands:
         - dagster-graphql --help
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql"
@@ -553,7 +553,7 @@ outputs:
       imports:
         - dagster_pagerduty
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pagerduty"
@@ -584,7 +584,7 @@ outputs:
       imports:
         - dagster_pandas
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster"
@@ -613,7 +613,7 @@ outputs:
       imports:
         - dagster_papertrail
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-papertrail"
@@ -644,7 +644,7 @@ outputs:
       imports:
         - dagster_postgres
       # commands:
-      #   - pip check
+      #   - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-postgres"
@@ -676,7 +676,7 @@ outputs:
       imports:
         - dagster_pyspark
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-framework/pyspark"
@@ -708,7 +708,7 @@ outputs:
       imports:
         - dagster_slack
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-slack"
@@ -739,7 +739,7 @@ outputs:
       imports:
         - dagster_snowflake
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake"
@@ -768,7 +768,7 @@ outputs:
       imports:
         - dagster_spark
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-spark"
@@ -799,7 +799,7 @@ outputs:
       imports:
         - dagster_ssh
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-ssh"
@@ -829,7 +829,7 @@ outputs:
       imports:
         - dagster_twilio
       commands:
-        - pip check
+        - python -m pip check
 
     about:
       home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-twilio"
