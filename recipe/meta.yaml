@@ -5,15 +5,6 @@ package:
   name: dagster
   version: {{ version }}
 
-build:
-  number: {{ build_number }}
-
-requirements:
-  host:
-    - python
-  run:
-    - python
-
 source:
   - folder: dagit
     url: "https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz"
@@ -101,11 +92,20 @@ source:
 
 
 build:
-  number: 0
+  number: {{ build_number }}
+
+
+requirements:
+  host:
+    - python
+  run:
+    - python
+
 
 test:
   commands:
     - echo "TODO"
+
 
 outputs:
   - name: dagit
@@ -838,8 +838,10 @@ outputs:
 
 about:
   home: https://github.com/dagster-io
+  summary: 'A Python library for building data applications: ETL, ML, Data Pipelines, and more.'
   license: Apache-2.0
   license_family: APACHE
+  license_file: dagster/LICENSE
   doc_url: https://dagster.readthedocs.io
   description: >-
     Dagster is a system for building modern data applications. Combining an
