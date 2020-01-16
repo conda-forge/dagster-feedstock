@@ -259,7 +259,8 @@ outputs:
         - dagster_aws
         - dagster_aws.cli
         - dagster_aws.cloudwatch
-        - dagster_aws.emr  # [not py38]
+        # not sure why selector not working
+        # - dagster_aws.emr  # [not py38]
         - dagster_aws.s3
       commands:
         - chcp 65001 && set PYTHONIOENCODING=utf-8 && dagster-aws --help  # [win]
