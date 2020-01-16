@@ -249,7 +249,7 @@ outputs:
         - python
         - requests
         - terminaltables
-        - win-unicode-console  # [win]
+        - colorama  # [win]
 
     test:
       requires:
