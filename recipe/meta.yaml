@@ -249,7 +249,6 @@ outputs:
         - python
         - requests
         - terminaltables
-        - colorama  # [win]
 
     test:
       requires:
@@ -263,7 +262,8 @@ outputs:
         - dagster_aws.emr  # [not py38]
         - dagster_aws.s3
       commands:
-        - dagster-aws --help
+        - chcp 65001 && set PYTHONIOENCODING=utf-8 && dagster-aws --help  # [win]
+        - dagster-aws --help  # [not win]
         - python -m pip check
 
     about:
