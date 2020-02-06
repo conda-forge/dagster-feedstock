@@ -10,7 +10,8 @@ package:
 # - dagster-aws      issues with python 3.8
 # - dagster-celery   missing transient dependency (billiard >=3.6.1)
 # - dagster-dask     issues with python 2.7
-# - dagster-gcp     issues with win/python 2.7
+# - dagstermill      issues with python 2.7
+# - dagster-gcp      issues with win/python 2.7
 # - dagster-pyspark  issues with python 3.8
 
 source:
@@ -89,10 +90,6 @@ source:
   - folder: dagster-twilio
     url: "https://pypi.io/packages/source/d/dagster-twilio/dagster-twilio-{{ version }}.tar.gz"
     sha256: 33ce7363d1e00517bc6bfa06e6e05ba476a17e36a68a9b376b6409f41a814286
-
-  - folder: dagstermill
-    url: "https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ version }}.tar.gz"
-    sha256: 9b3dba0b8ce064cabbb6aa4eecd4ee3f77037b854a90ce52998518bc4d86da27
 
 
 build:
@@ -754,43 +751,6 @@ outputs:
       license_file: dagster-twilio/LICENSE
       summary: "A Dagster integration for twilio"
 
-  - name: dagstermill
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagstermill && {{ PYTHON }} -m pip install . -vv --no-deps
-      entry_points:
-        - dagstermill = dagstermill.cli:main
-
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster {{ version }}.*
-        - dagster-pandas
-        - ipykernel >=4.9.0
-        - nteract-scrapbook >=0.2.0
-        - papermill >=1.0.0
-        - python
-        - scikit-learn >=0.19.0
-        - six
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagstermill
-      commands:
-        - dagstermill --help
-        - python -m pip check
-
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagstermill"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagstermill/LICENSE
-      summary: "A Dagster integration for papermill"
 
 about:
   home: https://github.com/dagster-io
