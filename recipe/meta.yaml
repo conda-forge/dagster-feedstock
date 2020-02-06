@@ -10,6 +10,7 @@ package:
 # - dagster-aws      issues with python 3.8
 # - dagster-celery   missing transient dependency (billiard >=3.6.1)
 # - dagster-dask     issues with python 2.7
+# - dagster-gcp     issues with win/python 2.7
 # - dagster-pyspark  issues with python 3.8
 
 source:
@@ -36,10 +37,6 @@ source:
   - folder: dagster-dbt
     url: "https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ version }}.tar.gz"
     sha256: c80b06b46d96d6f32b816d013812bb42469e672f9ea57dfef426055f7c0649ab
-
-  - folder: dagster-gcp
-    url: "https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ version }}.tar.gz"
-    sha256: f7c309f0dd71e3a51ec7ad09d853bb15a85e940986066687cdc0784714bdd03b
 
   - folder: dagster-ge
     url: "https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ version }}.tar.gz"
@@ -353,44 +350,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-dbt/LICENSE
       summary: "Package for Dagster dbt integration."
-
-  - name: dagster-gcp
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-gcp && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster
-        - dagster-pandas
-        - google-api-python-client
-        - google-cloud-bigquery >=1.19
-        - google-cloud-storage
-        - google-resumable-media >=0.3.1,<0.5.0a0
-        - oauth2client
-        - python
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_gcp
-        - dagster_gcp.bigquery
-        - dagster_gcp.dataproc
-        - dagster_gcp.gcs
-      commands:
-        - python -m pip check
-
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-gcp"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-gcp/LICENSE
-      summary: "Package for GCP-specific Dagster framework solid and resource components."
 
   - name: dagster-ge
     build:
