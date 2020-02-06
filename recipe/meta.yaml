@@ -284,6 +284,7 @@ outputs:
         - celery >=4.3.0
         - click >=5.0
         - dagster {{ version }}.*
+        - dagster-graphql {{ version }}.*
         - python
 
     test:
