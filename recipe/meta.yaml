@@ -42,13 +42,17 @@ source:
     url: "https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ version }}.tar.gz"
     sha256: 5ddae6ab8185e61899203837c3cb80c224fafb4a87ff4a1d9d7d18e69c2d934d
 
+  - folder: dagster-github
+    url: "https://pypi.io/packages/source/d/dagster-github/dagster-github-{{ version }}.tar.gz"
+    sha256: 50edfc0b9dfeca90a4eb451b274fc721fb5a56b4d3882da49f93c24ea96c4af8
+
   - folder: dagster-graphql
     url: "https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz"
     sha256: 3dd6a8757f5994acf0d79bf0660d63c9ea04f1b63947a71a7eadd98b10008985
 
   - folder: dagster-pagerduty
     url: "https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ version }}.tar.gz"
-    sha256: 8c3ed6d90ed7ee97cee28c8950f539bb1ea6eb50fdc4a3c93699b462fd0fdcc0
+    sha256: 164aefdb477c49fdce0fbad2b47c79854f29de8667f5fa89fd17d839a205167d
 
   - folder: dagster-pandas
     url: "https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ version }}.tar.gz"
@@ -133,7 +137,7 @@ outputs:
         - graphql-ws >=0.3.0
         - nbconvert >=5.4.0
         - python
-        - pyyaml >=3.10,<5
+        - pyyaml
         - watchdog >=0.8.3
 
     test:
@@ -149,11 +153,11 @@ outputs:
         - dagit --help
 
     about:
-      home: "https://github.com/dagster-io/dagster"
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagit"
       license: Apache-2.0
       license_family: APACHE
       license_file: dagit/LICENSE
-      summary: "Web UI for dagster."
+      summary: "Dagster UI"
 
   - name: dagster
     build:
@@ -442,11 +446,42 @@ outputs:
         - python -m pip check
 
     about:
-      home: "https://github.com/dagster-io/dagster"
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-ge"
       license: Apache-2.0
       license_family: APACHE
       license_file: dagster-ge/LICENSE
       summary: "Great Expectations plugin for Dagster"
+
+  - name: dagster-github
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-github && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - cryptography >=1.4
+        - dagster {{ version }}.*
+        - pyjwt
+        - requests
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_github
+      commands:
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-github"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-github/LICENSE
+      summary: "Github plugin for Dagster"
 
   - name: dagster-graphql
     build:
