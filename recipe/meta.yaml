@@ -315,6 +315,7 @@ outputs:
         - pip
         - python
       run:
+        - airflow
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - docker-py
