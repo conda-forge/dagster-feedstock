@@ -14,6 +14,10 @@ source:
     url: "https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz"
     sha256: e9a683eae89a6a2898b68ea8a3fde2cf30a5192c391b2cf8dab8a08f10ee28d3
 
+  - folder: dagster-airflow
+    url: "https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz"
+    sha256: 9ee2311ec0ae1a6b375e2fb7d31bd0e7b50ee56d59c191a98f3bf2b259060e6e
+
   - folder: dagster-bash
     url: "https://pypi.io/packages/source/d/dagster-bash/dagster-bash-{{ version }}.tar.gz"
     sha256: 8b1d280d7093b2745e92a8a280bb7558d4b6c30f9712bfee3821aaa52407534c
@@ -259,6 +263,39 @@ outputs:
       license_family: APACHE
       license_file: dagster-bash/LICENSE
       summary: "Package for Dagster bash solids."
+
+  - name: dagster-airflow
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster {{ version }}.*
+        - dagster-graphql {{ version }}.*
+        - docker-py
+        - python
+        - python-dateutil >=2.8.0
+        - six
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_airflow
+      commands:
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-airflow/LICENSE
+      summary: "Airflow plugin for Dagster"
 
   - name: dagster-cron
     build:
