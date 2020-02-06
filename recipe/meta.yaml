@@ -70,10 +70,6 @@ source:
     url: "https://pypi.io/packages/source/d/dagster-prometheus/dagster-prometheus-{{ version }}.tar.gz"
     sha256: 5bdf9a500abe8e8fa0c7cb9043101b17edadd388c8ae4834c07de82a169893e1
 
-  - folder: dagster-pyspark
-    url: "https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ version }}.tar.gz"
-    sha256: d66a44bfe28c0efadcaea435b496d0d3f6bd3635d982ecfc6c6a6d6f65d37cf0
-
   - folder: dagster-slack
     url: "https://pypi.io/packages/source/d/dagster-slack/dagster-slack-{{ version }}.tar.gz"
     sha256: 7caa42e161713af5aff4e066c1a965127d9cdd488f2488284daa8778f9b06892
@@ -671,38 +667,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-prometheus/LICENSE
       summary: "A Dagster integration for prometheus"
-
-  - name: dagster-pyspark
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster {{ version }}.*
-        - dagster-spark {{ version }}.*
-        - pyspark
-        - python
-
-    test:
-      requires:
-        - pip
-        - python <3.8.0a0
-      imports:
-        - dagster_pyspark
-      commands:
-        - python -m pip check
-
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-framework/pyspark"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-pyspark/LICENSE
-      summary: "Package for PySpark Dagster framework components."
 
   - name: dagster-slack
     build:
