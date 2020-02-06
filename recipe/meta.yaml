@@ -269,6 +269,8 @@ outputs:
       number: {{ build_number }}
       noarch: python
       script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagster-airflow = dagster_airflow.cli:main
 
     requirements:
       host:
