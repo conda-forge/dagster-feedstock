@@ -406,7 +406,7 @@ outputs:
         - google-api-python-client
         - google-cloud-bigquery >=1.19
         - google-cloud-storage
-        - google-resumable-media
+        - google-resumable-media >=0.3.1,<0.5.0a0
         - oauth2client
         - python
 
