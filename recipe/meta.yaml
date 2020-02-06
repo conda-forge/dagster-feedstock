@@ -5,6 +5,12 @@ package:
   name: dagster
   version: {{ version }}
 
+# TODO: all of the below failed to build in this setup for some reason
+# - dagster-airflow  issues with python 3.8
+# - dagster-aws      issues with python 3.8
+# - dagster-celery   missing transient dependency (billiard >=3.6.1)
+# - dagster-pyspark  issues with python 3.8
+
 source:
   - folder: dagit
     url: "https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz"
@@ -17,10 +23,6 @@ source:
   - folder: dagster-bash
     url: "https://pypi.io/packages/source/d/dagster-bash/dagster-bash-{{ version }}.tar.gz"
     sha256: 8b1d280d7093b2745e92a8a280bb7558d4b6c30f9712bfee3821aaa52407534c
-
-  - folder: dagster-celery
-    url: "https://pypi.io/packages/source/d/dagster-celery/dagster-celery-{{ version }}.tar.gz"
-    sha256: e3cf1283889b1f87f4511d7b68b6ff9576cc00e0f569adfdf005e5567f1356bf
 
   - folder: dagster-cron
     url: "https://pypi.io/packages/source/d/dagster-cron/dagster-cron-{{ version }}.tar.gz"
@@ -263,41 +265,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-bash/LICENSE
       summary: "Package for Dagster bash solids."
-
-  - name: dagster-celery
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-celery && {{ PYTHON }} -m pip install . -vv --no-deps
-      entry_points:
-        - dagster-celery = dagster_celery.cli:main
-
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - celery >=4.3.0
-        - click >=5.0
-        - dagster {{ version }}.*
-        - dagster-graphql {{ version }}.*
-        - python
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_celery
-      commands:
-        - dagster-celery --help
-        - python -m pip check
-
-    about:
-      home: "https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-celery/LICENSE
-      summary: "Package for using Celery as Dagster's execution engine."
 
   - name: dagster-cron
     build:
