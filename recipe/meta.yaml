@@ -66,6 +66,10 @@ source:
     url: "https://pypi.io/packages/source/d/dagster-postgres/dagster-postgres-{{ version }}.tar.gz"
     sha256: ebfc9ec2a6e342ad3a19e9e633b5039d0356c54abe667ebf34d1853eea2fd493
 
+  - folder: dagster-prometheus
+    url: "https://pypi.io/packages/source/d/dagster-prometheus/dagster-prometheus-{{ version }}.tar.gz"
+    sha256: 5bdf9a500abe8e8fa0c7cb9043101b17edadd388c8ae4834c07de82a169893e1
+
   - folder: dagster-pyspark
     url: "https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ version }}.tar.gz"
     sha256: d66a44bfe28c0efadcaea435b496d0d3f6bd3635d982ecfc6c6a6d6f65d37cf0
@@ -637,6 +641,36 @@ outputs:
       license_family: APACHE
       license_file: dagster-postgres/LICENSE
       summary: "A Dagster integration for postgres"
+
+  - name: dagster-prometheus
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-prometheus && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster {{ version }}.*
+        - prometheus_client
+        - python
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_prometheus
+      commands:
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-prometheus"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-prometheus/LICENSE
+      summary: "A Dagster integration for prometheus"
 
   - name: dagster-pyspark
     build:
