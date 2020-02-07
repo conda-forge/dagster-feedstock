@@ -1,27 +1,64 @@
 {% set version = "0.6.9" %}
 {% set build_number = "0" %}
 
+# TODO: more elegant way to get at CONDA_SUBDIR
+{% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
+{% set on_linux_py38 = PY_VER == "3.8" and "linux-64" in compiler("c") %}
+
 package:
   name: dagster
   version: {{ version }}
 
-# TODO: all of the below failed to build in this setup for some reason
-# - dagster-airflow  issues with python 3.8
-# - dagster-aws      issues with python 3.8
-# - dagster-celery   missing transient dependency (billiard >=3.6.1)
-# - dagster-dask     issues with python 2.7
-# - dagstermill      issues with python 2.7
-# - dagster-gcp      issues with win/python 2.7
-# - dagster-pyspark  issues with python 3.8
-
 source:
-  - folder: dagit
-    url: "https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz"
-    sha256: 80b797cc65d10dec1931d5b726e38a826823c5fcb36f1c06e0d3dcf581fca2ac
-
+  # this should always be built
   - folder: dagster
     url: "https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz"
     sha256: e9a683eae89a6a2898b68ea8a3fde2cf30a5192c391b2cf8dab8a08f10ee28d3
+
+  {% if on_linux_py37 or on_linux_py38 %}
+  # these are generally safe to build wherever, but are also required for special builds
+  - folder: dagster-graphql
+    url: "https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz"
+    sha256: 3dd6a8757f5994acf0d79bf0660d63c9ea04f1b63947a71a7eadd98b10008985
+  {% endif %}
+
+  {% if on_linux_py37 %}
+  # these are problematic, and presently build only/most reliably on linux/37
+  # along with their dependencies
+  - folder: dagster-airflow
+    url: "https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz"
+    sha256: 9ee2311ec0ae1a6b375e2fb7d31bd0e7b50ee56d59c191a98f3bf2b259060e6e
+
+  - folder: dagster-aws
+    url: "https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz"
+    sha256: c91e924e2ff19298fca7cfa0cb78a74e3bd798f79f50f2d3b72a72b2054cbb08
+
+  - folder: dagster-celery
+    url: "https://pypi.io/packages/source/d/dagster-celery/dagster-celery-{{ version }}.tar.gz"
+    sha256: e3cf1283889b1f87f4511d7b68b6ff9576cc00e0f569adfdf005e5567f1356bf
+
+  - folder: dagster-dask
+    url: "https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz"
+    sha256: 76c05e3ce984fc12b90ca155d1b32cbf7d1360cfde299031348fc9252f0c0a9a
+
+  - folder: dagster-gcp
+    url: "https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ version }}.tar.gz"
+    sha256: f7c309f0dd71e3a51ec7ad09d853bb15a85e940986066687cdc0784714bdd03b
+
+  - folder: dagster-pyspark
+    url: "https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ version }}.tar.gz"
+    sha256: d66a44bfe28c0efadcaea435b496d0d3f6bd3635d982ecfc6c6a6d6f65d37cf0
+
+  - folder: dagstermill
+    url: "https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ version }}.tar.gz"
+    sha256: 9b3dba0b8ce064cabbb6aa4eecd4ee3f77037b854a90ce52998518bc4d86da27
+  {% endif %}
+
+  {% if on_linux_py38 %}
+  # these are generally safe to build wherever, but can be built most quickly on linux/38
+  - folder: dagit
+    url: "https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz"
+    sha256: 80b797cc65d10dec1931d5b726e38a826823c5fcb36f1c06e0d3dcf581fca2ac
 
   - folder: dagster-bash
     url: "https://pypi.io/packages/source/d/dagster-bash/dagster-bash-{{ version }}.tar.gz"
@@ -46,10 +83,6 @@ source:
   - folder: dagster-github
     url: "https://pypi.io/packages/source/d/dagster-github/dagster-github-{{ version }}.tar.gz"
     sha256: 50edfc0b9dfeca90a4eb451b274fc721fb5a56b4d3882da49f93c24ea96c4af8
-
-  - folder: dagster-graphql
-    url: "https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz"
-    sha256: 3dd6a8757f5994acf0d79bf0660d63c9ea04f1b63947a71a7eadd98b10008985
 
   - folder: dagster-pagerduty
     url: "https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ version }}.tar.gz"
@@ -90,7 +123,7 @@ source:
   - folder: dagster-twilio
     url: "https://pypi.io/packages/source/d/dagster-twilio/dagster-twilio-{{ version }}.tar.gz"
     sha256: 33ce7363d1e00517bc6bfa06e6e05ba476a17e36a68a9b376b6409f41a814286
-
+  {% endif %}
 
 build:
   number: {{ build_number }}
@@ -109,57 +142,7 @@ test:
 
 
 outputs:
-  - name: dagit
-    build:
-      number: {{ build_number }}
-      noarch: python
-      entry_points:
-        - dagit-cli = dagit.cli:main
-        - dagit = dagit.dagit:main
-      script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - click >=7.0
-        - dagster {{ version }}.*
-        - dagster-graphql {{ version }}.*
-        - enum-compat >=0.0.1
-        - flask >=0.12.4
-        - flask-cors >=3.0.6
-        - flask-graphql >=2.0.0
-        - flask-sockets >=0.2.1
-        - future
-        - gevent
-        - gevent-websocket >=0.10.1
-        - graphql-core >=2.1,<3
-        - graphql-ws >=0.3.0
-        - nbconvert >=5.4.0
-        - python
-        - pyyaml
-        - watchdog >=0.8.3
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagit
-        - dagit.schema
-        - dagit.templates
-      commands:
-        - python -m pip check
-        - dagit-cli --help
-        - dagit --help
-
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagit"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagit/LICENSE
-      summary: "Dagster UI"
-
+  # all platform/python versions
   - name: dagster
     build:
       number: {{ build_number }}
@@ -231,6 +214,368 @@ outputs:
       license_family: APACHE
       license_file: dagster/LICENSE
       summary: "Dagster is an opinionated programming model for data pipelines."
+
+  {% if on_linux_py37 or on_linux_py38 %}
+  # needed by both
+  - name: dagster-graphql
+    build:
+      number: {{ build_number }}
+      noarch: python
+      entry_points:
+        - dagster-graphql = dagster_graphql.cli:main
+      script: cd dagster-graphql && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster {{ version }}.*
+        - gevent
+        - gevent-websocket >=0.10.1
+        - graphene >=2.1.3
+        - python
+        - requests
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_graphql
+        - dagster_graphql.client
+        - dagster_graphql.schema
+      commands:
+        - dagster-graphql --help
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-graphql/LICENSE
+      summary: "The GraphQL frontend to python dagster."
+  {% endif %}
+
+  {% if on_linux_py37 %}
+  # issues with python 3.8
+  - name: dagster-airflow
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagster-airflow = dagster_airflow.cli:main
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - airflow
+        - dagster {{ version }}.*
+        - dagster-graphql {{ version }}.*
+        - docker-py
+        - python
+        - python-dateutil >=2.8.0
+        - six
+
+    test:
+      # presently has upstream issues with:
+      # python-daemon 2.1.2 requires docutils, which is not installed.
+      # apache-airflow 1.10.7 has requirement flask-admin==1.5.4, but you have flask-admin 1.5.3.
+      # apache-airflow 1.10.7 has requirement flask-appbuilder~=2.2; python_version >= "3.6", but you have flask-appbuilder 1.12.5.
+      # requires:
+      #   - pip
+      imports:
+        - dagster_airflow
+      commands:
+        - dagster-airflow --help
+        # - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-airflow/LICENSE
+      summary: "Airflow plugin for Dagster"
+
+  # issues with python 3.8
+  - name: dagster-aws
+    build:
+      noarch: python
+      number: {{ build_number }}
+      entry_points:
+        - dagster-aws = dagster_aws.cli.cli:main
+      script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - boto3 1.9.*
+        - dagster {{ version }}.*
+        - mock
+        - python
+        - requests
+        - terminaltables
+
+    test:
+      requires:
+        - dagster-pyspark
+        - pip
+        - python
+      imports:
+        - dagster_aws
+        - dagster_aws.cli
+        - dagster_aws.cloudwatch
+        - dagster_aws.emr
+        - dagster_aws.s3
+      commands:
+        - dagster-aws --help
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws"
+      license: Apache Software
+      license_family: APACHE
+      license_file: dagster-aws/LICENSE
+      summary: "Package for AWS-specific Dagster framework solid and resource components."
+
+  - name: dagster-celery
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-celery && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagster-celery = dagster_celery.cli:main
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - celery >=4.3.0
+        - click >=5.0
+        - dagster {{ version }}.*
+        - dagster-graphql {{ version }}.*
+        - python
+
+    test:
+      # missing transient dependency (billiard >=3.6.1)
+      # requires:
+      #   - pip
+      imports:
+        - dagster_celery
+      commands:
+        - dagster-celery --help
+        # - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-celery/LICENSE
+      summary: "Package for using Celery as Dagster's execution engine."
+
+  # issues with python 2.7
+  - name: dagster-dask
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-dask && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3
+      run:
+        - bokeh
+        - dagster {{ version}}.*
+        - dagster-graphql {{ version }}.*
+        - dask >=1.2.2
+        - distributed >=1.28.1
+        - python >=3
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_dask
+      commands:
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dask"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-dask/LICENSE
+      summary: "Package for using Dask as Dagster's execution engine."
+
+  # issues with win/python 2.7
+  - name: dagster-gcp
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-gcp && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster
+        - dagster-pandas
+        - google-api-python-client
+        - google-cloud-bigquery >=1.19
+        - google-cloud-storage
+        - google-resumable-media
+        - oauth2client
+        - python
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_gcp
+        - dagster_gcp.bigquery
+        - dagster_gcp.dataproc
+        - dagster_gcp.gcs
+      commands:
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-gcp"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-gcp/LICENSE
+      summary: "Package for GCP-specific Dagster framework solid and resource components."
+
+  # issues with python 3.8
+  - name: dagster-pyspark
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster {{ version }}.*
+        - dagster-spark {{ version }}.*
+        - pyspark
+        - python
+
+    test:
+      requires:
+        - pip
+        - python <3.8.0a0
+      imports:
+        - dagster_pyspark
+      commands:
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-framework/pyspark"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-pyspark/LICENSE
+      summary: "Package for PySpark Dagster framework components."
+
+  # issues with python 2.7
+  - name: dagstermill
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagstermill && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagstermill = dagstermill.cli:main
+
+    requirements:
+      host:
+        - pip
+        - python >=3.5
+      run:
+        - dagster {{ version }}.*
+        - dagster-pandas
+        - ipykernel >=4.9.0
+        - nteract-scrapbook >=0.2.0
+        - papermill >=1.0.0
+        - python >=3.5
+        - scikit-learn >=0.19.0
+        - six
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagstermill
+      commands:
+        - dagstermill --help
+        - python -m pip check
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagstermill"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagstermill/LICENSE
+      summary: "A Dagster integration for papermill"
+  {% endif %}
+
+  {% if on_linux_py38 %}
+  # would build wherever, but build fastest here
+  - name: dagit
+    build:
+      number: {{ build_number }}
+      noarch: python
+      entry_points:
+        - dagit-cli = dagit.cli:main
+        - dagit = dagit.dagit:main
+      script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - click >=7.0
+        - dagster {{ version }}.*
+        - dagster-graphql {{ version }}.*
+        - enum-compat >=0.0.1
+        - flask >=0.12.4
+        - flask-cors >=3.0.6
+        - flask-graphql >=2.0.0
+        - flask-sockets >=0.2.1
+        - future
+        - gevent
+        - gevent-websocket >=0.10.1
+        - graphql-core >=2.1,<3
+        - graphql-ws >=0.3.0
+        - nbconvert >=5.4.0
+        - python
+        - pyyaml
+        - watchdog >=0.8.3
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagit
+        - dagit.schema
+        - dagit.templates
+      commands:
+        - python -m pip check
+        - dagit-cli --help
+        - dagit --help
+
+    about:
+      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagit"
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagit/LICENSE
+      summary: "Dagster UI"
 
   - name: dagster-bash
     build:
@@ -412,44 +757,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-github/LICENSE
       summary: "Github plugin for Dagster"
-
-  - name: dagster-graphql
-    build:
-      number: {{ build_number }}
-      noarch: python
-      entry_points:
-        - dagster-graphql = dagster_graphql.cli:main
-      script: cd dagster-graphql && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster {{ version }}.*
-        - gevent
-        - gevent-websocket >=0.10.1
-        - graphene >=2.1.3
-        - python
-        - requests
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_graphql
-        - dagster_graphql.client
-        - dagster_graphql.schema
-      commands:
-        - dagster-graphql --help
-        - python -m pip check
-
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-graphql/LICENSE
-      summary: "The GraphQL frontend to python dagster."
 
   - name: dagster-pagerduty
     build:
@@ -750,6 +1057,7 @@ outputs:
       license_family: APACHE
       license_file: dagster-twilio/LICENSE
       summary: "A Dagster integration for twilio"
+  {% endif %}
 
 
 about:
