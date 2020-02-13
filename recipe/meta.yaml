@@ -173,7 +173,7 @@ outputs:
         - python-graphviz >=0.8.4
         - pywin32 !=226  # [win]
         - pyyaml >=3.10,<5
-        - rx <=1.6.1
+        - rx 1.6.1.*
         - six
         - sqlalchemy >=1.0
         - toposort >=1.0
@@ -270,16 +270,16 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python <3.8.0a0
       run:
         - airflow
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - docker-py
-        - python
+        - python <3.8.0a0
         - python-dateutil >=2.8.0
         - six
-        - werkzeug <1.0.0
+        - werkzeug
 
     test:
       # presently has upstream issues with:
@@ -288,6 +288,8 @@ outputs:
       # apache-airflow 1.10.7 has requirement flask-appbuilder~=2.2; python_version >= "3.6", but you have flask-appbuilder 1.12.5.
       # requires:
       #   - pip
+      requires:
+        - python <3.8.0a0
       imports:
         - dagster_airflow
       commands:
@@ -313,12 +315,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python <3.8.0a0
       run:
         - boto3 1.9.*
         - dagster {{ version }}.*
         - mock
-        - python
+        - python <3.8.0a0
         - requests
         - terminaltables
 
@@ -326,12 +328,12 @@ outputs:
       requires:
         - dagster-pyspark
         - pip
-        - python
+        - python <3.8.0
       imports:
         - dagster_aws
         - dagster_aws.cli
         - dagster_aws.cloudwatch
-        - dagster_aws.emr
+        # - dagster_aws.emr
         - dagster_aws.s3
       commands:
         - dagster-aws --help
