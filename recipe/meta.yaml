@@ -259,92 +259,92 @@ outputs:
 
   {% if on_linux_py37 %}
   # issues with python 3.8
-  - name: dagster-airflow
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
-      entry_points:
-        - dagster-airflow = dagster_airflow.cli:main
+  # - name: dagster-airflow
+  #   build:
+  #     number: {{ build_number }}
+  #     noarch: python
+  #     script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
+  #     entry_points:
+  #       - dagster-airflow = dagster_airflow.cli:main
 
-    requirements:
-      host:
-        - pip
-        - python <3.8.0a0
-      run:
-        - airflow
-        - dagster {{ version }}.*
-        - dagster-graphql {{ version }}.*
-        - docker-py
-        - python <3.8.0a0
-        - python-dateutil >=2.8.0
-        - six
-        - werkzeug <1.0.0a0
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - airflow
+  #       - dagster {{ version }}.*
+  #       - dagster-graphql {{ version }}.*
+  #       - docker-py
+  #       - python <3.8.0a0
+  #       - python-dateutil >=2.8.0
+  #       - six
+  #       - werkzeug <1.0.0a0
 
-    test:
-      # presently has upstream issues with:
-      # python-daemon 2.1.2 requires docutils, which is not installed.
-      # apache-airflow 1.10.7 has requirement flask-admin==1.5.4, but you have flask-admin 1.5.3.
-      # apache-airflow 1.10.7 has requirement flask-appbuilder~=2.2; python_version >= "3.6", but you have flask-appbuilder 1.12.5.
-      # requires:
-      #   - pip
-      requires:
-        - python <3.8.0a0
-      imports:
-        - dagster_airflow
-      commands:
-        - dagster-airflow --help
-        # - python -m pip check
+  #   test:
+  #     # presently has upstream issues with:
+  #     # python-daemon 2.1.2 requires docutils, which is not installed.
+  #     # apache-airflow 1.10.7 has requirement flask-admin==1.5.4, but you have flask-admin 1.5.3.
+  #     # apache-airflow 1.10.7 has requirement flask-appbuilder~=2.2; python_version >= "3.6", but you have flask-appbuilder 1.12.5.
+  #     # requires:
+  #     #   - pip
+  #     requires:
+  #       - python <3.8.0a0
+  #     imports:
+  #       - dagster_airflow
+  #     commands:
+  #       - dagster-airflow --help
+  #       # - python -m pip check
 
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-airflow/LICENSE
-      summary: "Airflow plugin for Dagster"
+  #   about:
+  #     home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow"
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-airflow/LICENSE
+  #     summary: "Airflow plugin for Dagster"
 
   # issues with python 3.8
-  - name: dagster-aws
-    build:
-      noarch: python
-      number: {{ build_number }}
-      entry_points:
-        - dagster-aws = dagster_aws.cli.cli:main
-      script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
+  # - name: dagster-aws
+  #   build:
+  #     noarch: python
+  #     number: {{ build_number }}
+  #     entry_points:
+  #       - dagster-aws = dagster_aws.cli.cli:main
+  #     script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python <3.8.0a0
-      run:
-        - boto3 1.9.*
-        - dagster {{ version }}.*
-        - mock
-        - python <3.8.0a0
-        - requests
-        - terminaltables
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - boto3 1.9.*
+  #       - dagster {{ version }}.*
+  #       - mock
+  #       - python <3.8.0a0
+  #       - requests
+  #       - terminaltables
 
-    test:
-      requires:
-        - dagster-pyspark
-        - pip
-        - python <3.8.0
-      imports:
-        - dagster_aws
-        - dagster_aws.cli
-        - dagster_aws.cloudwatch
-        # - dagster_aws.emr
-        - dagster_aws.s3
-      commands:
-        - dagster-aws --help
-        - python -m pip check
+  #   test:
+  #     requires:
+  #       - dagster-pyspark
+  #       - pip
+  #       - python <3.8.0
+  #     imports:
+  #       - dagster_aws
+  #       - dagster_aws.cli
+  #       - dagster_aws.cloudwatch
+  #       # - dagster_aws.emr
+  #       - dagster_aws.s3
+  #     commands:
+  #       - dagster-aws --help
+  #       - python -m pip check
 
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws"
-      license: Apache Software
-      license_family: APACHE
-      license_file: dagster-aws/LICENSE
-      summary: "Package for AWS-specific Dagster framework solid and resource components."
+  #   about:
+  #     home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws"
+  #     license: Apache Software
+  #     license_family: APACHE
+  #     license_file: dagster-aws/LICENSE
+  #     summary: "Package for AWS-specific Dagster framework solid and resource components."
 
   - name: dagster-celery
     build:
@@ -417,115 +417,114 @@ outputs:
       summary: "Package for using Dask as Dagster's execution engine."
 
   # issues with win/python 2.7
-  - name: dagster-gcp
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-gcp && {{ PYTHON }} -m pip install . -vv --no-deps
+  # - name: dagster-gcp
+  #   build:
+  #     number: {{ build_number }}
+  #     noarch: python
+  #     script: cd dagster-gcp && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster
-        - dagster-pandas
-        - google-api-python-client
-        - google-cloud-bigquery >=1.19
-        - google-cloud-storage
-        - google-resumable-media
-        - oauth2client
-        - python
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - dagster
+  #       - dagster-pandas
+  #       - google-api-python-client
+  #       - google-cloud-bigquery >=1.19
+  #       - google-cloud-storage
+  #       - google-resumable-media
+  #       - oauth2client
+  #       - python <3.8.0a0
 
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_gcp
-        - dagster_gcp.bigquery
-        - dagster_gcp.dataproc
-        - dagster_gcp.gcs
-      commands:
-        - python -m pip check
+  #   test:
+  #     requires:
+  #       - pip
+  #     imports:
+  #       - dagster_gcp
+  #       - dagster_gcp.bigquery
+  #       - dagster_gcp.dataproc
+  #       - dagster_gcp.gcs
+  #     commands:
+  #       - python -m pip check
 
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-gcp"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-gcp/LICENSE
-      summary: "Package for GCP-specific Dagster framework solid and resource components."
+  #   about:
+  #     home: "https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-gcp"
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-gcp/LICENSE
+  #     summary: "Package for GCP-specific Dagster framework solid and resource components."
 
   # issues with python 3.8
-  - name: dagster-pyspark
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
+  # - name: dagster-pyspark
+  #   build:
+  #     number: {{ build_number }}
+  #     noarch: python
+  #     script: cd dagster-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster {{ version }}.*
-        - dagster-spark {{ version }}.*
-        - pyspark
-        - python
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - dagster {{ version }}.*
+  #       - dagster-spark {{ version }}.*
+  #       - pyspark
+  #       - python <3.8.0a0
 
-    test:
-      requires:
-        - pip
-        - python <3.8.0a0
-      imports:
-        - dagster_pyspark
-      commands:
-        - python -m pip check
+  #   test:
+  #     requires:
+  #       - pip
+  #     imports:
+  #       - dagster_pyspark
+  #     commands:
+  #       - python -m pip check
 
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-framework/pyspark"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-pyspark/LICENSE
-      summary: "Package for PySpark Dagster framework components."
+  #   about:
+  #     home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-framework/pyspark"
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-pyspark/LICENSE
+  #     summary: "Package for PySpark Dagster framework components."
 
   # issues with python 2.7
-  - name: dagstermill
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagstermill && {{ PYTHON }} -m pip install . -vv --no-deps
-      entry_points:
-        - dagstermill = dagstermill.cli:main
+  # - name: dagstermill
+  #   build:
+  #     number: {{ build_number }}
+  #     noarch: python
+  #     script: cd dagstermill && {{ PYTHON }} -m pip install . -vv --no-deps
+  #     entry_points:
+  #       - dagstermill = dagstermill.cli:main
 
-    requirements:
-      host:
-        - pip
-        - python >=3.5
-      run:
-        - dagster {{ version }}.*
-        - dagster-pandas
-        - ipykernel >=4.9.0
-        - nteract-scrapbook >=0.2.0
-        - papermill >=1.0.0,<2.0.0
-        - python >=3.5
-        - scikit-learn >=0.19.0
-        - six
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python >=3.5
+  #     run:
+  #       - dagster {{ version }}.*
+  #       - dagster-pandas
+  #       - ipykernel >=4.9.0
+  #       - nteract-scrapbook >=0.2.0
+  #       - papermill >=1.0.0,<2.0.0
+  #       - python >=3.5
+  #       - scikit-learn >=0.19.0
+  #       - six
 
-    test:
-      requires:
-        - pip
-      imports:
-        - dagstermill
-      commands:
-        - dagstermill --help
-        - python -m pip check
+  #   test:
+  #     requires:
+  #       - pip
+  #     imports:
+  #       - dagstermill
+  #     commands:
+  #       - dagstermill --help
+  #       - python -m pip check
 
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagstermill"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagstermill/LICENSE
-      summary: "A Dagster integration for papermill"
+  #   about:
+  #     home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagstermill"
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagstermill/LICENSE
+  #     summary: "A Dagster integration for papermill"
   {% endif %}
 
   {% if on_linux_py38 %}
