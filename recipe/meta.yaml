@@ -370,7 +370,7 @@ outputs:
       license_file: dagster-gcp/LICENSE
       summary: "Package for GCP-specific Dagster framework solid and resource components."
 
-  issues with python 3.8
+  # issues with python 3.8
   - name: dagster-pyspark
     build:
       number: {{ build_number }}
@@ -442,49 +442,49 @@ outputs:
       summary: "A Dagster integration for papermill"
 
   # issues with python 3.8
-  - name: dagster-airflow
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
-      entry_points:
-        - dagster-airflow = dagster_airflow.cli:main
+  # - name: dagster-airflow
+  #   build:
+  #     number: {{ build_number }}
+  #     noarch: python
+  #     script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
+  #     entry_points:
+  #       - dagster-airflow = dagster_airflow.cli:main
 
-    requirements:
-      host:
-        - pip
-        - python <3.8.0a0
-      run:
-        - airflow
-        - dagster {{ version }}.*
-        - dagster-graphql {{ version }}.*
-        - docker-py
-        - python <3.8.0a0
-        - python-dateutil >=2.8.0
-        - six
-        - werkzeug <1.0.0a0
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - airflow
+  #       - dagster {{ version }}.*
+  #       - dagster-graphql {{ version }}.*
+  #       - docker-py
+  #       - python <3.8.0a0
+  #       - python-dateutil >=2.8.0
+  #       - six
+  #       - werkzeug <1.0.0a0
 
-    test:
-      # presently has upstream issues with:
-      # python-daemon 2.1.2 requires docutils, which is not installed.
-      # apache-airflow 1.10.7 has requirement flask-admin==1.5.4, but you have flask-admin 1.5.3.
-      # apache-airflow 1.10.7 has requirement flask-appbuilder~=2.2; python_version >= "3.6", but you have flask-appbuilder 1.12.5.
-      # requires:
-      #   - pip
-      requires:
-        - python <3.8.0a0
-      imports:
-        - dagster_airflow
-      commands:
-        - dagster-airflow --help
-        # - python -m pip check
+  #   test:
+  #     # presently has upstream issues with:
+  #     # python-daemon 2.1.2 requires docutils, which is not installed.
+  #     # apache-airflow 1.10.7 has requirement flask-admin==1.5.4, but you have flask-admin 1.5.3.
+  #     # apache-airflow 1.10.7 has requirement flask-appbuilder~=2.2; python_version >= "3.6", but you have flask-appbuilder 1.12.5.
+  #     # requires:
+  #     #   - pip
+  #     requires:
+  #       - python <3.8.0a0
+  #     imports:
+  #       - dagster_airflow
+  #     commands:
+  #       - dagster-airflow --help
+  #       # - python -m pip check
 
-    about:
-      home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow"
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-airflow/LICENSE
-      summary: "Airflow plugin for Dagster"
+  #   about:
+  #     home: "https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow"
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-airflow/LICENSE
+  #     summary: "Airflow plugin for Dagster"
 
   # issues with python 3.8
   - name: dagster-aws
