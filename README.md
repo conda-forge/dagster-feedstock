@@ -132,9 +132,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster-green.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--celery-green.svg)](https://anaconda.org/conda-forge/dagster-celery) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-celery.svg)](https://anaconda.org/conda-forge/dagster-celery) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-celery.svg)](https://anaconda.org/conda-forge/dagster-celery) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-celery.svg)](https://anaconda.org/conda-forge/dagster-celery) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--dask-green.svg)](https://anaconda.org/conda-forge/dagster-dask) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-dask.svg)](https://anaconda.org/conda-forge/dagster-dask) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-dask.svg)](https://anaconda.org/conda-forge/dagster-dask) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-dask.svg)](https://anaconda.org/conda-forge/dagster-dask) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--graphql-green.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) |
 
 Installing dagster
 ==================
@@ -145,10 +142,10 @@ Installing `dagster` from the `conda-forge` channel can be achieved by adding `c
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `dagster, dagster-celery, dagster-dask, dagster-graphql` can be installed with:
+Once the `conda-forge` channel has been enabled, `dagster` can be installed with:
 
 ```
-conda install dagster dagster-celery dagster-dask dagster-graphql
+conda install dagster
 ```
 
 It is possible to list all of the versions of `dagster` available on your platform with:
