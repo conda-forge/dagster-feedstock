@@ -329,7 +329,7 @@ outputs:
       summary: Package for using Dask as Dagster's execution engine.
   {% endif %}
 
-  {% if on_linux_py37 and build_number > 0 %}
+  {% if on_linux_py37 %}
   # these _would_ build on py37_0, except conda-build tries to test them with py38
   # issues with win/python 2.7
   - name: dagster-gcp
