@@ -499,6 +499,7 @@ outputs:
         - python <3.8.0a0
       run:
         - boto3 1.9.*
+        - jmespath >=0.9.4,<1.0.0
         - dagster {{ version }}.*
         - mock
         - python <3.8.0a0
