@@ -55,7 +55,6 @@ source:
     sha256: 8a8c6b454e00475539124a07e7661eecf8752b7820c731c916b1f7de4f9d3d0f
   {% endif %}
 
-  {% if on_linux_py38 %}
   # these are generally safe to build wherever, but can be built most quickly on linux/38
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
@@ -124,7 +123,6 @@ source:
   - folder: dagster-twilio
     url: https://pypi.io/packages/source/d/dagster-twilio/dagster-twilio-{{ version }}.tar.gz
     sha256: 31cdcc116206202a76b5c5e2a8eeca9022ed6919635800fcf71d62e7aa42307b
-  {% endif %}
 
 build:
   number: {{ build_number }}
