@@ -29,87 +29,66 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_python2.7</td>
+              <td>linux_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=linux&configuration=linux_python2.7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=linux&configuration=linux_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_python3.6</td>
+              <td>linux_python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=linux&configuration=linux_python3.6" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=linux&configuration=linux_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_python3.7</td>
+              <td>linux_python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=linux&configuration=linux_python3.7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=linux&configuration=linux_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_python3.8</td>
+              <td>osx_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=linux&configuration=linux_python3.8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=osx&configuration=osx_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python2.7</td>
+              <td>osx_python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=osx&configuration=osx_python2.7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=osx&configuration=osx_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.6</td>
+              <td>osx_python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=osx&configuration=osx_python3.6" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=osx&configuration=osx_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.7</td>
+              <td>win_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=osx&configuration=osx_python3.7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=win&configuration=win_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.8</td>
+              <td>win_python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=osx&configuration=osx_python3.8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=win&configuration=win_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_python2.7</td>
+              <td>win_python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=win&configuration=win_python2.7" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_python3.6</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=win&configuration=win_python3.6" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_python3.7</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=win&configuration=win_python3.7" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_python3.8</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=win&configuration=win_python3.8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=master&jobName=win&configuration=win_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
@@ -132,13 +111,9 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster-green.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--aws-green.svg)](https://anaconda.org/conda-forge/dagster-aws) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-aws.svg)](https://anaconda.org/conda-forge/dagster-aws) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-aws.svg)](https://anaconda.org/conda-forge/dagster-aws) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-aws.svg)](https://anaconda.org/conda-forge/dagster-aws) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--celery-green.svg)](https://anaconda.org/conda-forge/dagster-celery) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-celery.svg)](https://anaconda.org/conda-forge/dagster-celery) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-celery.svg)](https://anaconda.org/conda-forge/dagster-celery) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-celery.svg)](https://anaconda.org/conda-forge/dagster-celery) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--dask-green.svg)](https://anaconda.org/conda-forge/dagster-dask) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-dask.svg)](https://anaconda.org/conda-forge/dagster-dask) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-dask.svg)](https://anaconda.org/conda-forge/dagster-dask) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-dask.svg)](https://anaconda.org/conda-forge/dagster-dask) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--gcp-green.svg)](https://anaconda.org/conda-forge/dagster-gcp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-gcp.svg)](https://anaconda.org/conda-forge/dagster-gcp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-gcp.svg)](https://anaconda.org/conda-forge/dagster-gcp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-gcp.svg)](https://anaconda.org/conda-forge/dagster-gcp) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--graphql-green.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--pyspark-green.svg)](https://anaconda.org/conda-forge/dagster-pyspark) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-pyspark.svg)](https://anaconda.org/conda-forge/dagster-pyspark) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-pyspark.svg)](https://anaconda.org/conda-forge/dagster-pyspark) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-pyspark.svg)](https://anaconda.org/conda-forge/dagster-pyspark) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-dagstermill-green.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) |
 
 Installing dagster
 ==================
@@ -149,10 +124,10 @@ Installing `dagster` from the `conda-forge` channel can be achieved by adding `c
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `dagster, dagster-aws, dagster-celery, dagster-dask, dagster-gcp, dagster-graphql, dagster-pyspark, dagstermill` can be installed with:
+Once the `conda-forge` channel has been enabled, `dagster, dagster-celery, dagster-dask, dagster-graphql` can be installed with:
 
 ```
-conda install dagster dagster-aws dagster-celery dagster-dask dagster-gcp dagster-graphql dagster-pyspark dagstermill
+conda install dagster dagster-celery dagster-dask dagster-graphql
 ```
 
 It is possible to list all of the versions of `dagster` available on your platform with:
