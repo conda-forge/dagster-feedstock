@@ -1,5 +1,5 @@
 {% set version = "0.7.11.post0" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -507,6 +507,7 @@ outputs:
       run:
         - boto3 >=1.9
         - dagster {{ version }}.*
+        - psycopg2
         - python <3.8.0a0
         - requests
         - terminaltables
@@ -514,17 +515,20 @@ outputs:
     test:
       requires:
         - dagster-pyspark
-        - pip
         - python <3.8.0
+        # can't be pip checked because of psycopg2-binary
+        # - pip
       imports:
         - dagster_aws
         - dagster_aws.cli
         - dagster_aws.cloudwatch
-        # - dagster_aws.emr
         - dagster_aws.s3
+        - dagster_aws.redshift
+        # still seems to be failing
+        # - dagster_aws.emr
       commands:
         - dagster-aws --help
-        - python -m pip check
+        # - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws
