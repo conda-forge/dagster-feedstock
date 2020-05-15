@@ -465,6 +465,8 @@ outputs:
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - docker-py
+        - lazy-object-proxy
+        - pendulum ==1.4.4
         - python <3.8.0a0
         - python-dateutil >=2.8.0
         - six
