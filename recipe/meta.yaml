@@ -576,7 +576,7 @@ outputs:
       number: {{ build_number }}
       noarch: python
       entry_points:
-        - dagit = dagit.dagit:main
+        - dagit = dagit.cli:main
       script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
