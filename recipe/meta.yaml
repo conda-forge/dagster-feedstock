@@ -1,5 +1,5 @@
 {% set version = "0.8.1" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -34,9 +34,9 @@ source:
     url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
     sha256: 79778e5588ba2ea3841809938d1ee41be11eb0d8f329f54187fdcfbf806bd8eb
 
-  - folder: dagster-azure
-    url: https://pypi.io/packages/source/d/dagster-azure/dagster-azure-{{ version }}.tar.gz
-    sha256: d6d46a3f6e855815926dd59b6d701f95465e5487a28f88653ca73982e1d37179
+  # - folder: dagster-azure
+  #   url: https://pypi.io/packages/source/d/dagster-azure/dagster-azure-{{ version }}.tar.gz
+  #   sha256: d6d46a3f6e855815926dd59b6d701f95465e5487a28f88653ca73982e1d37179
 
   - folder: dagster-celery
     url: https://pypi.io/packages/source/d/dagster-celery/dagster-celery-{{ version }}.tar.gz
@@ -351,7 +351,13 @@ outputs:
         - dagster
         - dagster-pandas
         - google-api-python-client
-        - google-cloud-bigquery >=1.19
+        # TODO as of #39 google-api-core 1.20.0, importing bigquery presently fails with
+        #
+        #   AttributeError: module 'google.api_core' has no attribute 'gapic_v1'`
+        #
+        # which uncovers a whole separate can of worms down to grpcio
+        - google-api-core !=1.20.0
+        - google-cloud-bigquery-core >=1.19
         - google-cloud-storage
         - google-resumable-media
         - oauth2client
@@ -459,8 +465,6 @@ outputs:
         - python <3.8.0a0
       run:
         - airflow
-        # because of older python-daemon with bad pin...
-        - docutils
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - docker-py
@@ -471,15 +475,18 @@ outputs:
         - six
 
     test:
-      requires:
-        - pip
+      # requires:
+      #   - pip
       requires:
         - python <3.8.0a0
       imports:
         - dagster_airflow
       commands:
         - dagster-airflow --help
-        - python -m pip check
+        # cannot be pip-checked because:
+        #
+        #   flask-admin 1.5.4 requires enum34, which is not installed.
+        # - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
@@ -494,6 +501,7 @@ outputs:
       noarch: python
       number: {{ build_number }}
       entry_points:
+        # TODO remove after https://github.com/dagster-io/dagster/pull/2600
         - dagster-aws = dagster_aws.cli.cli:main
       script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
 
@@ -507,6 +515,7 @@ outputs:
         - psycopg2
         - python <3.8.0a0
         - requests
+        # TODO remove after https://github.com/dagster-io/dagster/pull/2600
         - terminaltables
 
     test:
@@ -517,15 +526,12 @@ outputs:
         # - pip
       imports:
         - dagster_aws
-        - dagster_aws.cli
         - dagster_aws.cloudwatch
-        - dagster_aws.s3
+        - dagster_aws.ecs
         - dagster_aws.redshift
+        - dagster_aws.s3
         # still seems to be failing
         # - dagster_aws.emr
-      commands:
-        - dagster-aws --help
-        # - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws
@@ -534,39 +540,40 @@ outputs:
       license_file: dagster-aws/LICENSE
       summary: Package for AWS-specific Dagster framework solid and resource components.
 
-  - name: dagster-azure
-    build:
-      noarch: python
-      number: {{ build_number }}
-      entry_points:
-        - dagster-azure = dagster_azure.cli.cli:main
-      script: cd dagster-azure && {{ PYTHON }} -m pip install . -vv --no-deps
+  # azure-storage-file-datalake not available
+  # - name: dagster-azure
+  #   build:
+  #     noarch: python
+  #     number: {{ build_number }}
+  #     entry_points:
+  #       - dagster-azure = dagster_azure.cli.cli:main
+  #     script: cd dagster-azure && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python <3.8.0a0
-      run:
-        - dagster {{ version }}.*
-        - azure-storage-blob >=12.3.0,<12.4.0a0
-        - azure-storage-file-datalake >=12.0.1,<12.1.0a0
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - dagster {{ version }}.*
+  #       - azure-storage-blob >=12.3.0,<12.4.0a0
+  #       - azure-storage-file-datalake >=12.0.1,<12.1.0a0
 
-    test:
-      requires:
-        - python <3.8.0
-        - pip
-      imports:
-        - dagster_azure
-      commands:
-        - dagster-azure --help
-        - python -m pip check
+  #   test:
+  #     requires:
+  #       - python <3.8.0
+  #       - pip
+  #     imports:
+  #       - dagster_azure
+  #     commands:
+  #       - dagster-azure --help
+  #       - python -m pip check
 
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-azure
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-azure/LICENSE
-      summary: Package for Azure-specific Dagster framework solid and resource components.
+  #   about:
+  #     home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-azure
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-azure/LICENSE
+  #     summary: Package for Azure-specific Dagster framework solid and resource components.
   {% endif %}
 
   {% if on_linux_py38 %}
