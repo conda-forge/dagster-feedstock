@@ -351,6 +351,9 @@ outputs:
         - dagster
         - dagster-pandas
         - google-api-python-client
+        # TODO 1.20.0 fails with
+        # AttributeError: module 'google.api_core' has no attribute 'gapic_v1'`
+        - google-api-core !=1.20.0
         - google-cloud-bigquery >=1.19
         - google-cloud-storage
         - google-resumable-media
@@ -459,8 +462,6 @@ outputs:
         - python <3.8.0a0
       run:
         - airflow
-        # because of older python-daemon with bad pin...
-        - docutils
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - docker-py
@@ -471,15 +472,18 @@ outputs:
         - six
 
     test:
-      requires:
-        - pip
+      # requires:
+      #   - pip
       requires:
         - python <3.8.0a0
       imports:
         - dagster_airflow
       commands:
         - dagster-airflow --help
-        - python -m pip check
+        # cannot be pip-checked because:
+        #
+        #   flask-admin 1.5.4 requires enum34, which is not installed.
+        # - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
