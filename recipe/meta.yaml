@@ -501,6 +501,7 @@ outputs:
       noarch: python
       number: {{ build_number }}
       entry_points:
+        # TODO remove after https://github.com/dagster-io/dagster/pull/2600
         - dagster-aws = dagster_aws.cli.cli:main
       script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
 
@@ -514,6 +515,7 @@ outputs:
         - psycopg2
         - python <3.8.0a0
         - requests
+        # TODO remove after https://github.com/dagster-io/dagster/pull/2600
         - terminaltables
 
     test:
