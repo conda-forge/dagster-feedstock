@@ -591,8 +591,6 @@ outputs:
         - flask >=0.12.4
         - flask-cors >=3.0.6
         - flask-graphql >=2.0.0
-        # until flask-graphql pins this...
-        - graphql-server-core >=1.1,<2.0.0a0
         - flask-sockets >=0.2.1
         - future
         - gevent
