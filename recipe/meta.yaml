@@ -471,19 +471,15 @@ outputs:
         - six
 
     test:
-      # presently has upstream issues with:
-      # python-daemon 2.1.2 requires docutils, which is not installed.
-      # apache-airflow 1.10.7 has requirement flask-admin==1.5.4, but you have flask-admin 1.5.3.
-      # apache-airflow 1.10.7 has requirement flask-appbuilder~=2.2; python_version >= "3.6", but you have flask-appbuilder 1.12.5.
-      # requires:
-      #   - pip
+      requires:
+        - pip
       requires:
         - python <3.8.0a0
       imports:
         - dagster_airflow
       commands:
         - dagster-airflow --help
-        # - python -m pip check
+        - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
@@ -617,7 +613,6 @@ outputs:
         - dagit.templates
       commands:
         - python -m pip check
-        - dagit-cli --help
         - dagit --help
 
     about:
