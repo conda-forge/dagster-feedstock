@@ -351,10 +351,13 @@ outputs:
         - dagster
         - dagster-pandas
         - google-api-python-client
-        # TODO 1.20.0 fails with
-        # AttributeError: module 'google.api_core' has no attribute 'gapic_v1'`
+        # TODO as of #39 google-api-core 1.20.0, importing bigquery presently fails with
+        #
+        #   AttributeError: module 'google.api_core' has no attribute 'gapic_v1'`
+        #
+        # which uncovers a whole separate can of worms down to grpcio
         - google-api-core !=1.20.0
-        - google-cloud-bigquery >=1.19
+        - google-cloud-bigquery-core >=1.19
         - google-cloud-storage
         - google-resumable-media
         - oauth2client
