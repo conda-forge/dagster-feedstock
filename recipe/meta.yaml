@@ -35,7 +35,7 @@ source:
     sha256: 79778e5588ba2ea3841809938d1ee41be11eb0d8f329f54187fdcfbf806bd8eb
 
   - folder: dagster-azure
-    url: https://pypi.io/packages/source/d/dagster-aws/dagster-azure-{{ version }}.tar.gz
+    url: https://pypi.io/packages/source/d/dagster-azure/dagster-azure-{{ version }}.tar.gz
     sha256: d6d46a3f6e855815926dd59b6d701f95465e5487a28f88653ca73982e1d37179
 
   - folder: dagster-celery
