@@ -517,15 +517,12 @@ outputs:
         # - pip
       imports:
         - dagster_aws
-        - dagster_aws.cli
         - dagster_aws.cloudwatch
-        - dagster_aws.s3
+        - dagster_aws.ecs
         - dagster_aws.redshift
+        - dagster_aws.s3
         # still seems to be failing
         # - dagster_aws.emr
-      commands:
-        - dagster-aws --help
-        # - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws
