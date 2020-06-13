@@ -34,9 +34,9 @@ source:
     url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
     sha256: 79778e5588ba2ea3841809938d1ee41be11eb0d8f329f54187fdcfbf806bd8eb
 
-  - folder: dagster-azure
-    url: https://pypi.io/packages/source/d/dagster-azure/dagster-azure-{{ version }}.tar.gz
-    sha256: d6d46a3f6e855815926dd59b6d701f95465e5487a28f88653ca73982e1d37179
+  # - folder: dagster-azure
+  #   url: https://pypi.io/packages/source/d/dagster-azure/dagster-azure-{{ version }}.tar.gz
+  #   sha256: d6d46a3f6e855815926dd59b6d701f95465e5487a28f88653ca73982e1d37179
 
   - folder: dagster-celery
     url: https://pypi.io/packages/source/d/dagster-celery/dagster-celery-{{ version }}.tar.gz
@@ -531,39 +531,40 @@ outputs:
       license_file: dagster-aws/LICENSE
       summary: Package for AWS-specific Dagster framework solid and resource components.
 
-  - name: dagster-azure
-    build:
-      noarch: python
-      number: {{ build_number }}
-      entry_points:
-        - dagster-azure = dagster_azure.cli.cli:main
-      script: cd dagster-azure && {{ PYTHON }} -m pip install . -vv --no-deps
+  # azure-storage-file-datalake not available
+  # - name: dagster-azure
+  #   build:
+  #     noarch: python
+  #     number: {{ build_number }}
+  #     entry_points:
+  #       - dagster-azure = dagster_azure.cli.cli:main
+  #     script: cd dagster-azure && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python <3.8.0a0
-      run:
-        - dagster {{ version }}.*
-        - azure-storage-blob >=12.3.0,<12.4.0a0
-        - azure-storage-file-datalake >=12.0.1,<12.1.0a0
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - dagster {{ version }}.*
+  #       - azure-storage-blob >=12.3.0,<12.4.0a0
+  #       - azure-storage-file-datalake >=12.0.1,<12.1.0a0
 
-    test:
-      requires:
-        - python <3.8.0
-        - pip
-      imports:
-        - dagster_azure
-      commands:
-        - dagster-azure --help
-        - python -m pip check
+  #   test:
+  #     requires:
+  #       - python <3.8.0
+  #       - pip
+  #     imports:
+  #       - dagster_azure
+  #     commands:
+  #       - dagster-azure --help
+  #       - python -m pip check
 
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-azure
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-azure/LICENSE
-      summary: Package for Azure-specific Dagster framework solid and resource components.
+  #   about:
+  #     home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-azure
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-azure/LICENSE
+  #     summary: Package for Azure-specific Dagster framework solid and resource components.
   {% endif %}
 
   {% if on_linux_py38 %}
