@@ -1,5 +1,5 @@
 {% set version = "0.8.3" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -500,9 +500,6 @@ outputs:
     build:
       noarch: python
       number: {{ build_number }}
-      entry_points:
-        # TODO remove after https://github.com/dagster-io/dagster/pull/2600
-        - dagster-aws = dagster_aws.cli.cli:main
       script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -515,8 +512,6 @@ outputs:
         - psycopg2
         - python <3.8.0a0
         - requests
-        # TODO remove after https://github.com/dagster-io/dagster/pull/2600
-        - terminaltables
 
     test:
       requires:
