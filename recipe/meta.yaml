@@ -164,6 +164,8 @@ outputs:
         - funcsigs
         - future
         - gevent
+        - grpcio ==1.30.0
+        - protobuf ==3.12.2
         - psutil >=1.0  # [win]
         - pyrsistent >=0.14.8
         - python
@@ -173,8 +175,7 @@ outputs:
         - pyyaml
         - requests
         - rx 1.6.1.*
-        # undeclared dep
-        - setuptools
+        - setuptools  # undeclared dep
         - six
         - sqlalchemy >=1.0
         - toposort >=1.0
