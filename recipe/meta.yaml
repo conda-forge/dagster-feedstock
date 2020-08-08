@@ -46,10 +46,6 @@ source:
     url: https://pypi.io/packages/source/d/dagster-celery-docker/dagster-celery-docker-{{ version }}.tar.gz
     sha256: 10eb1d34c5603a32f20d50444bd549ffb0233fdc0c0d1eed33cd31020db8c8c7
 
-  - folder: dagster-celery-k8s
-    url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
-    sha256: d54d0773890b5230da43365c6d9dcaa3b8aab8be3f23ab73a2c750bbf8cbe3b8
-
   - folder: dagster-dask
     url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
     sha256: 5458d9cfaf829a2a9ad5fdd2c363cfedb21911e04615e77cb3a8699dde9de834
@@ -96,6 +92,10 @@ source:
   - folder: dagster-k8s
     url: https://pypi.io/packages/source/d/dagster-k8s/dagster-k8s-{{ version }}.tar.gz
     sha256: 8d60876bd61592a7c86b9c479324004405d05d8a313b5847dea571e954f15d46
+
+  - folder: dagster-celery-k8s
+    url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
+    sha256: d54d0773890b5230da43365c6d9dcaa3b8aab8be3f23ab73a2c750bbf8cbe3b8
 
   - folder: dagster-pagerduty
     url: https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ version }}.tar.gz
