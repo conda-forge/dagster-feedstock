@@ -42,6 +42,14 @@ source:
     url: https://pypi.io/packages/source/d/dagster-celery/dagster-celery-{{ version }}.tar.gz
     sha256: a0a97d6f2c5649721648ac0e6a6ced4392280aa546a12db997619e51f23305cf
 
+  - folder: dagster-celery-docker
+    url: https://pypi.io/packages/source/d/dagster-celery-docker/dagster-celery-docker-{{ version }}.tar.gz
+    sha256: 10eb1d34c5603a32f20d50444bd549ffb0233fdc0c0d1eed33cd31020db8c8c7
+
+  - folder: dagster-celery-k8s
+    url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
+    sha256: d54d0773890b5230da43365c6d9dcaa3b8aab8be3f23ab73a2c750bbf8cbe3b8
+
   - folder: dagster-dask
     url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
     sha256: 5458d9cfaf829a2a9ad5fdd2c363cfedb21911e04615e77cb3a8699dde9de834
@@ -49,6 +57,10 @@ source:
   - folder: dagster-gcp
     url: https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ version }}.tar.gz
     sha256: 09f2f6daad9b82ac99604e2d3c9d6fb4a992edb28907fb92603f79118f79f164
+
+  - folder: dagster-ge
+    url: https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ version }}.tar.gz
+    sha256: 753fcd36802469fb77a3e7caf002df1b10b18d64f8d3c0007ca7c348a1d30cd6
 
   - folder: dagster-pyspark
     url: https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ version }}.tar.gz
@@ -163,7 +175,8 @@ outputs:
         - enum-compat >=0.0.1
         - funcsigs
         - future
-        - gevent
+        - grpcio ==1.30.0
+        - protobuf ==3.12.4
         - psutil >=1.0  # [win]
         - pyrsistent >=0.14.8
         - python
@@ -172,9 +185,8 @@ outputs:
         - pywin32 !=226  # [win]
         - pyyaml
         - requests
-        - rx 1.6.1.*
-        # undeclared dep
-        - setuptools
+        - rx <=1.6.1
+        - setuptools          # undeclared dep
         - six
         - sqlalchemy >=1.0
         - toposort >=1.0
@@ -299,6 +311,39 @@ outputs:
       license_file: dagster-celery/LICENSE
       summary: Package for using Celery as Dagster's execution engine.
 
+  - name: dagster-celery-docker
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-celery-docker && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster {{ version }}.*
+        - dagster-graphql {{ version }}.*
+        - dagster-celery {{ version }}.*
+        - docker-py
+        - python
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_celery_docker
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery-docker
+      license: Apache-2.0
+      license_family: APACHE
+      # TODO: make upstream issue
+      license_file: dagster/LICENSE
+      summary: A Dagster integration for celery-docker
+
   # issues with python 2.7
   - name: dagster-dask
     build:
@@ -391,12 +436,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python <3.8.0a0
+        - python
       run:
         - dagster {{ version }}.*
         - dagster-spark {{ version }}.*
         - pyspark
-        - python <3.8.0a0
+        - python
 
     test:
       requires:
@@ -449,6 +494,37 @@ outputs:
       license_family: APACHE
       license_file: dagstermill/LICENSE
       summary: A Dagster integration for papermill
+
+  - name: dagster-ge
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-ge && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3
+      run:
+        - dagster {{ version }}.*
+        - dagster-pandas {{ version }}.*
+        - great-expectations
+        - python >=3
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_ge
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-ge
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-ge/LICENSE
+      summary: Package for GE-specific Dagster framework solid and resource components.
 
   # issues with python 3.8
   - name: dagster-airflow
@@ -772,6 +848,38 @@ outputs:
       license_family: APACHE
       license_file: dagster-github/LICENSE
       summary: A Dagster integration for k8s
+
+  - name: dagster-celery-k8s
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-celery-k8s && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster {{ version }}.*
+        - dagster-celery {{ version }}.*
+        - dagster-k8s {{ version }}.*
+        - python
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_celery_k8s
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery-k8s
+      license: Apache-2.0
+      license_family: APACHE
+      # TODO: make upstream issue
+      license_file: dagster/LICENSE
+      summary: A Dagster integration for celery-k8s-executor
 
   - name: dagster-pagerduty
     build:
