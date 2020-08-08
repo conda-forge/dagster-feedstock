@@ -65,6 +65,10 @@ source:
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ version }}.tar.gz
     sha256: 2a6761472c33937057f86592c733804ce42232bc4506506a5fa159d34cabe5f5
+
+  - folder: dagster-celery-k8s
+    url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
+    sha256: d54d0773890b5230da43365c6d9dcaa3b8aab8be3f23ab73a2c750bbf8cbe3b8
   {% endif %}
 
   {% if on_linux_py38 %}
@@ -92,10 +96,6 @@ source:
   - folder: dagster-k8s
     url: https://pypi.io/packages/source/d/dagster-k8s/dagster-k8s-{{ version }}.tar.gz
     sha256: 8d60876bd61592a7c86b9c479324004405d05d8a313b5847dea571e954f15d46
-
-  - folder: dagster-celery-k8s
-    url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
-    sha256: d54d0773890b5230da43365c6d9dcaa3b8aab8be3f23ab73a2c750bbf8cbe3b8
 
   - folder: dagster-pagerduty
     url: https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ version }}.tar.gz
@@ -611,6 +611,30 @@ outputs:
       license_file: dagster-aws/LICENSE
       summary: Package for AWS-specific Dagster framework solid and resource components.
 
+  - name: dagster-celery-k8s
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-celery-k8s && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - dagster {{ version }}.*
+        - dagster-celery {{ version }}.*
+        - dagster-k8s {{ version }}.*
+        - python
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_celery_k8s
+      commands:
+        - python -m pip check
+
   # azure-storage-file-datalake not available
   # - name: dagster-azure
   #   build:
@@ -848,30 +872,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-github/LICENSE
       summary: A Dagster integration for k8s
-
-  - name: dagster-celery-k8s
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-celery-k8s && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster {{ version }}.*
-        - dagster-celery {{ version }}.*
-        - dagster-k8s {{ version }}.*
-        - python
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_celery_k8s
-      commands:
-        - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery-k8s
