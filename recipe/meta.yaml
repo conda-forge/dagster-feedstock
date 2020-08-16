@@ -231,8 +231,8 @@ outputs:
       home: https://github.com/dagster-io/dagster
       license: Apache-2.0
       license_family: APACHE
+      summary: Dagster is a data orchestrator for machine learning, analytics, and ETL.
       license_file: dagster/LICENSE
-      summary: Dagster is an opinionated programming model for data pipelines.
 
   {% if on_linux_py37 or on_linux_py38 %}
   # needed by both
