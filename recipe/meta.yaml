@@ -50,6 +50,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
     sha256: 701118d052bdc5585e271341d1330d6b33551240940143d0d0b3eca2550e144d
 
+  - folder: dagster-dbt
+    url: https://pypi.io/packages/source/d/dagster-dask/dagster-dbt-{{ version }}.tar.gz
+    sha256: deadb33f
+
   - folder: dagster-gcp
     url: https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ version }}.tar.gz
     sha256: 7a165387ceb7a713308d14212dddf316acca6435d217a57e81d68a2ffe1f78c1
@@ -378,6 +382,37 @@ outputs:
       license_family: APACHE
       license_file: dagster-dask/LICENSE
       summary: Package for using Dask as Dagster's execution engine.
+
+  - name: dagster-dbt
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3
+      run:
+        - dagster {{ version }}.*
+        - dagster-pandas {{ version }}.*
+        - pandas
+        - requests
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_dbt
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dbt
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-dbt/LICENSE
+      summary: A Dagster integration for dbt
   {% endif %}
 
   {% if on_linux_py37 and build_number > 0 %}
@@ -896,7 +931,7 @@ outputs:
         - python
       run:
         - dagster {{ version }}.*
-        - pypd 1.1.*
+        - pypd
         - python
 
     test:
