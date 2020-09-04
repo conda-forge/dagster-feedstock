@@ -830,7 +830,7 @@ outputs:
         - pip
         - python >=3
       run:
-        - attr
+        - attrs
         - dagster {{ version }}.*
         - dagster-pandas {{ version }}.*
         - pandas
