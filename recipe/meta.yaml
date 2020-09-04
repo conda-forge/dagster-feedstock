@@ -50,10 +50,6 @@ source:
     url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
     sha256: 701118d052bdc5585e271341d1330d6b33551240940143d0d0b3eca2550e144d
 
-  - folder: dagster-dbt
-    url: https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ version }}.tar.gz
-    sha256: b4b45355c8acfdc4bc575a2701659348a3c36155e2f2e3ce040ffd3f1e5420eb
-
   - folder: dagster-gcp
     url: https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ version }}.tar.gz
     sha256: 7a165387ceb7a713308d14212dddf316acca6435d217a57e81d68a2ffe1f78c1
@@ -92,6 +88,10 @@ source:
   - folder: dagster-datadog
     url: https://pypi.io/packages/source/d/dagster-datadog/dagster-datadog-{{ version }}.tar.gz
     sha256: 4ab5271e3922d25263a6257f0169780d0634cea750028afdc9dff6c9dd4b702d
+
+  - folder: dagster-dbt
+    url: https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ version }}.tar.gz
+    sha256: b4b45355c8acfdc4bc575a2701659348a3c36155e2f2e3ce040ffd3f1e5420eb
 
   - folder: dagster-github
     url: https://pypi.io/packages/source/d/dagster-github/dagster-github-{{ version }}.tar.gz
