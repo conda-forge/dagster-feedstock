@@ -412,7 +412,7 @@ outputs:
       license: Apache-2.0
       license_family: APACHE
       # TODO: restore after https://github.com/dagster-io/dagster/issues/2881
-      license_file: dagster-dbt/LICENSE
+      license_file: dagster/LICENSE
       summary: A Dagster integration for dbt
   {% endif %}
 
