@@ -382,38 +382,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-dask/LICENSE
       summary: Package for using Dask as Dagster's execution engine.
-
-  - name: dagster-dbt
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python >=3
-      run:
-        - dagster {{ version }}.*
-        - dagster-pandas {{ version }}.*
-        - pandas
-        - requests
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_dbt
-      commands:
-        - python -m pip check
-
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dbt
-      license: Apache-2.0
-      license_family: APACHE
-      # TODO: restore after https://github.com/dagster-io/dagster/issues/2881
-      license_file: dagster/LICENSE
-      summary: A Dagster integration for dbt
   {% endif %}
 
   {% if on_linux_py37 and build_number > 0 %}
@@ -850,6 +818,38 @@ outputs:
       license_family: APACHE
       license_file: dagster-datadog/LICENSE
       summary: Package for datadog Dagster framework components.
+
+  - name: dagster-dbt
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3
+      run:
+        - dagster {{ version }}.*
+        - dagster-pandas {{ version }}.*
+        - pandas
+        - requests
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_dbt
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dbt
+      license: Apache-2.0
+      license_family: APACHE
+      # TODO: restore after https://github.com/dagster-io/dagster/issues/2881
+      license_file: dagster/LICENSE
+      summary: A Dagster integration for dbt
 
   - name: dagster-github
     build:
