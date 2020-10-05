@@ -604,6 +604,7 @@ outputs:
       run:
         - boto3 >=1.9
         - dagster {{ version }}.*
+        - packaging
         - psycopg2
         - python <3.8.0a0
         - requests
