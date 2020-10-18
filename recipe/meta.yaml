@@ -196,6 +196,7 @@ outputs:
         - setuptools          # undeclared dep
         - six
         - sqlalchemy >=1.0
+        - tabulate
         - toposort >=1.0
         - tqdm
         - watchdog >=0.8.3
@@ -909,7 +910,7 @@ outputs:
       run:
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
-        - python-kubernetes
+        - python-kubernetes <=11.0.0
 
     test:
       requires:
