@@ -1125,7 +1125,6 @@ outputs:
         - pip
         - python
       run:
-        - azure-storage-blob <12
         - dagster {{ version }}.*
         - python
         - snowflake-connector-python >=2.1.0
