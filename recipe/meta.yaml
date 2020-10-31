@@ -1,5 +1,5 @@
 {% set version = "0.9.15" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -30,9 +30,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
     sha256: a84ea6f979b9bb365088e09fd41c36dab7ab8e9342e6c7315b5eb33667501953
 
-  - folder: dagster-aws
-    url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
-    sha256: 42dd9f1df5b69194d8e31f126ce4f1c4feccd09619aaf5e452137056fcf29025
+  # TODO: restore dagster-aws
+  # - folder: dagster-aws
+  #   url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
+  #   sha256: 42dd9f1df5b69194d8e31f126ce4f1c4feccd09619aaf5e452137056fcf29025
 
   # - folder: dagster-azure
   #   url: https://pypi.io/packages/source/d/dagster-azure/dagster-azure-{{ version }}.tar.gz
@@ -69,6 +70,11 @@ source:
   - folder: dagster-celery-k8s
     url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
     sha256: bedf85a893eb3f36fcc553c61317ff54ebe819124073114a439e381cf9776e65
+
+  # TODO: restore dagster-snowflake
+  # - folder: dagster-snowflake
+  #   url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ version }}.tar.gz
+  #   sha256: 69cb5e6c999d665b86dc36e0d9317b9bb30f57ebe25c2236a05d2eea8fbfe3d6
   {% endif %}
 
   {% if on_linux_py38 %}
@@ -124,10 +130,6 @@ source:
   - folder: dagster-slack
     url: https://pypi.io/packages/source/d/dagster-slack/dagster-slack-{{ version }}.tar.gz
     sha256: 6c59dbfd02f6d01c5db15fa5900b0d20aafa6804389c45347fb040a5d6a73b06
-
-  - folder: dagster-snowflake
-    url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ version }}.tar.gz
-    sha256: 69cb5e6c999d665b86dc36e0d9317b9bb30f57ebe25c2236a05d2eea8fbfe3d6
 
   - folder: dagster-spark
     url: https://pypi.io/packages/source/d/dagster-spark/dagster-spark-{{ version }}.tar.gz
@@ -592,45 +594,45 @@ outputs:
       summary: Airflow plugin for Dagster
 
   # issues with python 3.8
-  - name: dagster-aws
-    build:
-      noarch: python
-      number: {{ build_number }}
-      script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
+  # - name: dagster-aws
+  #   build:
+  #     noarch: python
+  #     number: {{ build_number }}
+  #     script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python <3.8.0a0
-      run:
-        - boto3 >=1.9
-        - dagster {{ version }}.*
-        - packaging
-        - psycopg2
-        - python <3.8.0a0
-        - requests
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - boto3 >=1.9
+  #       - dagster {{ version }}.*
+  #       - packaging
+  #       - psycopg2
+  #       - python <3.8.0a0
+  #       - requests
 
-    test:
-      requires:
-        - dagster-pyspark
-        - python <3.8.0
-        # can't be pip checked because of psycopg2-binary
-        # - pip
-      imports:
-        - dagster_aws
-        - dagster_aws.cloudwatch
-        - dagster_aws.ecs
-        - dagster_aws.redshift
-        - dagster_aws.s3
-        # still seems to be failing
-        # - dagster_aws.emr
+  #   test:
+  #     requires:
+  #       - dagster-pyspark
+  #       - python <3.8.0
+  #       # can't be pip checked because of psycopg2-binary
+  #       # - pip
+  #     imports:
+  #       - dagster_aws
+  #       - dagster_aws.cloudwatch
+  #       - dagster_aws.ecs
+  #       - dagster_aws.redshift
+  #       - dagster_aws.s3
+  #       # still seems to be failing
+  #       # - dagster_aws.emr
 
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-aws/LICENSE
-      summary: Package for AWS-specific Dagster framework solid and resource components.
+  #   about:
+  #     home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-aws/LICENSE
+  #     summary: Package for AWS-specific Dagster framework solid and resource components.
 
   - name: dagster-celery-k8s
     build:
@@ -656,35 +658,36 @@ outputs:
       commands:
         - python -m pip check
 
-  - name: dagster-snowflake
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-snowflake && {{ PYTHON }} -m pip install . -vv --no-deps
+  # TODO: fix dagster-snowflake
+  # - name: dagster-snowflake
+  #   build:
+  #     number: {{ build_number }}
+  #     noarch: python
+  #     script: cd dagster-snowflake && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python
-      run:
-        - dagster {{ version }}.*
-        - python
-        - snowflake-connector-python >=2.1.0
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python
+  #     run:
+  #       - dagster {{ version }}.*
+  #       - python
+  #       - snowflake-connector-python >=2.1.0
 
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_snowflake
-      commands:
-        - python -m pip check
+  #   test:
+  #     requires:
+  #       - pip
+  #     imports:
+  #       - dagster_snowflake
+  #     commands:
+  #       - python -m pip check
 
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-snowflake/LICENSE
-      summary: Package for Snowflake Dagster framework components.
+  #   about:
+  #     home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-snowflake/LICENSE
+  #     summary: Package for Snowflake Dagster framework components.
 
   # azure-storage-file-datalake not available
   # - name: dagster-azure
