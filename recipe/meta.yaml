@@ -30,9 +30,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
     sha256: a84ea6f979b9bb365088e09fd41c36dab7ab8e9342e6c7315b5eb33667501953
 
-  - folder: dagster-aws
-    url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
-    sha256: 42dd9f1df5b69194d8e31f126ce4f1c4feccd09619aaf5e452137056fcf29025
+  # TODO: restore dagster-aws
+  # - folder: dagster-aws
+  #   url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
+  #   sha256: 42dd9f1df5b69194d8e31f126ce4f1c4feccd09619aaf5e452137056fcf29025
 
   # - folder: dagster-azure
   #   url: https://pypi.io/packages/source/d/dagster-azure/dagster-azure-{{ version }}.tar.gz
@@ -593,45 +594,45 @@ outputs:
       summary: Airflow plugin for Dagster
 
   # issues with python 3.8
-  - name: dagster-aws
-    build:
-      noarch: python
-      number: {{ build_number }}
-      script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
+  # - name: dagster-aws
+  #   build:
+  #     noarch: python
+  #     number: {{ build_number }}
+  #     script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
 
-    requirements:
-      host:
-        - pip
-        - python <3.8.0a0
-      run:
-        - boto3 >=1.9
-        - dagster {{ version }}.*
-        - packaging
-        - psycopg2
-        - python <3.8.0a0
-        - requests
+  #   requirements:
+  #     host:
+  #       - pip
+  #       - python <3.8.0a0
+  #     run:
+  #       - boto3 >=1.9
+  #       - dagster {{ version }}.*
+  #       - packaging
+  #       - psycopg2
+  #       - python <3.8.0a0
+  #       - requests
 
-    test:
-      requires:
-        - dagster-pyspark
-        - python <3.8.0
-        # can't be pip checked because of psycopg2-binary
-        # - pip
-      imports:
-        - dagster_aws
-        - dagster_aws.cloudwatch
-        - dagster_aws.ecs
-        - dagster_aws.redshift
-        - dagster_aws.s3
-        # still seems to be failing
-        # - dagster_aws.emr
+  #   test:
+  #     requires:
+  #       - dagster-pyspark
+  #       - python <3.8.0
+  #       # can't be pip checked because of psycopg2-binary
+  #       # - pip
+  #     imports:
+  #       - dagster_aws
+  #       - dagster_aws.cloudwatch
+  #       - dagster_aws.ecs
+  #       - dagster_aws.redshift
+  #       - dagster_aws.s3
+  #       # still seems to be failing
+  #       # - dagster_aws.emr
 
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-aws/LICENSE
-      summary: Package for AWS-specific Dagster framework solid and resource components.
+  #   about:
+  #     home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-aws
+  #     license: Apache-2.0
+  #     license_family: APACHE
+  #     license_file: dagster-aws/LICENSE
+  #     summary: Package for AWS-specific Dagster framework solid and resource components.
 
   - name: dagster-celery-k8s
     build:
