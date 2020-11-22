@@ -504,6 +504,8 @@ outputs:
     test:
       requires:
         - pip
+        # TODO: clean up after https://github.com/conda-forge/tqdm-feedstock/issues/84
+        - tqdm !=4.53.0
       imports:
         - dagstermill
       commands:
