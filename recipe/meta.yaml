@@ -1,5 +1,5 @@
 {% set version = "0.9.21" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -530,7 +530,7 @@ outputs:
       run:
         - dagster {{ version }}.*
         - dagster-pandas {{ version }}.*
-        - great-expectations >=0.11.9,!=0.12.8
+        - great-expectations  >=0.11.9,!=0.12.8,<0.13.0
         - python >=3
         # TODO: upstream
         - requests <2.24,>=2.20
