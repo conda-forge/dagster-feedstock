@@ -1,5 +1,5 @@
 {% set version = "0.10.3" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -98,6 +98,10 @@ source:
   - folder: dagster-dbt
     url: https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ version }}.tar.gz
     sha256: 9caf8e782bdcf6742d4264a585f84f348dbdce465180a9317359ce119e328784
+
+  - folder: dagster-docker
+    url: https://pypi.io/packages/source/d/dagster-docker/dagster-docker-{{ version }}.tar.gz
+    sha256: 884ea87f891db4c9640e8cf2e9b1216546f479e0bd0f44836de1624a8a45cf77
 
   - folder: dagster-github
     url: https://pypi.io/packages/source/d/dagster-github/dagster-github-{{ version }}.tar.gz
@@ -921,6 +925,39 @@ outputs:
       license_family: APACHE
       license_file: dagster-github/LICENSE
       summary: Github plugin for Dagster
+
+  - name: dagster-docker
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-docker && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - dagster {{ version }}.*
+        - docker-py
+        - docker-image-py
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_docker
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-docker
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-docker/LICENSE
+      # TODO: make upstream issue
+      license_file: dagster/LICENSE
+      summary: A Dagster integration for docker
 
   - name: dagster-k8s
     build:
