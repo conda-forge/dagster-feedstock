@@ -1,5 +1,5 @@
-{% set version = "0.9.21" %}
-{% set build_number = 1 %}
+{% set version = "0.10.3" %}
+{% set build_number = 0 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -13,13 +13,13 @@ source:
   # this should always be built
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 5093dd093f19778c2df4fa38dd317787627ab58728beb32fd529ee2667a0cf87
+    sha256: 978506def84dee54750244e94659bb7b08f963d5771591131f66761aff9d198d
 
   {% if on_linux_py37 or on_linux_py38 %}
   # these are generally safe to build wherever, but are also required for special builds
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: a3b7015188579ae7163ed99c2fddb4bfbaa68959ee43a10ab9b2530ef1e08c38
+    sha256: c9f9c2cb79593e7637bf21719d20afc44966cc251985d34c31227c982ccd67cc
   {% endif %}
 
   {% if on_linux_py37 %}
@@ -28,7 +28,7 @@ source:
   # when rendering the recipe to fetch the shas
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
-    sha256: 97fa4d32b85226d8d0c2e0f38a440928a5dd6bec49376cc70d0cc37ce879de43
+    sha256: 7420d7e13465cefe35e202db0baa891f71678e2688ccddf98d9263fa9dfe4790
 
   # TODO: restore dagster-aws
   # - folder: dagster-aws
@@ -41,35 +41,35 @@ source:
 
   - folder: dagster-celery
     url: https://pypi.io/packages/source/d/dagster-celery/dagster-celery-{{ version }}.tar.gz
-    sha256: f3a02637b26b69464bbc5dc6a7810ac8247ac86194a02373f291548fef7802c0
+    sha256: 4d51a4bfd1a8ec86c652ddc448659e10750b6cf9be75fdf5e6ff915ef3f41998
 
   - folder: dagster-celery-docker
     url: https://pypi.io/packages/source/d/dagster-celery-docker/dagster-celery-docker-{{ version }}.tar.gz
-    sha256: db0647cb16a0a6d6910169597c4eee1a8e6bda3985c18b4aa9f6018c21859d06
+    sha256: a159b41410438068b1abd2227a0ed45f4f7dd6f2a025e0ae760a60ea12bd50c3
 
   - folder: dagster-dask
     url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
-    sha256: 89f402a8cdcb8063b2454e22a4a4e96681897774536382af6c2a7040e1ac6b3a
+    sha256: 18f52a1ecc0648a57db94eaf3de1eab687650c2e268a5f52651f48b6fb530d79
 
   - folder: dagster-gcp
     url: https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ version }}.tar.gz
-    sha256: db7e11eed3b69966d69d5a67472385c6cac5ae361fe84fb7bfcc99d658b2dbcc
+    sha256: ede36be14c5f96e19571ee9e2bdf1ff2299caeb01bb0b24cf4bd104409fc0940
 
   - folder: dagster-ge
     url: https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ version }}.tar.gz
-    sha256: 45b3c3f1515f09ec3ff23329cb3f510c19c9be48908560590faa7b6ae6e089dd
+    sha256: 5c4933eff690a0868122978e93fe43a90772296e243b7bb6cf99886707a3e647
 
   - folder: dagster-pyspark
     url: https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ version }}.tar.gz
-    sha256: c156ba76861e63f7b1b52202991f0b57185a6de3ed8e872a22d89616f6021caa
+    sha256: 8ca87ece0c2cdf7929e0eb73e86ce05259c190c0b8641676afe4abf3bd9c15e2
 
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ version }}.tar.gz
-    sha256: d8cb91e000072cb4df0e6e065a7252e64a797fd3352dc9e95ccaf1ed18d3d02f
+    sha256: 352cc4eac6863859786d945b2d2430b185c87696e6ab470f4c91e3697b3f1cad
 
   - folder: dagster-celery-k8s
     url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
-    sha256: dd75554a78e9fa3b9dadcdb390e865306a72a326005df92fe2801a18969d9380
+    sha256: cd8323a92132a29cf2aff888b91ec282e7c68452bebac4ba98a7202b3d056ce9
 
   # TODO: restore dagster-snowflake
   # - folder: dagster-snowflake
@@ -81,67 +81,67 @@ source:
   # these are generally safe to build wherever, but can be built most quickly on linux/38
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: 783a5e7560818d4303f5c88ed9c3beb80f38a808ab646758258bfe5d841c7a6f
+    sha256: c93e15f8248f77f44155d068fd61fc841c60cba3e23e29118bfe5a59ccaadc33
 
   - folder: dagster-shell
     url: https://pypi.io/packages/source/d/dagster-shell/dagster-shell-{{ version }}.tar.gz
-    sha256: fa7b565491074df64f7914d9131db5da7ece0cdf2bfe0dd71e2f11df15524003
+    sha256: da3e62116621f7f3c910a81967c74f04a8884442c8b0cda29ad6da2dd3a3071c
 
   - folder: dagster-cron
     url: https://pypi.io/packages/source/d/dagster-cron/dagster-cron-{{ version }}.tar.gz
-    sha256: 97d9eaefbe252ca0a440fc28a8d739ce760ee148d59ed747acb5721360002867
+    sha256: 21206723437cf595a9dd7c720c07e7cda683593ed0e87be0141010ef90e7f9f3
 
   - folder: dagster-datadog
     url: https://pypi.io/packages/source/d/dagster-datadog/dagster-datadog-{{ version }}.tar.gz
-    sha256: 06ad64eac702bb93b57637482b36322d123b5229ac58da0e797ca2dbc4a402f0
+    sha256: c74f826adcd74c1010f19941a2f183e3281de6ee085d8638bddf73596a13242e
 
   - folder: dagster-dbt
     url: https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ version }}.tar.gz
-    sha256: e8faf0406c293bfb84d6a41c114a0def64c81b2ae5d3de0e2928c523ed92b31a
+    sha256: 9caf8e782bdcf6742d4264a585f84f348dbdce465180a9317359ce119e328784
 
   - folder: dagster-github
     url: https://pypi.io/packages/source/d/dagster-github/dagster-github-{{ version }}.tar.gz
-    sha256: f9163c6f109aca5c36ee346ce84326d66803b41d6200b344ad4f6e86a2f14bba
+    sha256: b3d34430dc9a53a0f50af3fc03ea14c7e0262eb0b7728b57ca2c4e01612dea52
 
   - folder: dagster-k8s
     url: https://pypi.io/packages/source/d/dagster-k8s/dagster-k8s-{{ version }}.tar.gz
-    sha256: 54b14c0f8262880a63b571cca8f9385a9b26a466ca6f196ce11e289688baa5d7
+    sha256: bf4ba911657e4874449aaa23619b57a7ab7d93dcb59f0af603f1d9cb2a801632
 
   - folder: dagster-pagerduty
     url: https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ version }}.tar.gz
-    sha256: 954cd5230fb760b8749b03ac90731e9fa21574aa7ba52c0db89b8bd60faabade
+    sha256: c827fdbf53f330e43defdf27d284989042f2cd8179a67895c9c991ded1345fe9
 
   - folder: dagster-pandas
     url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ version }}.tar.gz
-    sha256: 7d4b22b1254275affbadc31bf70f05628e03e81c4f70c6f2ea527421c95fe504
+    sha256: 14b634ce01a7e88e5f05f5309b5dbe30661ab5c403672d0b4dcb440c9b8a2fe8
 
   - folder: dagster-papertrail
     url: https://pypi.io/packages/source/d/dagster-papertrail/dagster-papertrail-{{ version }}.tar.gz
-    sha256: dea3f39b63a00bc8f841ea85ad0777bfadae9a806275c175ffd008eaf535d5a0
+    sha256: e5aacee0bdfa13deb702ccda74db5c6740a4186adacd95170755e4fb8e9104cb
 
   - folder: dagster-postgres
     url: https://pypi.io/packages/source/d/dagster-postgres/dagster-postgres-{{ version }}.tar.gz
-    sha256: 296d04f27d52e743f74c5af4e9f2e540c50caf169d8ff8f07981e9eab88324b2
+    sha256: 79fd8425e8a872dc8275bf2a8f98807b146dcca09bda38a0247bbfdfaa9917aa
 
   - folder: dagster-prometheus
     url: https://pypi.io/packages/source/d/dagster-prometheus/dagster-prometheus-{{ version }}.tar.gz
-    sha256: df055293ce4d7c5c70217411e8a3d079757d064a772cb1c038e75dd26c2d5847
+    sha256: 4fefa9d7e5a11ccf0d2a861c1d5f5ae414075475343547bf05837d9456fac876
 
   - folder: dagster-slack
     url: https://pypi.io/packages/source/d/dagster-slack/dagster-slack-{{ version }}.tar.gz
-    sha256: 543871aecaf612c017d00643ad275256393b80ed4f537a9c06daed64e364366b
+    sha256: a29fed7173975a03c83a734251e838b6576115b567d32f8bd4a6455cac994021
 
   - folder: dagster-spark
     url: https://pypi.io/packages/source/d/dagster-spark/dagster-spark-{{ version }}.tar.gz
-    sha256: f55f50efec01a035cd4b8165ffde4c61fd9496344728a502c21d28a903da74fd
+    sha256: b8f79f53cfd8f672ebaf092753923d37d50c70f32995ed0a7303e3730500bca0
 
   - folder: dagster-ssh
     url: https://pypi.io/packages/source/d/dagster-ssh/dagster-ssh-{{ version }}.tar.gz
-    sha256: 96aba1e7c39356fcc7b48ae78ddf86f2f7878f08a6e1d6ad3ef2bc3bc8088bf9
+    sha256: f32a1876f8de1f306e9d2e30916aa14e9d4871cb9756c6f9cd1c7bee6d0ceef4
 
   - folder: dagster-twilio
     url: https://pypi.io/packages/source/d/dagster-twilio/dagster-twilio-{{ version }}.tar.gz
-    sha256: 262326882e4d4757648f8b19d12951c793eb82e65944074eae60dc387aa7946f
+    sha256: 421e4133fb282338ff58be6c528a753795d7c1061764623feb5f6874c1ed0c7d
   {% endif %}
 
 build:
@@ -178,39 +178,31 @@ outputs:
       run:
         - alembic >=1.2.1
         - click >=5.0
-        - coloredlogs >=6.1
-        - contextlib2 >=0.5.4
+        - coloredlogs>=6.1, <=14.0
         - croniter >=0.3.34
         - docstring_parser 0.7.1
         - enum-compat >=0.0.1
-        - funcsigs
         - future
         - grpcio >=1.32.0
         - grpcio-health-checking >=1.32.0
         - pendulum 1.4.4
-        - tzlocal >=1.5,<2   # probably from pendulum?
         - protobuf >=3.13.0
         - psutil >=1.0  # [win]
         - pyrsistent >=0.14.8
         - python
         - python-dateutil
-        - pytz
+        - pytz <2021.0
         - pywin32 !=226  # [win]
         - pyyaml
         - requests
         - rx <=1.6.1
         - setuptools          # undeclared dep
-        - six
         - sqlalchemy >=1.0
         - tabulate
         - toposort >=1.0
         - tqdm
+        - tzlocal >=1.5,<2   # probably from pendulum?
         - watchdog >=0.8.3
-        # historical py2k packages
-        # - functools32  # [py2k]
-        # - backports.tempfile  # [py2k]
-        # - typing  # [py2k]
-        # - pathlib2 >=2.3.4  # [py2k]
 
     test:
       requires:
@@ -270,13 +262,13 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - gevent
         - gevent-websocket >=0.10.1
         - graphene >=2.1.3
-        - python
+        - python >=3.6
         - requests
 
     test:
@@ -310,13 +302,13 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - celery >=4.3.0
         - click >=5.0
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -343,13 +335,13 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - dagster-celery {{ version }}.*
         - docker-py
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -376,13 +368,14 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3
+        - python >=3.6
       run:
         - bokeh
+        - chardet <4.0
         - dagster {{ version }}.*
-        - dask >=1.2.2
-        - distributed >=1.28.1
-        - python >=3
+        - dask >=1.2.2,<=2.30.0
+        - distributed >=1.28.1,<=2.30.1
+        - python >=3.6
 
     test:
       requires:
@@ -412,7 +405,7 @@ outputs:
     requirements:
       host:
         - pip
-        - python <3.8.0a0
+        - python >=3.6
       run:
         - dagster
         - dagster-pandas
@@ -427,7 +420,7 @@ outputs:
         - google-cloud-storage
         - google-resumable-media
         - oauth2client
-        - python <3.8.0a0
+        - python >=3.6
 
     test:
       requires:
@@ -457,12 +450,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - dagster-spark {{ version }}.*
         - pyspark
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -491,15 +484,14 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3.5
+        - python >=3.6
       run:
         - dagster {{ version }}.*
-        - ipykernel >=4.9.0
+        - ipykernel >=4.9.0,!=5.4.0,!=5.4.1
         - nbconvert >=5.4.0,<6.0.0
         - nteract-scrapbook >=0.2.0
         - papermill >=1.0.0,<2.0.0
-        - python >=3.5
-        - six
+        - python >=3.6s
 
     test:
       requires:
@@ -526,12 +518,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - dagster-pandas {{ version }}.*
-        - great-expectations  >=0.11.9,!=0.12.8,<0.13.0
-        - python >=3
+        - great-expectations >=0.11.9,!=0.12.8
+        - python >=3.6
         # TODO: upstream
         - requests <2.24,>=2.20
 
@@ -562,16 +554,15 @@ outputs:
     requirements:
       host:
         - pip
-        - python <3.8.0a0
+        - python >=3.6
       run:
         - airflow
         - dagster {{ version }}.*
         - docker-py
         - lazy-object-proxy
         - pendulum 1.4.4
-        - python <3.8.0a0
+        - python >=3.6
         - python-dateutil >=2.8.0
-        - six
 
     test:
       # requires:
@@ -644,12 +635,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - dagster-celery {{ version }}.*
         - dagster-k8s {{ version }}.*
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -740,7 +731,7 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - click >=7.0
         - dagster {{ version }}.*
@@ -750,13 +741,12 @@ outputs:
         - flask-cors >=3.0.6
         - flask-graphql >=2.0.0
         - flask-sockets >=0.2.1
-        - future
         - gevent
         - gevent-websocket >=0.10.1
         - graphql-core >=2.1,<3
         - graphql-ws >=0.3.0
         - nbconvert >=5.4.0,<6.0.0
-        - python
+        - python >=3.6
         - pyyaml
         - watchdog >=0.8.3
 
@@ -787,10 +777,10 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -816,10 +806,10 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
-        - python
+        - python >=3.6
         - python-crontab >=2.3.8
 
     test:
@@ -846,12 +836,11 @@ outputs:
     requirements:
       host:
         - pip
-        - python
-
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - datadog
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -877,13 +866,14 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3
+        - python >=3.6
       run:
         - attrs
         - dagster {{ version }}.*
         - dagster-pandas {{ version }}.*
         - pandas
         - requests
+        - python >=3.6
 
     test:
       requires:
@@ -909,11 +899,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - cryptography >=1.4
         - dagster {{ version }}.*
         - pyjwt
+        - python >=3.6
         - requests
 
     test:
@@ -940,11 +931,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
-        - python-kubernetes <=11.0.0
+        - python-kubernetes
+        - python >=3.6
 
     test:
       requires:
@@ -978,11 +970,11 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - pypd
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -1008,12 +1000,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - matplotlib-base
-        - pandas
-        - python
+        - pandas <=1.1.4
+        - python >=3.6
 
     test:
       requires:
@@ -1039,10 +1031,10 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -1068,11 +1060,11 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - psycopg2
-        - python
+        - python >=3.6
 
     test:
       # this cannot be `pip check`ed because of the psycopg2[-binary] fiasco
@@ -1095,11 +1087,11 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - prometheus_client
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -1125,13 +1117,12 @@ outputs:
     requirements:
       host:
         - pip
-        - python >=3
+        - python >=3.6
       run:
+        - chardet <4.0
         - dagster {{ version }}.*
-        - python >=3
+        - python >=3.6
         - slackclient >=2,<3
-        # - websocket-client <0.55.0,>=0.35
-        # - ssl_match_hostname
 
     test:
       requires:
@@ -1157,10 +1148,10 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
-        - python
+        - python >=3.6
 
     test:
       requires:
@@ -1186,11 +1177,11 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
         - paramiko
-        - python
+        - python >=3.6
         - sshtunnel
 
     test:
@@ -1217,11 +1208,13 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.6
       run:
         - dagster {{ version }}.*
-        - python
-        - twilio
+        - python >=3.6
+        # TODO: fix after https://github.com/conda-forge/twilio-feedstock/pull/38
+        - twilio <6.51.0
+        - pyjwt <2
 
     test:
       requires:
