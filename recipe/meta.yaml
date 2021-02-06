@@ -1,5 +1,5 @@
 {% set version = "0.10.4" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -71,10 +71,9 @@ source:
     url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
     sha256: 98d5869b05577cbe995bfab35e8b8d9928c81a0f6b3a51d6fab39d1ded7abc29
 
-  # TODO: restore dagster-snowflake
-  # - folder: dagster-snowflake
-  #   url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ version }}.tar.gz
-  #   sha256:
+  - folder: dagster-snowflake
+    url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ version }}.tar.gz
+    sha256: a39edb7be4e94f54e4c746f262f43625aee044feae58200650b56fdfe8877d51
   {% endif %}
 
   {% if on_linux_py38 %}
@@ -654,36 +653,35 @@ outputs:
       commands:
         - python -m pip check
 
-  # TODO: fix dagster-snowflake
-  # - name: dagster-snowflake
-  #   build:
-  #     number: {{ build_number }}
-  #     noarch: python
-  #     script: cd dagster-snowflake && {{ PYTHON }} -m pip install . -vv --no-deps
+  - name: dagster-snowflake
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-snowflake && {{ PYTHON }} -m pip install . -vv --no-deps
 
-  #   requirements:
-  #     host:
-  #       - pip
-  #       - python
-  #     run:
-  #       - dagster {{ version }}.*
-  #       - python
-  #       - snowflake-connector-python >=2.1.0
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - dagster {{ version }}.*
+        - python >=3.6
+        - snowflake-connector-python >=2.1.0
 
-  #   test:
-  #     requires:
-  #       - pip
-  #     imports:
-  #       - dagster_snowflake
-  #     commands:
-  #       - python -m pip check
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_snowflake
+      commands:
+        - python -m pip check
 
-  #   about:
-  #     home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake
-  #     license: Apache-2.0
-  #     license_family: APACHE
-  #     license_file: dagster-snowflake/LICENSE
-  #     summary: Package for Snowflake Dagster framework components.
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-snowflake/LICENSE
+      summary: Package for Snowflake Dagster framework components.
 
   # azure-storage-file-datalake not available
   # - name: dagster-azure
