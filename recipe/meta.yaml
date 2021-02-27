@@ -496,7 +496,7 @@ outputs:
         - dagster {{ version }}.*
         - ipykernel >=4.9.0,!=5.4.0,!=5.4.1
         - nbconvert >=5.4.0,<6.0.0
-        - nteract-scrapbook >=0.2.0
+        - nteract-scrapbook >=0.2.0,<0.5
         - papermill >=1.0.0,<2.0.0
         - python >=3.6s
 
