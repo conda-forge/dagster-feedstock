@@ -380,6 +380,9 @@ outputs:
         - dask >=1.2.2,<=2.30.0
         - distributed >=1.28.1,<=2.30.1
         - python >=3.6
+        # For fsspec (maybe)
+        # TODO: remove after https://github.com/conda-forge/filesystem-spec-feedstock/issues/42
+        - importlib-metadata
 
     test:
       requires:
