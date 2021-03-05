@@ -111,6 +111,11 @@ source:
     url: https://pypi.io/packages/source/d/dagster-k8s/dagster-k8s-{{ version }}.tar.gz
     sha256: 0262b970d90e5a4eb9766972fba1f62f7cb52b4777bf2e6496d76a37a988cde6
 
+  - folder: dagster-pandas
+    url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ version }}.tar.gz
+    sha256: d883a6e2882dc04ba688c6aa4f5d9a6a794028f944de5bd18654558fa13997a0
+
+
   {% endif %}
 
   {% if on_linux_py39 %}
@@ -121,10 +126,6 @@ source:
   - folder: dagster-pagerduty
     url: https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ version }}.tar.gz
     sha256: ddc2887f581e260cbab7a5dad196441bc63f6f05b7f21fd6d1bae4ad5c9e27a2
-
-  - folder: dagster-pandas
-    url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ version }}.tar.gz
-    sha256: d883a6e2882dc04ba688c6aa4f5d9a6a794028f944de5bd18654558fa13997a0
 
   - folder: dagster-papertrail
     url: https://pypi.io/packages/source/d/dagster-papertrail/dagster-papertrail-{{ version }}.tar.gz
@@ -1008,6 +1009,38 @@ outputs:
       license_file: dagster/LICENSE
       summary: A Dagster integration for celery-k8s-executor
 
+  - name: dagster-pandas
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-pandas && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - dagster {{ version }}.*
+        - matplotlib-base
+        - pandas <=1.1.4
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_pandas
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-pandas/LICENSE
+      summary: Utilities and examples for working with pandas and dagster, an opinionated framework for expressing data pipelines
+
+
   {% endif %}
 
   {% if on_linux_py39 %}
@@ -1068,37 +1101,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-pagerduty/LICENSE
       summary: Package for pagerduty Dagster framework components.
-
-  - name: dagster-pandas
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-pandas && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python >=3.6
-      run:
-        - dagster {{ version }}.*
-        - matplotlib-base
-        - pandas <=1.1.4
-        - python >=3.6
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_pandas
-      commands:
-        - python -m pip check
-
-    about:
-      home: https://github.com/dagster-io/dagster
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-pandas/LICENSE
-      summary: Utilities and examples for working with pandas and dagster, an opinionated framework for expressing data pipelines
 
   - name: dagster-papertrail
     build:
