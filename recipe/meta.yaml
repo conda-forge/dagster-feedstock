@@ -665,6 +665,13 @@ outputs:
       commands:
         - python -m pip check
 
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery-k8s
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-celery-k8s/LICENSE
+      summary: A Dagster integration for celery-k8s-executor
+
   - name: dagster-snowflake
     build:
       number: {{ build_number }}
@@ -996,15 +1003,8 @@ outputs:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-k8s
       license: Apache-2.0
       license_family: APACHE
-      license_file: dagster-github/LICENSE
+      license_file: dagster-k8s/LICENSE
       summary: A Dagster integration for k8s
-
-    about:
-      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery-k8s
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-celery-k8s/LICENSE
-      summary: A Dagster integration for celery-k8s-executor
 
   - name: dagster-pandas
     build:
