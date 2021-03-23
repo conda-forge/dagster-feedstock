@@ -1,5 +1,5 @@
-{% set version = "0.11.0" %}
-{% set build_number = 1 %}
+{% set version = "0.11.1" %}
+{% set build_number = 0 %}
 
 # TODO: more elegant way to get at CONDA_SUBDIR
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
@@ -14,7 +14,7 @@ source:
   # this should always be built
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 4ea86a117f67f22586b0218023c3032229f817d85d2446b270e05215c5c093f5
+    sha256: 3210e33b8b881501a85a359a2def5129bcce4d755ef329b4fa64446008e40f36
 
   {% if on_linux_py37 or on_linux_py38 %}
   # these are generally safe to build wherever, but are also required for special builds
