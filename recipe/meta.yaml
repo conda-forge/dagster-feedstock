@@ -204,7 +204,6 @@ outputs:
         - pyrsistent >=0.14.8
         - python
         - python-dateutil
-        - pytz <2021.0
         - pywin32 !=226  # [win]
         - pyyaml >=5.1
         - requests
@@ -503,10 +502,11 @@ outputs:
       run:
         - dagster {{ version }}.*
         - ipykernel >=4.9.0,!=5.4.0,!=5.4.1
+        - jupyter_client !=6.1.13
         - nbconvert >=5.4.0,<6.0.0
-        - nteract-scrapbook >=0.2.0,<0.5
         - papermill >=1.0.0,<2.0.0
-        - python >=3.6s
+        - python >=3.6
+        - scrapbook >=0.5
 
     test:
       requires:
@@ -537,7 +537,7 @@ outputs:
       run:
         - dagster {{ version }}.*
         - dagster-pandas {{ version }}.*
-        - great-expectations >=0.11.9,!=0.12.8
+        - great-expectations >=0.11.9,!=0.12.8,<0.13.7
         - python >=3.6
         # TODO: upstream
         - requests <2.24,>=2.20
