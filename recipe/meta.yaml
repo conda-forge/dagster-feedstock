@@ -317,7 +317,8 @@ outputs:
         - python >=3.6
       run:
         - celery >=4.3.0
-        - click >=5.0
+        # TODO: maybe remove after https://github.com/conda-forge/celery-feedstock/pull/51
+        - click >=5.0,<8
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - python >=3.6
@@ -390,9 +391,6 @@ outputs:
 
     test:
       requires:
-        # For fsspec (maybe)
-        # TODO: remove after https://github.com/conda-forge/filesystem-spec-feedstock/issues/42
-        - importlib-metadata
         - pip
       imports:
         - dagster_dask
@@ -539,8 +537,6 @@ outputs:
         - dagster-pandas {{ version }}.*
         - great-expectations >=0.11.9,!=0.12.8,<0.13.7
         - python >=3.6
-        # TODO: upstream
-        - requests <2.24,>=2.20
 
     test:
       requires:
