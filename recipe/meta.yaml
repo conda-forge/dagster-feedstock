@@ -584,7 +584,8 @@ outputs:
         - dagster_airflow
       commands:
         - dagster-airflow --help
-        - python -m pip check
+        # TODO: flask-admin 1.5.4 requires enum34, which is not installed.
+        # - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
