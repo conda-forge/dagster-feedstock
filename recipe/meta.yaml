@@ -580,18 +580,15 @@ outputs:
         - python-dateutil >=2.8.0
 
     test:
-      # requires:
-      #   - pip
       requires:
-        - python <3.8.0a0
+        - pip
+      requires:
+        - python >=3.6
       imports:
         - dagster_airflow
       commands:
         - dagster-airflow --help
-        # cannot be pip-checked because:
-        #
-        #   flask-admin 1.5.4 requires enum34, which is not installed.
-        # - python -m pip check
+        - python -m pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
@@ -701,41 +698,6 @@ outputs:
       license_family: APACHE
       license_file: dagster-snowflake/LICENSE
       summary: Package for Snowflake Dagster framework components.
-
-  # azure-storage-file-datalake not available
-  # - name: dagster-azure
-  #   build:
-  #     noarch: python
-  #     number: {{ build_number }}
-  #     entry_points:
-  #       - dagster-azure = dagster_azure.cli.cli:main
-  #     script: cd dagster-azure && {{ PYTHON }} -m pip install . -vv --no-deps
-
-  #   requirements:
-  #     host:
-  #       - pip
-  #       - python <3.8.0a0
-  #     run:
-  #       - dagster {{ version }}.*
-  #       - azure-storage-blob >=12.3.0,<12.4.0a0
-  #       - azure-storage-file-datalake >=12.0.1,<12.1.0a0
-
-  #   test:
-  #     requires:
-  #       - python <3.8.0
-  #       - pip
-  #     imports:
-  #       - dagster_azure
-  #     commands:
-  #       - dagster-azure --help
-  #       - python -m pip check
-
-  #   about:
-  #     home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-azure
-  #     license: Apache-2.0
-  #     license_family: APACHE
-  #     license_file: dagster-azure/LICENSE
-  #     summary: Package for Azure-specific Dagster framework solid and resource components.
   {% endif %}
 
   {% if on_linux_py38 %}
@@ -1138,13 +1100,16 @@ outputs:
         - python >=3.6
       run:
         - dagster {{ version }}.*
-        - psycopg2
+        - psycopg2-binary
         - python >=3.6
 
     test:
-      # this cannot be `pip check`ed because of the psycopg2[-binary] fiasco
       imports:
         - dagster_postgres
+      commands:
+        - pip check
+      requires:
+        - pip
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-postgres
