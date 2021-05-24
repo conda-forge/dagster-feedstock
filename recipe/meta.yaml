@@ -728,6 +728,7 @@ outputs:
         - pyyaml
         - requests
         - watchdog >=0.8.3
+        - werkzeug <2.0.0
 
     test:
       requires:
