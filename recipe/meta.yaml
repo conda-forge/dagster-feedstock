@@ -457,7 +457,7 @@ outputs:
       summary: Package for using Dask as Dagster's execution engine.
   {% endif %}
 
-  {% if on_linux_py37 and build_number > 0 %}
+  {% if on_linux_py37 %}
   # issues with python 3.8
   - name: dagster-pyspark
     build:
