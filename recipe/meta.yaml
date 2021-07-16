@@ -180,29 +180,28 @@ outputs:
         - alembic >=1.2.1,!=1.6.3
         - click >=5.0,<8
         - coloredlogs >=6.1,<=14.0
-        - jinja2 <3
         - croniter >=0.3.34
         - docstring_parser 0.7.1
-        - enum-compat >=0.0.1
         - future
         - grpcio >=1.32.0
         - grpcio-health-checking >=1.32.0
+        - jinja2 <3
+        - packaging >=20.9
         - pendulum
         - protobuf >=3.13.0
         - psutil >=1.0  # [win]
-        - packaging >=20.9
         - python
         - python-dateutil
         - pywin32 !=226  # [win]
         - pyyaml >=5.1
         - rx >=1.6,<2
-        - setuptools          # undeclared dep
+        - setuptools  # undeclared dep
         - sqlalchemy >=1.0
         - tabulate
         - toposort >=1.0
         - tqdm
         - typing-compat
-        - tzlocal >=1.5,<2   # probably from pendulum?
+        - tzlocal >=1.5,<2  # from pendulum
         - watchdog >=0.8.3
 
     test:
