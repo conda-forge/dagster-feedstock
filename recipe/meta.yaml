@@ -1070,7 +1070,7 @@ outputs:
         - python >=3.6
       run:
         - dagster {{ version }}.*
-        - psycopg2-binary <2.9
+        - psycopg2-binary
         - python >=3.6
 
     test:
