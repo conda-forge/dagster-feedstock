@@ -702,7 +702,7 @@ outputs:
       license: Apache-2.0
       license_family: APACHE
       license_file: dagster-shell/LICENSE
-      summary: Package for Dagster shell solids.
+      summary: Package for Dagster shell ops.
 
   - name: dagster-datadog
     build:
@@ -1128,10 +1128,9 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - chardet <4.0
         - dagster {{ version }}.*
         - python >=3.6
-        - slackclient >=2,<3
+        - slack-sdk
 
     test:
       requires:
