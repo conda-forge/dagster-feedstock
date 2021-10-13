@@ -384,6 +384,8 @@ outputs:
     test:
       requires:
         - pip
+        # to get viable intersecting click ranges 
+        - celery >=5.1.2
       imports:
         - dagster_celery_k8s
       commands:
