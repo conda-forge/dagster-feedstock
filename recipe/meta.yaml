@@ -178,7 +178,7 @@ outputs:
         - python
       run:
         - alembic >=1.2.1,!=1.6.3,<1.7.0
-        - click >=5.0,<8
+        - click >=5.0,<9
         - coloredlogs >=6.1,<=14.0
         - croniter >=0.3.34
         - docstring_parser
@@ -191,6 +191,7 @@ outputs:
         - psutil >=1.0  # [win]
         - python
         - python-dateutil
+        - pytz
         - pywin32 !=226  # [win]
         - pyyaml >=5.1
         - rx >=1.6,<2
@@ -307,7 +308,7 @@ outputs:
       run:
         - celery >=4.3.0
         # TODO: maybe remove after https://github.com/conda-forge/celery-feedstock/pull/51
-        - click >=5.0,<8
+        - click >=5.0,<9
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - python >=3.6
@@ -640,7 +641,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - click >=7.0,<8.0
+        - click >=7.0,<9.0
         - dagster {{ version }}.*
         - dagster-graphql {{ version }}.*
         - flask >=0.12.4,<2.0.0
