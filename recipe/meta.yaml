@@ -316,7 +316,7 @@ outputs:
     test:
       requires:
         - pip
-        # to get correct intersecting click ranges 
+        # to get viable intersecting click ranges 
         - celery >=5.1.2
       imports:
         - dagster_celery
@@ -351,6 +351,8 @@ outputs:
     test:
       requires:
         - pip
+        # to get viable intersecting click ranges 
+        - celery >=5.1.2
       imports:
         - dagster_celery_docker
       commands:
