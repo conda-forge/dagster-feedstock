@@ -168,7 +168,6 @@ outputs:
       number: {{ build_number }}
       entry_points:
         - dagster = dagster.cli:main
-        - dagster-scheduler = dagster.scheduler.cli:main
         - dagster-daemon = dagster.daemon.cli:main
       script: cd dagster && {{ PYTHON }} -m pip install . -vv --no-deps
 
@@ -230,8 +229,9 @@ outputs:
         - dagster.seven
         - dagster.utils
       commands:
-        - dagster --help
         - python -m pip check
+        - dagster --help
+        - dagster-daemon --help
 
     about:
       home: https://github.com/dagster-io/dagster
