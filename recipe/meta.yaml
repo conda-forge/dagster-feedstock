@@ -440,7 +440,6 @@ outputs:
         - python >=3.6
       run:
         - bokeh
-        - chardet <4.0
         - dagster {{ version }}.*
         - dask >=1.2.2
         - distributed >=1.28.1
