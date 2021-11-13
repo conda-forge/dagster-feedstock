@@ -90,6 +90,14 @@ source:
     url: https://pypi.io/packages/source/d/dagster-docker/dagster-docker-{{ version }}.tar.gz
     sha256: de9cd66c5768a27a2daf2a325987a0d852ced1226588f74be9dcd95131cebfde
 
+  - folder: dagster-fivetran
+    url: https://pypi.io/packages/source/d/dagster-fivetran/dagster-fivetran-{{ version }}.tar.gz
+    sha256: c90bebd21635874ab6533a358e4cecb39e93a4bc3f6020a344370de9d3beae90
+
+  - folder: dagster-ge
+    url: https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ version }}.tar.gz
+    sha256: f8a00ea8c47f24f992b71ed7e3810aaf68f6394eaf7927b6dfb7f748f9863600
+
   - folder: dagster-github
     url: https://pypi.io/packages/source/d/dagster-github/dagster-github-{{ version }}.tar.gz
     sha256: 848d99d228168f5ff074fc120d2bff5a852f6f549d944e4c9cbe4e12b79bfc92
@@ -102,10 +110,6 @@ source:
     url: https://pypi.io/packages/source/d/dagster-mlflow/dagster-mlflow-{{ version }}.tar.gz
     sha256: 41a8e866d9a4f04fd1721182801557066eff37dc144bdb7866f3c754403a83df
 
-  - folder: dagster-ge
-    url: https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ version }}.tar.gz
-    sha256: f8a00ea8c47f24f992b71ed7e3810aaf68f6394eaf7927b6dfb7f748f9863600
-
   - folder: dagster-pandas
     url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ version }}.tar.gz
     sha256: d379bedf5c08353bee06091bb9f35ac93847533e7b83dc1ef99e89365da9a7ad
@@ -115,6 +119,10 @@ source:
   - folder: dagster-mysql
     url: https://pypi.io/packages/source/d/dagster-mysql/dagster-mysql-{{ version }}.tar.gz
     sha256: c485303e7a4d0c7b4a3730ebcbcc3dc2b92347df3dff65e4fd0d5279429f404a
+
+  - folder: dagster-msteams
+    url: https://pypi.io/packages/source/d/dagster-msteams/dagster-msteams-{{ version }}.tar.gz
+    sha256: d67629736f50457249f6a4d08d196888e47e88168f85669e22a7f7aaf149b3c0
 
   - folder: dagster-pagerduty
     url: https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ version }}.tar.gz
@@ -316,7 +324,7 @@ outputs:
     test:
       requires:
         - pip
-        # to get viable intersecting click ranges 
+        # to get viable intersecting click ranges
         - celery >=5.1.2
       imports:
         - dagster_celery
@@ -351,7 +359,7 @@ outputs:
     test:
       requires:
         - pip
-        # to get viable intersecting click ranges 
+        # to get viable intersecting click ranges
         - celery >=5.1.2
       imports:
         - dagster_celery_docker
@@ -384,7 +392,7 @@ outputs:
     test:
       requires:
         - pip
-        # to get viable intersecting click ranges 
+        # to get viable intersecting click ranges
         - celery >=5.1.2
       imports:
         - dagster_celery_k8s
@@ -488,7 +496,7 @@ outputs:
         - python -m pip check
 
     about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-framework/pyspark
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pyspark
       license: Apache-2.0
       license_family: APACHE
       license_file: dagster-pyspark/LICENSE
@@ -774,6 +782,36 @@ outputs:
       license_file: dagster/LICENSE
       summary: A Dagster integration for dbt
 
+  - name: dagster-fivetran
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-fivetran && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - dagster {{ version }}.*
+        - python >=3.6
+        - requests
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_fivetran
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-fivetran
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-fivetran/LICENSE
+      summary: Package for integrating Fivetran with Dagster.
+
   - name: dagster-ge
     build:
       number: {{ build_number }}
@@ -1003,6 +1041,34 @@ outputs:
       license_family: APACHE
       license_file: dagster-mysql/LICENSE
       summary: A Dagster integration for MySQL
+
+  - name: dagster-msteams
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-msteams && {{ PYTHON }} -m pip install . -vv --no-deps
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - dagster {{ version }}.*
+        - python >=3.6
+        - requests >=2,<3
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_msteams
+      commands:
+        - python -m pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-msteams
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-msteams/LICENSE
+      summary: A Microsoft Teams client resource for posting to Microsoft Teams
 
   - name: dagster-pagerduty
     build:
