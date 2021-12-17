@@ -7,7 +7,7 @@
 {% set on_linux_py39 = PY_VER == "3.9" and "linux-64" in compiler("c") %}
 
 package:
-  name: dagster
+  name: dagster-meta
   version: {{ version }}
 
 source:
@@ -245,7 +245,7 @@ outputs:
       home: https://github.com/dagster-io/dagster
       license: Apache-2.0
       license_family: APACHE
-      summary: Dagster is a data orchestrator for machine learning, analytics, and ETL.
+      summary: The data orchestration platform built for productivity.
       license_file: dagster/LICENSE
       description: |
         Dagster lets you define pipelines in terms of the data flow between reusable, logical components,
@@ -1285,7 +1285,7 @@ outputs:
 
 about:
   home: https://github.com/dagster-io
-  summary: 'A Python library for building data applications: ETL, ML, Data Pipelines, and more.'
+  summary: The data orchestration platform built for productivity.
   license: Apache-2.0
   license_family: APACHE
   license_file: dagster/LICENSE
@@ -1294,6 +1294,7 @@ about:
     Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
 
 extra:
+  feedstock-name: dagster
   recipe-maintainers:
     - xhochy
     - bollwyvl
