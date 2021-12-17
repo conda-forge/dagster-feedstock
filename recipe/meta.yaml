@@ -216,23 +216,30 @@ outputs:
         - pip
       imports:
         - dagster
+        - dagster.api
         - dagster.check
         - dagster.cli
-        - dagster.core
+        - dagster.config
+        - dagster.core.asset_defs
         - dagster.core.definitions
         - dagster.core.events
         - dagster.core.execution
-        - dagster.core.execution.context
-        - dagster.core.execution.plan
+        - dagster.core.executor
+        - dagster.core.host_representation
         - dagster.core.instance
+        - dagster.core.launcher
+        - dagster.core.run_coordinator
         - dagster.core.scheduler
         - dagster.core.selector
-        - dagster.core.serdes
+        - dagster.core.snap
         - dagster.core.storage
         - dagster.core.system_config
         - dagster.core.types
-        - dagster.core.types.evaluator
+        - dagster.core.workspace
+        - dagster.daemon
+        - dagster.grpc
         - dagster.loggers
+        - dagster.scheduler
         - dagster.seven
         - dagster.utils
       commands:
