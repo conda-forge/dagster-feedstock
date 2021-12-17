@@ -7,9 +7,7 @@ Package license: Apache-2.0
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/dagster-feedstock/blob/master/LICENSE.txt)
 
-Summary: Dagster is a data orchestrator for machine learning, analytics, and ETL.
-
-Documentation: https://dagster.readthedocs.io
+Summary: The data orchestration platform built for productivity.
 
 Dagster lets you define pipelines in terms of the data flow between reusable, logical components,
 then test locally and run anywhere. With a unified view of pipelines and the assets they produce,
