@@ -220,7 +220,6 @@ outputs:
         - dagster.cli
         - dagster.core
         - dagster.core.definitions
-        - dagster.core.engine
         - dagster.core.events
         - dagster.core.execution
         - dagster.core.execution.context
@@ -246,6 +245,7 @@ outputs:
       license: Apache-2.0
       license_family: APACHE
       summary: The data orchestration platform built for productivity.
+      doc_url: https://dagster.readthedocs.io
       license_file: dagster/LICENSE
       description: |
         Dagster lets you define pipelines in terms of the data flow between reusable, logical components,
