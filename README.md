@@ -9,6 +9,8 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/dagster-feedsto
 
 Summary: The data orchestration platform built for productivity.
 
+Documentation: https://dagster.readthedocs.io
+
 Dagster lets you define pipelines in terms of the data flow between reusable, logical components,
 then test locally and run anywhere. With a unified view of pipelines and the assets they produce,
 Dagster can schedule and orchestrate Pandas, Spark, SQL, or anything else that Python can invoke.
