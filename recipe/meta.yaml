@@ -834,7 +834,8 @@ outputs:
       run:
         - dagster {{ version }}.*
         - dagster-pandas {{ version }}.*
-        - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27
+        # TODO: #175 revisit after https://github.com/conda-forge/great-expectations-feedstock/pull/153
+        - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27,!=0.14.0
         - python >=3.6
 
     test:
