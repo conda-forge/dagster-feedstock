@@ -24,9 +24,10 @@ source:
   {% endif %}
 
   {% if on_linux_py37 %}
-  # these are problematic, and presently build only/most reliably on linux/37
-  # along with their dependencies. always download them anyway so they can be found
-  # when rendering the recipe to fetch the shas
+  - folder: dagster-airbyte
+    url: https://pypi.io/packages/source/d/dagster-airbyte/dagster-airbyte-{{ version }}.tar.gz
+    sha256: 598e3d7c1149091f2b9182e53092ef411a5359975cf0564944ef9f54c86bcca5
+
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
     sha256: 19520e95525986b4fc925895d1dd28f61c97470da18d3ad1d099e5009fef9f81
@@ -192,7 +193,7 @@ outputs:
         - docstring_parser
         - grpcio >=1.32.0
         - grpcio-health-checking >=1.32.0
-        - jinja2 <3
+        - jinja2 <3.0
         - packaging >=20.9
         - pendulum
         - protobuf >=3.13.0
@@ -244,7 +245,7 @@ outputs:
         - dagster.seven
         - dagster.utils
       commands:
-        - python -m pip check
+        - pip check
         - dagster --help
         - dagster-daemon --help
 
@@ -280,7 +281,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - gevent
         - gevent-websocket >=0.10.1
         - graphene >=2.1.3,<3
@@ -298,7 +299,7 @@ outputs:
         - dagster_graphql.schema
       commands:
         - dagster-graphql --help
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql
@@ -325,8 +326,8 @@ outputs:
         - celery >=4.3.0
         # TODO: maybe remove after https://github.com/conda-forge/celery-feedstock/pull/51
         - click >=5.0,<9
-        - dagster {{ version }}.*
-        - dagster-graphql {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-graphql", exact=True) }}
         - python >=3.6
 
     test:
@@ -338,7 +339,7 @@ outputs:
         - dagster_celery
       commands:
         - dagster-celery --help
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery
@@ -358,9 +359,9 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
-        - dagster-graphql {{ version }}.*
-        - dagster-celery {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-graphql", exact=True) }}
+        - {{ pin_subpackage("dagster-celery", exact=True) }}
         - docker-py
         - python >=3.6
 
@@ -372,7 +373,7 @@ outputs:
       imports:
         - dagster_celery_docker
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery-docker
@@ -392,9 +393,9 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
-        - dagster-celery {{ version }}.*
-        - dagster-k8s {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-celery", exact=True) }}
+        - {{ pin_subpackage("dagster-k8s", exact=True) }}
         - python >=3.6
 
     test:
@@ -405,7 +406,7 @@ outputs:
       imports:
         - dagster_celery_k8s
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-celery-k8s
@@ -425,7 +426,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python-kubernetes
         - python >=3.6
 
@@ -435,7 +436,7 @@ outputs:
       imports:
         - dagster_k8s
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-k8s
@@ -456,7 +457,7 @@ outputs:
         - python >=3.6
       run:
         - bokeh
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - dask >=1.2.2
         - distributed >=1.28.1
         - python >=3.6
@@ -467,7 +468,7 @@ outputs:
       imports:
         - dagster_dask
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dask
@@ -490,8 +491,8 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
-        - dagster-spark {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-spark", exact=True) }}
         - pyspark
         - python >=3.6
 
@@ -501,7 +502,7 @@ outputs:
       imports:
         - dagster_pyspark
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pyspark
@@ -521,7 +522,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
 
     test:
@@ -530,7 +531,7 @@ outputs:
       imports:
         - dagster_spark
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-spark
@@ -553,7 +554,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - ipykernel >=4.9.0,!=5.4.0,!=5.4.1
         - packaging >=20.5
         - papermill >=1.0.0
@@ -567,7 +568,7 @@ outputs:
         - dagstermill
       commands:
         - dagstermill --help
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagstermill
@@ -575,6 +576,35 @@ outputs:
       license_family: APACHE
       license_file: dagstermill/LICENSE
       summary: A Dagster integration for papermill
+
+  - name: dagster-airbyte
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-airbyte && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", exact=True) }}
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_airbyte
+      commands:
+        - dagster-airflow --help
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airbyte
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-airbyte/LICENSE
+      summary: Package for integrating Airbyte with Dagster.
 
   # issues with python 3.8
   - name: dagster-airflow
@@ -591,7 +621,7 @@ outputs:
         - python >=3.6
       run:
         - airflow
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - docker-py
         - lazy-object-proxy
         - pendulum 1.4.4
@@ -607,7 +637,7 @@ outputs:
       commands:
         - dagster-airflow --help
         # TODO: flask-admin 1.5.4 requires enum34, which is not installed.
-        # - python -m pip check
+        # - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
@@ -627,7 +657,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
         - snowflake-connector-python >=2.1.0
 
@@ -637,7 +667,7 @@ outputs:
       imports:
         - dagster_snowflake
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake
@@ -664,8 +694,8 @@ outputs:
         - python >=3.6
       run:
         - click >=7.0,<9.0
-        - dagster {{ version }}.*
-        - dagster-graphql {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-graphql", exact=True) }}
         - flask >=0.12.4,<2.0.0
         - flask-cors >=3.0.6
         - flask-graphql >=2.0.0
@@ -688,7 +718,7 @@ outputs:
         - dagit.schema
         - dagit.templates
       commands:
-        - python -m pip check
+        - pip check
         - dagit --help
 
     about:
@@ -709,7 +739,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
 
     test:
@@ -718,7 +748,7 @@ outputs:
       imports:
         - dagster_shell
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-shell
@@ -738,7 +768,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - datadog
         - python >=3.6
 
@@ -748,7 +778,7 @@ outputs:
       imports:
         - dagster_datadog
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-datadog
@@ -769,8 +799,8 @@ outputs:
         - python >=3.6
       run:
         - attrs
-        - dagster {{ version }}.*
-        - dagster-pandas {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-pandas", exact=True) }}
         - pandas
         - requests
         - agate <1.6.2
@@ -782,7 +812,7 @@ outputs:
       imports:
         - dagster_dbt
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dbt
@@ -802,7 +832,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
         - requests
 
@@ -812,7 +842,7 @@ outputs:
       imports:
         - dagster_fivetran
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-fivetran
@@ -832,8 +862,8 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
-        - dagster-pandas {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-pandas", exact=True) }}
         # TODO: #175 revisit after https://github.com/conda-forge/great-expectations-feedstock/pull/153
         - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27,!=0.14.0
         - python >=3.6
@@ -844,7 +874,7 @@ outputs:
       imports:
         - dagster_ge
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-ge
@@ -865,7 +895,7 @@ outputs:
         - python >=3.6
       run:
         - cryptography >=1.4
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - pyjwt
         - python >=3.6
         - requests
@@ -876,7 +906,7 @@ outputs:
       imports:
         - dagster_github
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-github
@@ -896,7 +926,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - docker-py
         - docker-image-py
         - python >=3.6
@@ -907,7 +937,7 @@ outputs:
       imports:
         - dagster_docker
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-docker
@@ -930,8 +960,8 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
-        - dagster-pandas {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
+        - {{ pin_subpackage("dagster-pandas", exact=True) }}
         - google-api-python-client <2.0.0
         # TODO as of #39 google-api-core 1.20.0, importing bigquery presently fails with
         #
@@ -954,7 +984,7 @@ outputs:
         - dagster_gcp.dataproc
         - dagster_gcp.gcs
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-gcp
@@ -973,7 +1003,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - mlflow
         - pandas
         - python >=3.6
@@ -983,7 +1013,7 @@ outputs:
       imports:
         - dagster_mlflow
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-mlflow
@@ -1003,7 +1033,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - pandas
         - python >=3.6
 
@@ -1013,7 +1043,7 @@ outputs:
       imports:
         - dagster_pandas
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster
@@ -1034,7 +1064,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - mysql-connector-python
         - python >=3.6
     test:
@@ -1043,7 +1073,7 @@ outputs:
       imports:
         - dagster_mysql
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-mysql
@@ -1062,7 +1092,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
         - requests >=2,<3
     test:
@@ -1071,7 +1101,7 @@ outputs:
       imports:
         - dagster_msteams
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-msteams
@@ -1091,7 +1121,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - pypd
         - python >=3.6
 
@@ -1101,7 +1131,7 @@ outputs:
       imports:
         - dagster_pagerduty
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pagerduty
@@ -1121,7 +1151,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
 
     test:
@@ -1130,7 +1160,7 @@ outputs:
       imports:
         - dagster_papertrail
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-papertrail
@@ -1150,7 +1180,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - psycopg2-binary
         - python >=3.6
 
@@ -1180,7 +1210,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - prometheus_client
         - python >=3.6
 
@@ -1190,7 +1220,7 @@ outputs:
       imports:
         - dagster_prometheus
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-prometheus
@@ -1210,7 +1240,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
         - slack-sdk
 
@@ -1220,7 +1250,7 @@ outputs:
       imports:
         - dagster_slack
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-slack
@@ -1240,7 +1270,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - paramiko
         - python >=3.6
         - sshtunnel
@@ -1251,7 +1281,7 @@ outputs:
       imports:
         - dagster_ssh
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-ssh
@@ -1271,7 +1301,7 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - dagster {{ version }}.*
+        - {{ pin_subpackage("dagster", exact=True) }}
         - python >=3.6
         - twilio
 
@@ -1281,7 +1311,7 @@ outputs:
       imports:
         - dagster_twilio
       commands:
-        - python -m pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-twilio
