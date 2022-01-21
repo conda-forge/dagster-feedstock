@@ -589,6 +589,7 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", exact=True) }}
+        - requests
 
     test:
       requires:
@@ -596,7 +597,6 @@ outputs:
       imports:
         - dagster_airbyte
       commands:
-        - dagster-airflow --help
         - pip check
 
     about:
