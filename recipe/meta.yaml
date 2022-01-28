@@ -203,6 +203,7 @@ outputs:
         - pytz
         - pywin32 !=226  # [win]
         - pyyaml >=5.1
+        - requests
         - rx >=1.6,<2
         - setuptools  # undeclared dep
         - sqlalchemy >=1.0
