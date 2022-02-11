@@ -211,7 +211,6 @@ outputs:
         - toposort >=1.0
         - tqdm
         - typing-compat
-        - tzlocal >=1.5,<2  # from pendulum
         - watchdog >=0.8.3
 
     test:
@@ -625,7 +624,6 @@ outputs:
         - {{ pin_subpackage("dagster", exact=True) }}
         - docker-py
         - lazy-object-proxy
-        - pendulum 1.4.4
         - python >=3.6
         - python-dateutil >=2.8.0
         - typing_extensions
