@@ -631,6 +631,8 @@ outputs:
     test:
       requires:
         - pip
+        # TODO: watch upstream https://github.com/dagster-io/dagster/issues/4047#issuecomment-1036269856
+        - airflow <2
       imports:
         - dagster_airflow
       commands:
