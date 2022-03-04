@@ -203,6 +203,7 @@ outputs:
         - markupsafe <2.1  # because jinja <3.0
         - packaging >=20.9
         - pendulum
+        - pep562
         - protobuf >=3.13.0
         - psutil >=1.0  # [win]
         - python
