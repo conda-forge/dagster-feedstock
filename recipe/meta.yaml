@@ -964,18 +964,11 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-pandas", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - google-api-python-client <2.0.0
-        # TODO as of #39 google-api-core 1.20.0, importing bigquery presently fails with
-        #
-        #   AttributeError: module 'google.api_core' has no attribute 'gapic_v1'`
-        #
-        # which uncovers a whole separate can of worms down to grpcio
-        - google-api-core !=1.20.0
-        - google-cloud-bigquery-core >=1.19
+        - google-cloud-bigquery-core >=1.19,<3
         - google-cloud-storage
-        - google-resumable-media
         - oauth2client
         - python >=3.6
 
