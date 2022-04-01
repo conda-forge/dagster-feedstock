@@ -573,6 +573,8 @@ outputs:
     test:
       requires:
         - pip
+        # TODO: fix when ipykernel fixes
+        - setuptools >=60
       imports:
         - dagstermill
       commands:
