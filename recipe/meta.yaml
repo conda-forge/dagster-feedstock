@@ -136,6 +136,10 @@ source:
   {% endif %}
 
   {% if on_linux_py310 %}
+  - folder: dagster-aws
+    url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
+    sha256: 8896c6d4409a8c8f7c3fe8cd73e6604fa3a22be95088f6c23c3f40beb1597c37
+
   - folder: dagster-dask
     url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
     sha256: 4e637c20e852f8a533a47527bac6f8c825bee9fd3a5ab690fac06b510c446537
@@ -1161,6 +1165,38 @@ outputs:
   {% endif %}
 
   {% if on_linux_py310 %}
+  - name: dagster-aws
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - boto3
+        - packaging
+        - python >=3.6
+        - requests
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_aws
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-aws
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-aws/LICENSE
+      summary: Package for AWS-specific Dagster framework solid and resource components.
+
   - name: dagster-dask
     build:
       number: {{ build_number }}
