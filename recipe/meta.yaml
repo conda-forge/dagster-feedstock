@@ -148,6 +148,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-datadog/dagster-datadog-{{ version }}.tar.gz
     sha256: 5641a5d860c18f5c1b507b14df36123572fbb7fdc75878080d9a2e412d21d70e
 
+  - folder: dagster-pandera
+    url: https://pypi.io/packages/source/d/dagster-pandera/dagster-pandera-{{ version }}.tar.gz
+    sha256: 28bbf616501fcd89773870391dc893c6551f0f411497b8dae98d177e380e94c7
+
   - folder: dagster-shell
     url: https://pypi.io/packages/source/d/dagster-shell/dagster-shell-{{ version }}.tar.gz
     sha256: 14ec256d2a8e735e6ed09ad2b82182f86d630ae4e3f0e6752aa5730530dedb30
@@ -1258,6 +1262,37 @@ outputs:
       license_family: APACHE
       license_file: dagster-datadog/LICENSE
       summary: Package for datadog Dagster framework components.
+
+  - name: dagster-pandera
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-pandera && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.7
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - pandas
+        - pandera>=0.9.0
+        - python >=3.7
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_pandera
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pandera
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-pandera/LICENSE
+      summary: Integration layer for dagster and pandera.
 
   - name: dagster-shell
     build:
