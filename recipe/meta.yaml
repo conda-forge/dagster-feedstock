@@ -793,7 +793,6 @@ outputs:
       license_file: dagster-docker/LICENSE
       summary: A Dagster integration for docker
 
-
   # these _would_ build on py37_0, except conda-build tries to test them with py38
   # issues with win/python 2.7
   - name: dagster-gcp
@@ -1311,9 +1310,7 @@ outputs:
         - dagstermill
       commands:
         - dagstermill --help
-        - echo "TODO - restore dagstermill's pip check"
-        # - pip check
-
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagstermill
