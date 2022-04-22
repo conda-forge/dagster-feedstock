@@ -574,7 +574,6 @@ outputs:
     test:
       requires:
         - pip
-        - airflow
         - apache-airflow-providers-docker
       imports:
         - dagster_airflow
