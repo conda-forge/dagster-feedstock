@@ -302,8 +302,6 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - gevent
-        - gevent-websocket >=0.10.1
         - graphene >=2.1.3,<3
         - graphql-core >=2.1,<3
         - python >=3.6
@@ -344,10 +342,8 @@ outputs:
         - python >=3.6
       run:
         - celery >=4.3.0
-        # TODO: maybe remove after https://github.com/conda-forge/celery-feedstock/pull/51
         - click >=5.0,<9
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - {{ pin_subpackage("dagster-graphql", max_pin="x.x.x") }}
         - python >=3.6
 
     test:
@@ -579,14 +575,11 @@ outputs:
     test:
       requires:
         - pip
-        # TODO: watch upstream https://github.com/dagster-io/dagster/issues/4047#issuecomment-1036269856
-        - airflow <2
       imports:
         - dagster_airflow
       commands:
         - dagster-airflow --help
-        # TODO: flask-admin 1.5.4 requires enum34, which is not installed.
-        # - pip check
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
@@ -720,7 +713,6 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-pandas", max_pin="x.x.x") }}
         - dataclasses
-        # TODO: #175 revisit after https://github.com/conda-forge/great-expectations-feedstock/pull/153
         - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27,!=0.14.0
         - python >=3.6
 
