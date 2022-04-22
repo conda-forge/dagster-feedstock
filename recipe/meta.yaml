@@ -564,7 +564,6 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - airflow
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - docker-py
         - lazy-object-proxy
@@ -575,6 +574,8 @@ outputs:
     test:
       requires:
         - pip
+        - airflow
+        - apache-airflow-providers-docker
       imports:
         - dagster_airflow
       commands:
