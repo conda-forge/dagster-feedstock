@@ -5,7 +5,6 @@
 {% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
 {% set on_linux_py38 = PY_VER == "3.8" and "linux-64" in compiler("c") %}
 {% set on_linux_py39 = PY_VER == "3.9" and "linux-64" in compiler("c") %}
-{% set on_linux_py310 = PY_VER == "3.10" and "linux-64" in compiler("c") %}
 
 package:
   name: dagster-meta
@@ -56,6 +55,19 @@ source:
   - folder: dagster-celery-k8s
     url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ version }}.tar.gz
     sha256: a45741f80148779de6057369b1f2c301240f179c7f8bf2cba5d80f8324efba27
+
+  # TODO: move these back to py310
+  - folder: dagster-aws
+    url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
+    sha256: ff1024304defc260c58a64331054d1ce358c6ac8ac29a8ac8751a5bb39e7b0f0
+
+  - folder: dagster-dask
+    url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
+    sha256: 387d54d62bcab82f4c941bbea14656e75095b2dd5797080e7c1c5569f712b95d
+
+  - folder: dagster-datadog
+    url: https://pypi.io/packages/source/d/dagster-datadog/dagster-datadog-{{ version }}.tar.gz
+    sha256: 18c036184bdd97e1d5a6bb39b4a6c6a68ffb9ae7e5a2ec231728b6e8181b50a1
   {% endif %}
 
   {% if on_linux_py38 %}
@@ -95,6 +107,15 @@ source:
   - folder: dagster-pandas
     url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ version }}.tar.gz
     sha256: 1514dca92609faaac7852db5494cb29a1a436e28f32dd60b4cfa9100dc2b50af
+
+  # TODO: move these back to py310
+  - folder: dagster-pandera
+    url: https://pypi.io/packages/source/d/dagster-pandera/dagster-pandera-{{ version }}.tar.gz
+    sha256: 4e11605470a05f7d672b0b0b16b1f8471968b65f25d5d518ede431a7a29d7395
+
+  - folder: dagster-shell
+    url: https://pypi.io/packages/source/d/dagster-shell/dagster-shell-{{ version }}.tar.gz
+    sha256: b8c83d86cdc21d5c3dbd32d08041811365d4f1d8a14ffea9bc796c75875cade4
   {% endif %}
 
   {% if on_linux_py39 %}
@@ -133,29 +154,8 @@ source:
   - folder: dagster-twilio
     url: https://pypi.io/packages/source/d/dagster-twilio/dagster-twilio-{{ version }}.tar.gz
     sha256: 3cb5fc2520803522537bbbc623a0aef85bb0a7a57f03ceb0e0e477cd2d2bca09
-  {% endif %}
 
-  {% if on_linux_py310 %}
-  - folder: dagster-aws
-    url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ version }}.tar.gz
-    sha256: ff1024304defc260c58a64331054d1ce358c6ac8ac29a8ac8751a5bb39e7b0f0
-
-  - folder: dagster-dask
-    url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ version }}.tar.gz
-    sha256: 387d54d62bcab82f4c941bbea14656e75095b2dd5797080e7c1c5569f712b95d
-
-  - folder: dagster-datadog
-    url: https://pypi.io/packages/source/d/dagster-datadog/dagster-datadog-{{ version }}.tar.gz
-    sha256: 18c036184bdd97e1d5a6bb39b4a6c6a68ffb9ae7e5a2ec231728b6e8181b50a1
-
-  - folder: dagster-pandera
-    url: https://pypi.io/packages/source/d/dagster-pandera/dagster-pandera-{{ version }}.tar.gz
-    sha256: 4e11605470a05f7d672b0b0b16b1f8471968b65f25d5d518ede431a7a29d7395
-
-  - folder: dagster-shell
-    url: https://pypi.io/packages/source/d/dagster-shell/dagster-shell-{{ version }}.tar.gz
-    sha256: b8c83d86cdc21d5c3dbd32d08041811365d4f1d8a14ffea9bc796c75875cade4
-
+  # TODO: move these back to py310
   - folder: dagster-snowflake
     url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ version }}.tar.gz
     sha256: c00fa48106794b518da03449a6a1de5fda699da0dfafa8564d34668dfccfce76
@@ -164,7 +164,6 @@ source:
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ version }}.tar.gz
     sha256: 0ee2d5523ad20d25148fbc403853bee67c29a2afc898bcd5cfb037e7efea8b2b
   {% endif %}
-
 
 build:
   number: {{ build_number }}
@@ -589,6 +588,100 @@ outputs:
       license_file: dagster-airflow/LICENSE
       summary: Airflow plugin for Dagster
 
+  # TODO: move these back to py310
+  - name: dagster-aws
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - boto3
+        - packaging
+        - python >=3.6
+        - requests
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_aws
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-aws
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-aws/LICENSE
+      summary: Package for AWS-specific Dagster framework solid and resource components.
+
+  - name: dagster-dask
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-dask && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - bokeh
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - dask >=1.2.2
+        - distributed >=1.28.1
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_dask
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dask
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-dask/LICENSE
+      summary: Package for using Dask as Dagster's execution engine.
+
+  - name: dagster-datadog
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-datadog && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - datadog
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_datadog
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-datadog
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-datadog/LICENSE
+      summary: Package for datadog Dagster framework components.
   {% endif %}
 
   {% if on_linux_py38 %}
@@ -892,6 +985,68 @@ outputs:
       license_family: APACHE
       license_file: dagster-pandas/LICENSE
       summary: Utilities and examples for working with pandas and dagster, an opinionated framework for expressing data pipelines
+
+  # TODO: move these back to py310
+  - name: dagster-pandera
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-pandera && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.7
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - pandas
+        - pandera>=0.9.0
+        - python >=3.7
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_pandera
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pandera
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-pandera/LICENSE
+      summary: Integration layer for dagster and pandera.
+
+  - name: dagster-shell
+    build:
+      number: {{ build_number }}
+      noarch: python
+      script: cd dagster-shell && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_shell
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-shell
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-shell/LICENSE
+      summary: Package for Dagster shell ops.
+
   {% endif %}
 
   {% if on_linux_py39 %}
@@ -1160,163 +1315,8 @@ outputs:
       license_family: APACHE
       license_file: dagster-twilio/LICENSE
       summary: A Dagster integration for twilio
-  {% endif %}
 
-  {% if on_linux_py310 %}
-  - name: dagster-aws
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python >=3.6
-      run:
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - boto3
-        - packaging
-        - python >=3.6
-        - requests
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_aws
-      commands:
-        - pip check
-
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-aws
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-aws/LICENSE
-      summary: Package for AWS-specific Dagster framework solid and resource components.
-
-  - name: dagster-dask
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-dask && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python >=3.6
-      run:
-        - bokeh
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - dask >=1.2.2
-        - distributed >=1.28.1
-        - python >=3.6
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_dask
-      commands:
-        - pip check
-
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dask
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-dask/LICENSE
-      summary: Package for using Dask as Dagster's execution engine.
-
-  - name: dagster-datadog
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-datadog && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python >=3.6
-      run:
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - datadog
-        - python >=3.6
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_datadog
-      commands:
-        - pip check
-
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-datadog
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-datadog/LICENSE
-      summary: Package for datadog Dagster framework components.
-
-  - name: dagster-pandera
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-pandera && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python >=3.7
-      run:
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - pandas
-        - pandera>=0.9.0
-        - python >=3.7
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_pandera
-      commands:
-        - pip check
-
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pandera
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-pandera/LICENSE
-      summary: Integration layer for dagster and pandera.
-
-  - name: dagster-shell
-    build:
-      number: {{ build_number }}
-      noarch: python
-      script: cd dagster-shell && {{ PYTHON }} -m pip install . -vv --no-deps
-
-    requirements:
-      host:
-        - pip
-        - python >=3.6
-      run:
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - python >=3.6
-
-    test:
-      requires:
-        - pip
-      imports:
-        - dagster_shell
-      commands:
-        - pip check
-
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-shell
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagster-shell/LICENSE
-      summary: Package for Dagster shell ops.
-
+  # TODO: move these back to py310
   - name: dagster-snowflake
     build:
       number: {{ build_number }}
@@ -1384,7 +1384,6 @@ outputs:
       license_file: dagstermill/LICENSE
       summary: A Dagster integration for papermill
   {% endif %}
-
 
 about:
   home: https://github.com/dagster-io
