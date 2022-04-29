@@ -225,12 +225,13 @@ outputs:
         - pyyaml >=5.1
         - requests
         - rx >=1.6,<2
-        - setuptools  # undeclared dep
+        - setuptools
         - sqlalchemy >=1.0
         - tabulate
         - toposort >=1.0
         - tqdm
         - typing-compat
+        - typing_extensions >=3.10
         - watchdog >=0.8.3
 
     test:
