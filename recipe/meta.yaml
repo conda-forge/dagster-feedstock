@@ -211,6 +211,7 @@ outputs:
         - grpcio >=1.32.0
         - grpcio-health-checking >=1.32.0,<1.44.0
         - jinja2
+        - markupsafe <2.0.1
         - packaging >=20.9
         - pendulum
         - pep562
