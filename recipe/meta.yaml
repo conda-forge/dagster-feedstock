@@ -575,6 +575,7 @@ outputs:
       requires:
         - pip
         - apache-airflow-providers-docker
+        - jinja2 <3
       imports:
         - dagster_airflow
       commands:
