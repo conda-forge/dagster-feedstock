@@ -214,7 +214,7 @@ outputs:
         - packaging >=20.9
         - pendulum
         - pep562
-        - protobuf >=3.13.0
+        - protobuf >=3.13.0,<4
         - psutil >=1.0  # [win]
         - python
         - python-dateutil
