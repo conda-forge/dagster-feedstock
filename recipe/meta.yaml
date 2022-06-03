@@ -937,7 +937,7 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - mlflow
+        - mlflow <=1.26.0
         - pandas
         - python >=3.6
     test:
