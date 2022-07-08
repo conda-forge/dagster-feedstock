@@ -243,7 +243,6 @@ outputs:
         - dagster.check
         - dagster.cli
         - dagster.config
-        - dagster.core.asset_defs
         - dagster.core.definitions
         - dagster.core.events
         - dagster.core.execution
