@@ -231,7 +231,7 @@ outputs:
         - toposort >=1.0
         - tqdm
         - typing-compat
-        - typing_extensions >=3.10
+        - typing_extensions >=4.0.1
         - watchdog >=0.8.3
 
     test:
@@ -306,7 +306,7 @@ outputs:
         - graphql-core >=2.1,<3
         - python >=3.6
         - requests
-        - gql <3
+        - gql
 
     test:
       requires:
@@ -652,7 +652,7 @@ outputs:
         - dbt-core
         - pandas
         - requests
-        - agate <1.6.2
+        - agate
         - python >=3.6
 
     test:
