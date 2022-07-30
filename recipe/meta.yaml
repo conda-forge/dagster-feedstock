@@ -261,7 +261,6 @@ outputs:
         - dagster.daemon
         - dagster.grpc
         - dagster.loggers
-        - dagster.scheduler
         - dagster.seven
         - dagster.utils
       commands:
