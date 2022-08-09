@@ -161,7 +161,7 @@ source:
 
   - folder: dagster-snowflake
     url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ lib_version }}.tar.gz
-    sha256: 79926281a474e2d3d5b6aefb84008c964d7fd2da8304eee5982f13418482c20e
+    sha256: b0b0cd975e75205ee84cb1894b1b689d842a2e6994ffa3fc79d958ee0cc9beca
 
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
