@@ -1,4 +1,4 @@
-{% set version = "1.0.2" %}
+{% set version = "1.0.3" %}
 {% set lib_version = "0.16.2" %}
 {% set build_number = 0 %}
 
@@ -16,13 +16,13 @@ source:
   # this should always be built
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 863909a2e227b6c033eefe76d1575cf55d8b16f3ea2bc4b2e25244b5d9bb52bb
+    sha256: 2a9ca7e4caf2540041c1d7f61d4bae0da46259c05e95ed51fb49d8e8bfbf947d
 
   {% if on_linux_py37 or on_linux_py38 %}
   # these are generally safe to build wherever, but are also required for special builds
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: 2ed6aaacd1b025bd909dff74e0c3ffc4f9f9be9c9af44b56074369b73639570f
+    sha256: 432aed51eccd8fe6347a7bb16b264cfb51250729999be09824087db40ab74353
   {% endif %}
 
   {% if on_linux_py37 %}
@@ -64,7 +64,7 @@ source:
   # these are generally safe to build wherever, but can be built most quickly on linux/38
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: c4efde0503974da6f57ba1cfb62bd810cf1330ac905b13a48408f201acd930af
+    sha256: 633bf01b285a48f19340640f4d4e547983719a1468aeeabec261545199d23393
 
   - folder: dagster-dbt
     url: https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ lib_version }}.tar.gz
@@ -333,7 +333,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-celery && {{ PYTHON }} -m pip install . -vv --no-deps
       entry_points:
         - dagster-celery = dagster_celery.cli:main
@@ -370,7 +369,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-celery-docker && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -405,7 +403,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-celery-k8s && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -439,7 +436,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-k8s && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -470,7 +466,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -502,7 +497,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-spark && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -532,7 +526,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-airbyte && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -563,7 +556,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
       entry_points:
         - dagster-airflow = dagster_airflow.cli:main
@@ -606,7 +598,6 @@ outputs:
     build:
       version: {{ version }}
       number: {{ build_number }}
-      noarch: python
       entry_points:
         - dagit = dagit.cli:main
         - dagit-debug = dagit.debug:main
@@ -649,7 +640,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -685,7 +675,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-fivetran && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -716,7 +705,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-ge && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -749,7 +737,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-github && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -782,7 +769,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-docker && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -816,7 +802,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-gcp && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -854,7 +839,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-mlflow && {{ PYTHON }} -m pip install . -vv --no-deps
     requirements:
       host:
@@ -884,7 +868,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-pandas && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -920,7 +903,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-mysql && {{ PYTHON }} -m pip install . -vv --no-deps
     requirements:
       host:
@@ -949,7 +931,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-msteams && {{ PYTHON }} -m pip install . -vv --no-deps
     requirements:
       host:
@@ -978,7 +959,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-pagerduty && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1009,7 +989,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-papertrail && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1039,7 +1018,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-postgres && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1070,7 +1048,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-prometheus && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1101,7 +1078,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-slack && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1132,7 +1108,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-ssh && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1164,7 +1139,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-twilio && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1197,7 +1171,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1230,7 +1203,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-dask && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1263,7 +1235,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-datadog && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1294,7 +1265,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-pandera && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1326,7 +1296,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-shell && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1356,7 +1325,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagster-snowflake && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -1387,7 +1355,6 @@ outputs:
     build:
       version: {{ lib_version }}
       number: {{ build_number }}
-      noarch: python
       script: cd dagstermill && {{ PYTHON }} -m pip install . -vv --no-deps
       entry_points:
         - dagstermill = dagstermill.cli:main
