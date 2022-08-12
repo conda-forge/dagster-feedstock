@@ -4,6 +4,7 @@
 
 package:
   name: dagster-meta
+  version: {{ version }}
 
 source:
   - folder: dagster
@@ -146,8 +147,10 @@ source:
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
     sha256: bb8fbbfbc5774050cb1a9d240f12e0e9294a786ccda92025ec26df2f3d93f667
 
+
 build:
   number: {{ build_number }}
+  noarch: python
 
 
 requirements:
@@ -178,7 +181,7 @@ outputs:
     requirements:
       host:
         - pip
-        - python
+        - python >=3.7
       run:
         - alembic >=1.2.1,!=1.6.3,<1.7.0
         - click >=5.0
@@ -192,7 +195,7 @@ outputs:
         - pendulum
         - protobuf >=3.13.0,<4
         - psutil >=1.0
-        - python
+        - python >=3.7
         - python-dateutil
         - pytz
         - pywin32-on-windows
