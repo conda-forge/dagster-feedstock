@@ -2,31 +2,18 @@
 {% set lib_version = "0.16.3" %}
 {% set build_number = 0 %}
 
-# TODO: more elegant way to get at CONDA_SUBDIR
-{% set on_linux_py37 = PY_VER == "3.7" and "linux-64" in compiler("c") %}
-{% set on_linux_py38 = PY_VER == "3.8" and "linux-64" in compiler("c") %}
-{% set on_linux_py39 = PY_VER == "3.9" and "linux-64" in compiler("c") %}
-{% set on_linux_py310 = PY_VER == "3.10" and "linux-64" in compiler("c") %}
-
-
 package:
   name: dagster-meta
-  version: {{ version }}
 
 source:
-  # this should always be built
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
     sha256: 2a9ca7e4caf2540041c1d7f61d4bae0da46259c05e95ed51fb49d8e8bfbf947d
 
-  {% if on_linux_py37 or on_linux_py38 %}
-  # these are generally safe to build wherever, but are also required for special builds
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
     sha256: 432aed51eccd8fe6347a7bb16b264cfb51250729999be09824087db40ab74353
-  {% endif %}
 
-  {% if on_linux_py37 %}
   - folder: dagster-airbyte
     url: https://pypi.io/packages/source/d/dagster-airbyte/dagster-airbyte-{{ lib_version }}.tar.gz
     sha256: 6f267fe54c2c33644c02207826c78c0af5886e91aa7737da60fa71cb56823334
@@ -59,10 +46,6 @@ source:
     url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ lib_version }}.tar.gz
     sha256: 4a087f511a55a41052d1b89e59caecbd0a96bc315249b0963757cffb5c77d9b3
 
-  {% endif %}
-
-  {% if on_linux_py38 %}
-  # these are generally safe to build wherever, but can be built most quickly on linux/38
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
     sha256: 633bf01b285a48f19340640f4d4e547983719a1468aeeabec261545199d23393
@@ -98,9 +81,7 @@ source:
   - folder: dagster-pandas
     url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ lib_version }}.tar.gz
     sha256: f66eef6780bfd765570bf794d5e98fb15a53c9c995ad6d4ca43dd3ee819ca223
-  {% endif %}
 
-  {% if on_linux_py39 %}
   - folder: dagster-mysql
     url: https://pypi.io/packages/source/d/dagster-mysql/dagster-mysql-{{ lib_version }}.tar.gz
     sha256: 77a985e36a957f339af46d5b2ca7434d0d9e4b2c72fcc13db487478d0e53c6e4
@@ -137,9 +118,6 @@ source:
     url: https://pypi.io/packages/source/d/dagster-twilio/dagster-twilio-{{ lib_version }}.tar.gz
     sha256: 557542e0cf5b70edab784873692176fa22652499857bdd9807c51f9fbc861710
 
-  {% endif %}
-
-  {% if on_linux_py310 %}
   - folder: dagster-aws
     url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ lib_version }}.tar.gz
     sha256: 2e54009bef53dc273fee8428427d709611c05a795f6f346230945ae1a7b947fd
@@ -167,20 +145,17 @@ source:
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
     sha256: bb8fbbfbc5774050cb1a9d240f12e0e9294a786ccda92025ec26df2f3d93f667
-  {% endif %}
 
 build:
   number: {{ build_number }}
 
 
 requirements:
-  build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
   host:
-    - python
+    - python >=3.7
+    - pip
   run:
-    - python
+    - python >=3.7
 
 
 test:
@@ -192,6 +167,7 @@ outputs:
   # all platform/python versions
   - name: dagster
     build:
+      noarch: python
       version: {{ version }}
       number: {{ build_number }}
       entry_points:
@@ -200,9 +176,6 @@ outputs:
       script: cd dagster && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
-      build:
-        - python                                 # [build_platform != target_platform]
-        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
       host:
         - pip
         - python
@@ -210,7 +183,6 @@ outputs:
         - alembic >=1.2.1,!=1.6.3,<1.7.0
         - click >=5.0
         - coloredlogs >=6.1,<=14.0
-        - contextvars  # [py<37]
         - croniter >=0.3.34
         - docstring_parser
         - grpcio >=1.32.0
@@ -219,11 +191,11 @@ outputs:
         - packaging >=20.9
         - pendulum
         - protobuf >=3.13.0,<4
-        - psutil >=1.0  # [win]
+        - psutil >=1.0
         - python
         - python-dateutil
         - pytz
-        - pywin32 !=226  # [win]
+        - pywin32-on-windows
         - pyyaml >=5.1
         - requests
         - rx >=1.6,<2
@@ -235,6 +207,8 @@ outputs:
         - typing-compat
         - typing_extensions >=4.0.1
         - watchdog >=0.8.3
+      run_constrained:
+        - pywin32 !=226
 
     test:
       requires:
@@ -286,9 +260,6 @@ outputs:
         Building a data platform with Dagster makes your stakeholders more independent and your systems
         more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
-
-  {% if on_linux_py37 or on_linux_py38 %}
-  # needed by both
   - name: dagster-graphql
     build:
       version: {{ version }}
@@ -327,11 +298,10 @@ outputs:
       license_family: APACHE
       license_file: dagster-graphql/LICENSE
       summary: The GraphQL frontend to python dagster.
-  {% endif %}
 
-  {% if on_linux_py37 %}
   - name: dagster-celery
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-celery && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -368,6 +338,7 @@ outputs:
 
   - name: dagster-celery-docker
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-celery-docker && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -402,6 +373,7 @@ outputs:
 
   - name: dagster-celery-k8s
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-celery-k8s && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -435,6 +407,7 @@ outputs:
 
   - name: dagster-k8s
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-k8s && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -465,6 +438,7 @@ outputs:
 
   - name: dagster-pyspark
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -496,6 +470,7 @@ outputs:
 
   - name: dagster-spark
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-spark && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -525,6 +500,7 @@ outputs:
 
   - name: dagster-airbyte
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-airbyte && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -555,6 +531,7 @@ outputs:
   # issues with python 3.8
   - name: dagster-airflow
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -591,12 +568,9 @@ outputs:
       license_file: dagster-airflow/LICENSE
       summary: Airflow plugin for Dagster
 
-  {% endif %}
-
-  {% if on_linux_py38 %}
-  # would build wherever, but build fastest here (or needs pandas)
   - name: dagit
     build:
+      noarch: python
       version: {{ version }}
       number: {{ build_number }}
       entry_points:
@@ -639,6 +613,7 @@ outputs:
 
   - name: dagster-dbt
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -674,6 +649,7 @@ outputs:
 
   - name: dagster-fivetran
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-fivetran && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -704,6 +680,7 @@ outputs:
 
   - name: dagster-ge
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-ge && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -736,6 +713,7 @@ outputs:
 
   - name: dagster-github
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-github && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -768,6 +746,7 @@ outputs:
 
   - name: dagster-docker
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-docker && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -801,6 +780,7 @@ outputs:
   # issues with win/python 2.7
   - name: dagster-gcp
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-gcp && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -838,6 +818,7 @@ outputs:
 
   - name: dagster-mlflow
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-mlflow && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -867,6 +848,7 @@ outputs:
 
   - name: dagster-pandas
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-pandas && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -895,13 +877,9 @@ outputs:
       license_file: dagster-pandas/LICENSE
       summary: Utilities and examples for working with pandas and dagster, an opinionated framework for expressing data pipelines
 
-
-
-  {% endif %}
-
-  {% if on_linux_py39 %}
   - name: dagster-mysql
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-mysql && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -930,6 +908,7 @@ outputs:
 
   - name: dagster-msteams
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-msteams && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -958,6 +937,7 @@ outputs:
 
   - name: dagster-pagerduty
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-pagerduty && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -988,6 +968,7 @@ outputs:
 
   - name: dagster-papertrail
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-papertrail && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1017,6 +998,7 @@ outputs:
 
   - name: dagster-postgres
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-postgres && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1047,6 +1029,7 @@ outputs:
 
   - name: dagster-prometheus
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-prometheus && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1077,6 +1060,7 @@ outputs:
 
   - name: dagster-slack
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-slack && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1107,6 +1091,7 @@ outputs:
 
   - name: dagster-ssh
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-ssh && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1138,6 +1123,7 @@ outputs:
 
   - name: dagster-twilio
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-twilio && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1165,11 +1151,10 @@ outputs:
       license_family: APACHE
       license_file: dagster-twilio/LICENSE
       summary: A Dagster integration for twilio
-  {% endif %}
 
-  {% if on_linux_py310 %}
   - name: dagster-aws
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-aws && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1202,6 +1187,7 @@ outputs:
 
   - name: dagster-dask
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-dask && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1234,6 +1220,7 @@ outputs:
 
   - name: dagster-datadog
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-datadog && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1264,6 +1251,7 @@ outputs:
 
   - name: dagster-pandera
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-pandera && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1295,6 +1283,7 @@ outputs:
 
   - name: dagster-shell
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-shell && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1324,6 +1313,7 @@ outputs:
 
   - name: dagster-snowflake
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-snowflake && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1354,6 +1344,7 @@ outputs:
 
   - name: dagstermill
     build:
+      noarch: python
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagstermill && {{ PYTHON }} -m pip install . -vv --no-deps
@@ -1388,7 +1379,6 @@ outputs:
       license_family: APACHE
       license_file: dagstermill/LICENSE
       summary: A Dagster integration for papermill
-  {% endif %}
 
 about:
   home: https://github.com/dagster-io
