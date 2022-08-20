@@ -1,4 +1,4 @@
-{% set version = "1.0.3" %}
+{% set version = "1.0.4" %}
 {% set lib_version = "0.16.3" %}
 {% set build_number = 0 %}
 
@@ -9,11 +9,11 @@ package:
 source:
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 2a9ca7e4caf2540041c1d7f61d4bae0da46259c05e95ed51fb49d8e8bfbf947d
+    sha256: b759baa031197cb419cb8acce378984b3d011c7dc3c6b5537071f731a2edc986
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: 432aed51eccd8fe6347a7bb16b264cfb51250729999be09824087db40ab74353
+    sha256: a6b15cc193c8583f008bb865fcd0d01a2159fa799b53b05314813342386599be
 
   - folder: dagster-airbyte
     url: https://pypi.io/packages/source/d/dagster-airbyte/dagster-airbyte-{{ lib_version }}.tar.gz
@@ -49,7 +49,7 @@ source:
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: 633bf01b285a48f19340640f4d4e547983719a1468aeeabec261545199d23393
+    sha256: 8a8067883c31eb8f306d70a92b838a3c69756ad4d33fd2f1e2e245ca71930ee9
 
   - folder: dagster-dbt
     url: https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ lib_version }}.tar.gz
