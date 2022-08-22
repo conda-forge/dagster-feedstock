@@ -1,5 +1,6 @@
 {% set version = "1.0.3" %}
-{% set lib_version = "0.16.3" %}
+# this appears to be the pattern at present, but may not hold in the future
+{% set lib_version = "0.16." ~ version.split(".")[-1] %}
 {% set build_number = 0 %}
 
 package:
