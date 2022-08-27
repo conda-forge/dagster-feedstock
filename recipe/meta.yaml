@@ -590,7 +590,6 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-graphql", max_pin="x.x.x") }}
         - click >=7.0,<9.0
-        - nbconvert
         - pyyaml
         - requests
         - starlette
@@ -1330,6 +1329,8 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - python >=3.6
         - snowflake-connector-python >=2.1.0
+        # currently an extra, but always imported: see https://github.com/dagster-io/dagster/pull/6984
+        - pandas
 
     test:
       requires:
