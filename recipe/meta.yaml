@@ -32,6 +32,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-celery-docker/dagster-celery-docker-{{ lib_version }}.tar.gz
     sha256: 1bdd783e3ccd2fa7ee6a06b13a86fb49267ba25e87ed5f673f3c541070abeca2
 
+  - folder: dagster-census
+    url: https://pypi.io/packages/source/d/dagster-census/dagster-census-{{ lib_version }}.tar.gz
+    sha256: c538bf8d8470467bcb0583ba66f8ab0a74d088a1b622db759d2bc0b6ee622095
+
   - folder: dagster-pyspark
     url: https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ lib_version }}.tar.gz
     sha256: b20651725043b3cbadf3fdff72c9a830b5f3c2a12c102b20e6fa28513ab068f5
@@ -143,6 +147,10 @@ source:
   - folder: dagster-snowflake
     url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ lib_version }}.tar.gz
     sha256: 348b1e5da18d142c3faab6b3fe65324aadcc75f5b1ddfd4f5fda8e6f0b97bf95
+
+  - folder: dagster-snowflake-pandas
+    url: https://pypi.io/packages/source/d/dagster-snowflake-pandas/dagster-snowflake-pandas-{{ lib_version }}.tar.gz
+    sha256: 7604d90605760d668ad41e167fc9e94e1236a1679c77bd2875aaf3d1eb3e9984
 
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
@@ -339,6 +347,36 @@ outputs:
       license_family: APACHE
       license_file: dagster-celery/LICENSE
       summary: Package for using Celery as Dagster's execution engine.
+
+  - name: dagster-census
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-census && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_census
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-census
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-census/LICENSE
+      summary: Package for integrating Census with Dagster.
 
   - name: dagster-celery-docker
     build:
@@ -1346,6 +1384,40 @@ outputs:
       license_family: APACHE
       license_file: dagster-snowflake/LICENSE
       summary: Package for Snowflake Dagster framework components.
+
+  - name: dagster-snowflake-pandas
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-snowflake-pandas && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster-snowflake", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - pandas
+        - python >=3.6
+        - requests
+        - snowflake-connector-python
+        - snowflake-sqlalchemy
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_snowflake_pandas
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-snowflake-pandas/LICENSE
+      summary: Package for integrating Snowflake and Pandas with Dagster.
 
   - name: dagstermill
     build:
