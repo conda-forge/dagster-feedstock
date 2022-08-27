@@ -375,7 +375,9 @@ outputs:
       home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-census
       license: Apache-2.0
       license_family: APACHE
-      license_file: dagster-census/LICENSE
+      # TODO: fix after https://github.com/dagster-io/dagster/issues/9516
+      # license_file: dagster-census/LICENSE
+      license_file: dagster/LICENSE
       summary: Package for integrating Census with Dagster.
 
   - name: dagster-celery-docker
