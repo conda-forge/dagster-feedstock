@@ -375,9 +375,7 @@ outputs:
       home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-census
       license: Apache-2.0
       license_family: APACHE
-      # TODO: fix after https://github.com/dagster-io/dagster/issues/9516
-      # license_file: dagster-census/LICENSE
-      license_file: dagster/LICENSE
+      license_file: dagster-census/LICENSE
       summary: Package for integrating Census with Dagster.
 
   - name: dagster-celery-docker
@@ -599,6 +597,8 @@ outputs:
         - pip
         - apache-airflow-providers-docker
         - jinja2 <3
+        # TODO: remove after https://github.com/conda-forge/airflow-feedstock/pull/92
+        - pathspec >=0.9.0,<0.10.0
       imports:
         - dagster_airflow
       commands:
