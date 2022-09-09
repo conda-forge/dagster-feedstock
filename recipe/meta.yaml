@@ -197,7 +197,7 @@ outputs:
         - coloredlogs >=6.1,<=14.0
         - croniter >=0.3.34
         - docstring_parser
-        - grpcio >=1.32.0
+        - grpcio >=1.32.0,<1.48.1
         - grpcio-health-checking >=1.32.0,<1.44.0
         - jinja2
         - packaging >=20.9
