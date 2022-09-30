@@ -1,4 +1,4 @@
-{% set version = "1.0.10" %}
+{% set version = "1.0.11" %}
 # this appears to be the pattern at present, but may not hold in the future
 {% set lib_version = "0.16." ~ version.split(".")[-1] %}
 {% set build_number = 0 %}
@@ -10,151 +10,151 @@ package:
 source:
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 25605c9246298d42713f15f08fd4b6df939d0949a8fb44f77eee8da5b94e5825
+    sha256: c45e32bb2c3b78304d52fe30b88d39cf857c9bc7c15e854b623e5585e025473f
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: 9f598e5ae1e9e4554566b0c3625bf4301d530bb1d564d20aec478358935879fe
+    sha256: 7b1f3f3c612b4eff0fd5c3bc842d556b4c684c87b6b328d4c5fe89e23ee1a853
 
   - folder: dagster-airbyte
     url: https://pypi.io/packages/source/d/dagster-airbyte/dagster-airbyte-{{ lib_version }}.tar.gz
-    sha256: 0a6c61b2c50d0bd662bf0db97150b1bbbb23cd82296118448b4664ee0e714660
+    sha256: af48749a9954b4cb64dc8a2f1dcaeee8d5802f21047b0fc85f7ece70fd78adf6
 
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ lib_version }}.tar.gz
-    sha256: d144adfbd9cc265184e0197fa8ecaf1832f54d01333095c2290e665601c39e99
+    sha256: 581b742cb71eed54e1979a6d693feaee0c73a381b3ec89a9c0c0d2b255a948ae
 
   - folder: dagster-celery
     url: https://pypi.io/packages/source/d/dagster-celery/dagster-celery-{{ lib_version }}.tar.gz
-    sha256: 5b0330a95716456449784f90a0e9d2e121475a78aa65a27679f760a7ee3a4c0a
+    sha256: 75b66647e78d7f1026af12e92f3713c66da844d9cef2139ec9d51cebd13ab40e
 
   - folder: dagster-celery-docker
     url: https://pypi.io/packages/source/d/dagster-celery-docker/dagster-celery-docker-{{ lib_version }}.tar.gz
-    sha256: 0ac9155101a327feacca931d3ea938f19f780fc9f6f56aa1509d82585e3409d4
+    sha256: ffac08f340c4d629ad80353c4fa7759f487d3b600f110ec8e2829f6f02a613c9
 
   - folder: dagster-census
     url: https://pypi.io/packages/source/d/dagster-census/dagster-census-{{ lib_version }}.tar.gz
-    sha256: d80d3ec76b58bb60d51c4fe3918921c28c0c05ce98175b2f507aeafb0dbdbca8
+    sha256: f9b5cdc47df837ed3891f2322e1fbd0e45adada1573329346dbeee8921da4df3
 
   - folder: dagster-pyspark
     url: https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ lib_version }}.tar.gz
-    sha256: 8a35b70a2fb1f052c508f36a3e10652328e0c35ac9c5b53bf288e22a125ced68
+    sha256: a74bf153a86bb62f58d2004d10a20fb302d418bf99f6b1096a6c2e07ee2cb7f1
 
   - folder: dagster-spark
     url: https://pypi.io/packages/source/d/dagster-spark/dagster-spark-{{ lib_version }}.tar.gz
-    sha256: 638ef7239abb960b7ada83a5d53eef31e6654eecd0329c7e4e7f89da7a5d6002
+    sha256: c77dc0d4dce3e3235b153eaa780d312c98d770d1f05cade694ad78ea7cf66fce
 
   - folder: dagster-k8s
     url: https://pypi.io/packages/source/d/dagster-k8s/dagster-k8s-{{ lib_version }}.tar.gz
-    sha256: 653b85daad73dac07572e1666f4888e233cba67d971d87d1d32a5cf767474e40
+    sha256: 889e85e07ef06d22ff36be836526644f5b5787b93d9234921a52a8d699c0c83f
 
   - folder: dagster-celery-k8s
     url: https://pypi.io/packages/source/d/dagster-celery-k8s/dagster-celery-k8s-{{ lib_version }}.tar.gz
-    sha256: b0b97f34d21a18c9107078d4b826abb975e4d22838e483d715d53662d62bd26e
+    sha256: efa1ba754cab70d109ec608ff9f8f1178b8e65e301fb363621bdbdaaa012b2e9
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: d175725378d791ad68f1bc3dd18f7b69dd652979670aa4b12ea97bbafaf1b83f
+    sha256: dd0f27a7b97b4453ec015bf0a462f37fa89f193df0d3b9fc5480a622669bf022
 
   - folder: dagster-dbt
     url: https://pypi.io/packages/source/d/dagster-dbt/dagster-dbt-{{ lib_version }}.tar.gz
-    sha256: 454bcd024196e38bfdeed66ce19085785adfc7d6f10cc23cc4310bf7115b57f2
+    sha256: e7115aa7f0b21c8fc38601a306250d8bd461f794a2b056bb560746ade0d7a3d9
 
   - folder: dagster-docker
     url: https://pypi.io/packages/source/d/dagster-docker/dagster-docker-{{ lib_version }}.tar.gz
-    sha256: b933f933178453cbcabeb0d856bc4cd426b9c8290b93f066841c63c92737cf16
+    sha256: 13489cc28090f53baa0568759d59c77be7f0ad9375939b1767c865c9b68d839c
 
   - folder: dagster-fivetran
     url: https://pypi.io/packages/source/d/dagster-fivetran/dagster-fivetran-{{ lib_version }}.tar.gz
-    sha256: c20d913a65c9b94cf8beec82bee2051c758402fe8fd2ec9f10ba4bb1a21f093e
+    sha256: 382d7d7fcf21b05ba04ccd8dad2645f1ae0d77f3d29fae15fcc34197bb9f1d60
 
   - folder: dagster-ge
     url: https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ lib_version }}.tar.gz
-    sha256: 073b9e93082de46436bcc08d9adbc671bc78dead32036b33a841f05f5597f324
+    sha256: e190f4521e14b814bd26f5164c55f86382fd5b9b3e28aa7faaa138345c352ffa
 
   - folder: dagster-github
     url: https://pypi.io/packages/source/d/dagster-github/dagster-github-{{ lib_version }}.tar.gz
-    sha256: a2bb0cca27dd86477f0b4250c615aff01446a12bd7f35d0e292ec0f8cfca9b3d
+    sha256: ae4016d68a6aca6e71e180e1111b69d5d1d3d1288f0395fab6ad70255267ceb4
 
   - folder: dagster-gcp
     url: https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ lib_version }}.tar.gz
-    sha256: 0ab7025eac5969ad03c66fa493040537eba699192d3722872cb436f755f06d9f
+    sha256: 6f8e3572b00bc3c65ca35f2ac1774f27994121f67971c73fe1b5f35f41aec74a
 
   - folder: dagster-mlflow
     url: https://pypi.io/packages/source/d/dagster-mlflow/dagster-mlflow-{{ lib_version }}.tar.gz
-    sha256: 2a5c2784740d425efaa984f7ef7b2884da4c99b7e63ce8e437a6d67852c8be7c
+    sha256: b46892ec7d0241f399d2b301439432f0627a8132266f7788462e1d833674b576
 
   - folder: dagster-pandas
     url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ lib_version }}.tar.gz
-    sha256: 7214462cbae24d028a0d8e2b65f2c406cd9d6de99fa3dc0cd9fb0a267c18cdb0
+    sha256: 05098a82a64a55358e8957a766c5b24fa4b156913eb6fb15357f3767b512f600
 
   - folder: dagster-mysql
     url: https://pypi.io/packages/source/d/dagster-mysql/dagster-mysql-{{ lib_version }}.tar.gz
-    sha256: 392739e4690a7fe10b2c65e1036f70bf3f2271bd4c4d036b52c2a3132280d87f
+    sha256: 0aa739d065658d89cb4fede4d0f1726c6cb1cd2370d9ce91a56240a0b4238c4e
 
   - folder: dagster-msteams
     url: https://pypi.io/packages/source/d/dagster-msteams/dagster-msteams-{{ lib_version }}.tar.gz
-    sha256: 5adf85829db4f6b807ad66d979b459860d8ffbe9ef298c15c50e005ab1e116e7
+    sha256: cde3ad5e37516e0bc2d77d051fb8fec5e4291b34b660674182c746b7c490cc35
 
   - folder: dagster-pagerduty
     url: https://pypi.io/packages/source/d/dagster-pagerduty/dagster-pagerduty-{{ lib_version }}.tar.gz
-    sha256: 6031abfda5e251c06f6b32b5c3b58044f3b2c192ed71ed7bde0da665af64e36c
+    sha256: 570992d1dbfd82da01bcac2b87b807e0a7313442d4b4fd84649ac67ede18ef68
 
   - folder: dagster-papertrail
     url: https://pypi.io/packages/source/d/dagster-papertrail/dagster-papertrail-{{ lib_version }}.tar.gz
-    sha256: 451cab76e65142636d3dab7f015b62f8d0750854cb1c8016360d79dd7ee2f51e
+    sha256: c3bb832c2ea51057ca2bee2db3929e23ec8b25d87778a6f6f1059938892c77c4
 
   - folder: dagster-postgres
     url: https://pypi.io/packages/source/d/dagster-postgres/dagster-postgres-{{ lib_version }}.tar.gz
-    sha256: 0ddbea60b3d58f9324f5d5c3fa7f2a0f65ec1c0e314e2bc9112c1ff8cd3799a8
+    sha256: 238511f2205db65a5150b14deb90ceb5d33deef57fc40eeb5c6a371e2eaf09b7
 
   - folder: dagster-prometheus
     url: https://pypi.io/packages/source/d/dagster-prometheus/dagster-prometheus-{{ lib_version }}.tar.gz
-    sha256: 0be854a063425ec700c267886e9c038b01c66e5ecc8b8bb0928bd49be13996a4
+    sha256: 59ec18a5b02a439e9987a23270face556352473e520309232bb5110caaaba597
 
   - folder: dagster-slack
     url: https://pypi.io/packages/source/d/dagster-slack/dagster-slack-{{ lib_version }}.tar.gz
-    sha256: 4c4566847784b48731cbd9da02e89e7cdfc94cb86d47d0f2530066283ec4ee98
+    sha256: 38ebb91f87e5bb49ddfc01ce125c5d7fb2741ffc2b3de6ddce0d90b89486aa81
 
   - folder: dagster-ssh
     url: https://pypi.io/packages/source/d/dagster-ssh/dagster-ssh-{{ lib_version }}.tar.gz
-    sha256: d62f148919f0bdbe4e1c74a9e451fdb1f44c8d0ab558006ba683e8acf855ee71
+    sha256: 2373c6ea2426927c394787dbdb4778caa3888a389213377f156164941baeb907
 
   - folder: dagster-twilio
     url: https://pypi.io/packages/source/d/dagster-twilio/dagster-twilio-{{ lib_version }}.tar.gz
-    sha256: 185dd03f606a262fd1b39f0f79eccb7c39adcaa7b42f6c6b92357de4fcee0d01
+    sha256: b4959dd8e6125ca0858fe05cb444423fe487409a86d058052e92c035d4b76ce0
 
   - folder: dagster-aws
     url: https://pypi.io/packages/source/d/dagster-aws/dagster-aws-{{ lib_version }}.tar.gz
-    sha256: 7ee70e28135fcc8120da30c19eb6f02586576a51ef5a1227c9aad48913c5e6e9
+    sha256: c8ae2f68cea1905872670f0c1d7acd3402d75ac0cbb6048f2c08e6d2d7526d2b
 
   - folder: dagster-dask
     url: https://pypi.io/packages/source/d/dagster-dask/dagster-dask-{{ lib_version }}.tar.gz
-    sha256: 1b7e2314e74b29eb219667c6e6b286ff8055d8c5b8426391de198c37700899a8
+    sha256: 7419f44b4ddf7cf4c66e41a912569c5a69853a7273fcd28bea0e80c5e0d8c337
 
   - folder: dagster-datadog
     url: https://pypi.io/packages/source/d/dagster-datadog/dagster-datadog-{{ lib_version }}.tar.gz
-    sha256: 4c4f30240e30420c0923aa4a495f1d97cfa40ae265814c358f18fb2ec74e9bf1
+    sha256: 85741eeb7edb79c0674d28a986f4233008d33286190f26658304c464d35f7062
 
   - folder: dagster-pandera
     url: https://pypi.io/packages/source/d/dagster-pandera/dagster-pandera-{{ lib_version }}.tar.gz
-    sha256: 5aeacaa70e788a4b93d5ced5519dcac9a0d6c246d80674d869d54dd75b98ed6c
+    sha256: 069360c61ec4912828d20b0999fee320b9d08feb9cff70b76a1ef3d32334848e
 
   - folder: dagster-shell
     url: https://pypi.io/packages/source/d/dagster-shell/dagster-shell-{{ lib_version }}.tar.gz
-    sha256: 5ca3998ab4358f57575c6c29a9523e249aeb3eddf25cc6648976cb9db2747bf6
+    sha256: 996f0eb4c24bf017e128b244b72efe92424bc5d8014e486ed071c8c206caf883
 
   - folder: dagster-snowflake
     url: https://pypi.io/packages/source/d/dagster-snowflake/dagster-snowflake-{{ lib_version }}.tar.gz
-    sha256: 3b0f99c1f08a066c9714b0b4251ad034743829ca72c044fa361bf66ad6199c55
+    sha256: 99b0701f76d9c274ae8e1c01e190036534628d9b642ebaec19db80fb6a12588e
 
   - folder: dagster-snowflake-pandas
     url: https://pypi.io/packages/source/d/dagster-snowflake-pandas/dagster-snowflake-pandas-{{ lib_version }}.tar.gz
-    sha256: 6fa60a7f74f470f4ba0419b28e438150266a9288eefebef52a67ebdf0f90315d
+    sha256: d45d3103e27aaa3c796f711e0868c11ece177361f0c908db18317e24d56e121f
 
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
-    sha256: b47820ca618f2f2b4f566b977f195892a4f69b5346269f6415405467cd8fa6d1
+    sha256: 55f1c81da67499b402bd0310ec8546cf28533d32a3bbf59f73ed39fa28eb44fd
 
 
 build:
@@ -172,7 +172,7 @@ requirements:
 
 test:
   commands:
-    - echo "TODO"
+    - echo "tests in outputs"
 
 
 outputs:
@@ -192,7 +192,7 @@ outputs:
         - pip
         - python >=3.7
       run:
-        - alembic >=1.2.1,!=1.6.3,<1.7.0
+        - alembic >=1.2.1,!=1.6.3,!=1.7.0
         - click >=5.0
         - coloredlogs >=6.1,<=14.0
         - croniter >=0.3.34
@@ -1315,7 +1315,7 @@ outputs:
       imports:
         - dagster_pandera
       commands:
-        - echo "TODO restore pip check when pandas-stubs is clean"
+        - pip check
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-pandera
