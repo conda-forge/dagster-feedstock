@@ -597,6 +597,8 @@ outputs:
         - pip
         - apache-airflow-providers-docker
         - jinja2 <3
+        # TODO: remove after https://github.com/conda-forge/airflow-feedstock/pull/92
+        - pathspec >=0.9.0,<0.10.0
       imports:
         - dagster_airflow
       commands:
