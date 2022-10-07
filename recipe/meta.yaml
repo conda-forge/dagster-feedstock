@@ -579,6 +579,7 @@ outputs:
       script:
         # TODO: remove after https://github.com/dagster-io/dagster/pull/9932
         - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/hooks/__init__.py").touch()'
+        - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/links/__init__.py").touch()'
         - cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
       entry_points:
         - dagster-airflow = dagster_airflow.cli:main
