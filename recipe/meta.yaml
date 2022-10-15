@@ -543,7 +543,7 @@ outputs:
       requires:
         - pip
       imports:
-        - dagster_duckdb_pandas
+        - dagster_duckdb_pyspark
       commands:
         - pip check
 
