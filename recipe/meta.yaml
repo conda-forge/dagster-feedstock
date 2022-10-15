@@ -672,9 +672,7 @@ outputs:
       run:
         - attrs
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - {{ pin_subpackage("dagster-pandas", max_pin="x.x.x") }}
         - dbt-core
-        - pandas
         - requests
         - agate
         - python >=3.6
@@ -839,8 +837,9 @@ outputs:
       run:
         - {{ pin_subpackage("dagster-pandas", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - google-api-python-client <2.0.0
-        - google-cloud-bigquery-core >=1.19,<3
+        - db-dtypes
+        - google-api-python-client
+        - google-cloud-bigquery-core
         - google-cloud-storage
         - oauth2client
         - python >=3.6
