@@ -41,11 +41,11 @@ source:
     sha256: 547a6c7cb5aba70bd98a6a3a14dba8b1e74a22c1703a2db6840cdc63b9a252c8
 
   - folder: dagster-duckdb-pandas
-    url: https://pypi.io/packages/source/d/dagster-duckdb/dagster-duckdb-pandas-{{ lib_version }}.tar.gz
+    url: https://pypi.io/packages/source/d/dagster-duckdb-pandas/dagster-duckdb-pandas-{{ lib_version }}.tar.gz
     sha256: c00ca0cdba517e57dd27eb43a85d77449bc2f509f01da8d13ece99e33ecec449
 
   - folder: dagster-duckdb-pyspark
-    url: https://pypi.io/packages/source/d/dagster-duckdb/dagster-duckdb-pyspark-{{ lib_version }}.tar.gz
+    url: https://pypi.io/packages/source/d/dagster-duckdb-pyspark/dagster-duckdb-pyspark-{{ lib_version }}.tar.gz
     sha256: 5cb04129b516eb812f133a59b530d9c22cab327c105d5b87772066b7be1cec80
 
   - folder: dagster-pyspark
