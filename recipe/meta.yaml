@@ -36,6 +36,18 @@ source:
     url: https://pypi.io/packages/source/d/dagster-census/dagster-census-{{ lib_version }}.tar.gz
     sha256: 2fda4f25cdfb5e33866484816d1c315602a5a2f53c9228c6c2860f9e8cf700d4
 
+  - folder: dagster-duckdb
+    url: https://pypi.io/packages/source/d/dagster-duckdb/dagster-duckdb-{{ lib_version }}.tar.gz
+    sha256: 547a6c7cb5aba70bd98a6a3a14dba8b1e74a22c1703a2db6840cdc63b9a252c8
+
+  - folder: dagster-duckdb-pandas
+    url: https://pypi.io/packages/source/d/dagster-duckdb/dagster-duckdb-pandas-{{ lib_version }}.tar.gz
+    sha256: c00ca0cdba517e57dd27eb43a85d77449bc2f509f01da8d13ece99e33ecec449
+
+  - folder: dagster-duckdb-pyspark
+    url: https://pypi.io/packages/source/d/dagster-duckdb/dagster-duckdb-pyspark-{{ lib_version }}.tar.gz
+    sha256: 5cb04129b516eb812f133a59b530d9c22cab327c105d5b87772066b7be1cec80
+
   - folder: dagster-pyspark
     url: https://pypi.io/packages/source/d/dagster-pyspark/dagster-pyspark-{{ lib_version }}.tar.gz
     sha256: b726831c3714838c4ca0212f818926ec6750e9c89f7cf1efb4c4b970d3b66b8f
@@ -446,6 +458,101 @@ outputs:
       license_family: APACHE
       license_file: dagster-celery-k8s/LICENSE
       summary: A Dagster integration for celery-k8s-executor
+
+  - name: dagster-duckdb
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-duckdb && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - python-duckdb
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_duckdb
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-duckdb
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-duckdb/LICENSE
+      summary: Package for DuckDB-specific Dagster framework op and resource components.
+
+  - name: dagster-duckdb-pandas
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-duckdb-pandas && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster-duckdb", max_pin="x.x.x") }}
+        - pandas
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_duckdb_pandas
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-duckdb-pandas
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-duckdb-pandas/LICENSE
+      summary: Package for storing Pandas DataFrames in DuckDB.
+
+  - name: dagster-duckdb-pyspark
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-duckdb-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster-duckdb", max_pin="x.x.x") }}
+        - pyspark
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_duckdb_pandas
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-duckdb-pyspark
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-duckdb-pyspark/LICENSE
+      summary: Package for storing PySpark DataFrames in DuckDB.
 
   - name: dagster-k8s
     build:
