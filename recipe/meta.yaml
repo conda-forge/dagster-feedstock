@@ -1516,6 +1516,7 @@ outputs:
         - requests
         - snowflake-connector-python
         - snowflake-sqlalchemy
+        - sqlalchemy !=1.4.42
     test:
       requires:
         - pip
