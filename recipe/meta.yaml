@@ -96,6 +96,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-mlflow/dagster-mlflow-{{ lib_version }}.tar.gz
     sha256: 2ec40ba65ee19c70db13e35c16dc7734b100d2e752ba8ed23209546cc510c812
 
+  - folder: dagster-managed-elements
+    url: https://pypi.io/packages/source/d/dagster-managed-elements/dagster-managed-elements-{{ lib_version }}.tar.gz
+    sha256: 5eb4be03b6ef230c785425c6f158b1400d42d11c763b62b6f27e21bbac6f8b68
+
   - folder: dagster-pandas
     url: https://pypi.io/packages/source/d/dagster-pandas/dagster-pandas-{{ lib_version }}.tar.gz
     sha256: 988eb712a9355db1515e2e0f30a5b3542552ad4d111397ae5eaca3fc87d4dcff
@@ -998,6 +1002,37 @@ outputs:
       license_family: APACHE
       license_file: dagster-mlflow/LICENSE
       summary: Package for mlflow Dagster framework components
+
+  - name: dagster-managed-elements
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-managed-elements && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagster-managed-elements = dagster_managed_elements.cli:main
+        - dagster-me = dagster_managed_elements.cli:main
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - requests
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_managed_elements
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-managed-elements
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-managed-elements/LICENSE
+      summary: Package for Managed elements with Dagster.
 
   - name: dagster-pandas
     build:
