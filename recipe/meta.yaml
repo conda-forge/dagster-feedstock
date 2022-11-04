@@ -234,6 +234,7 @@ outputs:
         - tqdm
         - typing-compat
         - typing_extensions >=4.0.1
+        - universal_pathlib
         - watchdog >=0.8.3
       run_constrained:
         - pywin32 !=226
