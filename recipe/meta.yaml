@@ -1086,6 +1086,8 @@ outputs:
     test:
       requires:
         - pip
+        # TODO: fix upstream
+        - protobuf >=3.11.0,<=3.20.1
       imports:
         - dagster_mysql
       commands:
