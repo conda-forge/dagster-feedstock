@@ -953,6 +953,8 @@ outputs:
         - {{ pin_subpackage("dagster-pandas", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - db-dtypes
+        # TODO: hopefully remove after https://github.com/conda-forge/googleapis-common-protos-feedstock/issues/50
+        - googleapis-common-protos !=1.57.0=*_1
         - google-api-python-client
         - google-cloud-bigquery-core
         - google-cloud-storage
