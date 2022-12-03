@@ -230,10 +230,10 @@ outputs:
         - setuptools
         - sqlalchemy >=1.0
         - tabulate
+        - tomli
         - toposort >=1.0
         - tqdm
         - typing_extensions >=4.0.1
-        - typing-compat
         - universal_pathlib
         - watchdog >=0.8.3
       run_constrained:
@@ -705,11 +705,11 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - docker-py
+        - docker-py >=5.0.3,<6
         - lazy-object-proxy
+        - pendulum
         - python >=3.6
         - python-dateutil >=2.8.0
-        - typing_extensions
 
     test:
       requires:
@@ -813,6 +813,8 @@ outputs:
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-fivetran && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagster-fivetran = dagster_fivetran.cli:main
 
     requirements:
       host:
@@ -830,6 +832,7 @@ outputs:
         - dagster_fivetran
       commands:
         - pip check
+        - dagster-fivetran --help
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-fivetran
@@ -1024,6 +1027,7 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - click-spinner
         - requests
     test:
       requires:
@@ -1088,7 +1092,7 @@ outputs:
     test:
       requires:
         # - pip
-        # TODO: can't be installed, investigate upstream 
+        # TODO: can't be installed, investigate upstream
         # #https://github.com/conda-forge/mysql-connector-python-feedstock/pull/77
         # - protobuf >=3.11.0,<=3.20.1
       imports:
