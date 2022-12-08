@@ -216,7 +216,7 @@ outputs:
         - grpcio >=1.32.0,<1.48.1
         - grpcio-health-checking >=1.32.0,<1.44.0
         - jinja2
-        - packaging >=20.9
+        - packaging >=20.9,<22
         - pendulum
         - protobuf >=3.13.0,<4
         - psutil >=1.0
@@ -1596,8 +1596,9 @@ outputs:
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - ipykernel >=4.9.0,!=5.4.0,!=5.4.1
-        - ipython_genutils
-        - packaging >=20.5
+        - ipython_genutils >=0.2.0
+        - nbconvert
+        - packaging >=20.5,<22
         - papermill >=1.0.0
         - python >=3.6
         - scrapbook >=0.5
