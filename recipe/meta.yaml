@@ -220,6 +220,7 @@ outputs:
         - pendulum
         - protobuf >=3.13.0,<4
         - psutil >=1.0
+        - pydantic
         - python >=3.7
         - python-dateutil
         - python-dotenv
@@ -304,7 +305,7 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - gql-with-requests
+        - gql-with-requests >=3.0.0
         - graphene >=3
         - python >=3.6
         - requests
