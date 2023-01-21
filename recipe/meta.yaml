@@ -777,18 +777,20 @@ outputs:
       version: {{ lib_version }}
       number: {{ build_number }}
       script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagster-dbt-cloud = dagster_dbt.cloud.cli:app
 
     requirements:
       host:
         - pip
         - python >=3.6
       run:
-        - attrs
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - attrs
         - dbt-core
-        - requests
-        - agate
         - python >=3.6
+        - requests
+        - typer
 
     test:
       requires:
@@ -797,6 +799,7 @@ outputs:
         - dagster_dbt
       commands:
         - pip check
+        - dagster-dbt-cloud --help
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dbt
