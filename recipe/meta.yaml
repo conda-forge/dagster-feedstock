@@ -229,7 +229,7 @@ outputs:
         - pyyaml >=5.1
         - requests
         - setuptools
-        - sqlalchemy >=1.0,<2
+        - sqlalchemy >=1.0,<2.0.0
         - tabulate
         - tomli
         - toposort >=1.0
@@ -786,8 +786,7 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - attrs
-        - dbt-core
+        - dbt-core <1.4.0
         - python >=3.6
         - requests
         - typer
@@ -1598,6 +1597,7 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - ipykernel >=4.9.0,!=5.4.0,!=5.4.1
         - ipython_genutils >=0.2.0
+        - jupyter_client <8
         - nbconvert
         - packaging >=20.9
         - papermill >=1.0.0
