@@ -168,6 +168,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-snowflake-pandas/dagster-snowflake-pandas-{{ lib_version }}.tar.gz
     sha256: 535046b78ec3518c97917386e9ea34eb7e4bf0cd48174b10db88e919f9d83c0b
 
+  - folder: dagster-snowflake-pyspark
+    url: https://pypi.io/packages/source/d/dagster-snowflake-pyspark/dagster-snowflake-pyspark-{{ lib_version }}.tar.gz
+    sha256: 248cfb5325df8bffc0e796705dc205e66972d337d3cd66135b1af788e1266812
+
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
     sha256: d6dfd30e81f800b90fbb1bf8bf4f092ba62c8457cd0ac6c9d5e14911bb246b53
@@ -1563,7 +1567,7 @@ outputs:
         - python >=3.6
         - requests
         - snowflake-connector-python
-        - snowflake-sqlalchemy
+        - snowflake-sqlalchemy >=1.2
         - sqlalchemy !=1.4.42
     test:
       requires:
@@ -1574,11 +1578,43 @@ outputs:
         - pip check
 
     about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake-pandas
       license: Apache-2.0
       license_family: APACHE
       license_file: dagster-snowflake-pandas/LICENSE
       summary: Package for integrating Snowflake and Pandas with Dagster.
+
+  - name: dagster-snowflake-pyspark
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-snowflake-pyspark && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.7
+      run:
+        - {{ pin_subpackage("dagster-snowflake", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - pyspark
+        - python >=3.7
+        - requests
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_snowflake_pyspark
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-snowflake-pyspark
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-snowflake-pyspark/LICENSE
+      summary: Package for integrating Snowflake and PySpark with Dagster.
 
   - name: dagstermill
     build:
