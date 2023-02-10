@@ -228,6 +228,7 @@ outputs:
         - jinja2
         - packaging >=20.9
         - pendulum
+        - protobuf >=3.13.0,<4
         - psutil >=1.0
         - pydantic
         - python >=3.7
