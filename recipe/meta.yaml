@@ -24,6 +24,8 @@ source:
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
     sha256: 0dbdfb99497134507b22c4c5605c848014b12da1d2498f15b86e8eeafa16efad
+    patches:
+      - 0000-no-airflow-cli.patch
 
   # uses lib version
   - folder: dagster-airbyte
@@ -707,8 +709,6 @@ outputs:
         - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/hooks/__init__.py").touch()'
         - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/links/__init__.py").touch()'
         - cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps
-      entry_points:
-        - dagster-airflow = dagster_airflow.cli:main
 
     requirements:
       host:
@@ -732,7 +732,6 @@ outputs:
       imports:
         - dagster_airflow
       commands:
-        - dagster-airflow --help
         - pip check
 
     about:
