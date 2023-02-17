@@ -24,8 +24,6 @@ source:
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
     sha256: f01b4b138db4839133166b5fe0d217b706525b683acbfbd4a94e9e3e7b36cbd8
-    patches:
-      - 0000-no-airflow-cli.patch
 
   # uses lib version
   - folder: dagster-airbyte
