@@ -1604,6 +1604,7 @@ outputs:
         - pyspark
         - python >=3.7
         - requests
+        - snowflake-sqlalchemy
     test:
       requires:
         - pip
