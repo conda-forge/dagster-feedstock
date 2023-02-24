@@ -86,6 +86,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-gcp/dagster-gcp-{{ lib_version }}.tar.gz
     sha256: 6e330f48a67ecdece8980f392b88569bc9b134aef45c03ea913113d2f1ebae36
 
+  - folder: dagster-gcp-pandas
+    url: https://pypi.io/packages/source/d/dagster-gcp-pandas/dagster-gcp-pandas-{{ lib_version }}.tar.gz
+    sha256: 6e330f48a67ecdece8980f392b88569bc9b134aef45c03ea913113d2f1ebae36
+
   - folder: dagster-ge
     url: https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ lib_version }}.tar.gz
     sha256: 8d7588827673d9aa1e00758be9958e7854a41850e85dba7bff4d400e373204c3
@@ -946,8 +950,6 @@ outputs:
       license_file: dagster-docker/LICENSE
       summary: A Dagster integration for docker
 
-  # these _would_ build on py37_0, except conda-build tries to test them with py38
-  # issues with win/python 2.7
   - name: dagster-gcp
     build:
       noarch: python
@@ -988,6 +990,36 @@ outputs:
       license_family: APACHE
       license_file: dagster-gcp/LICENSE
       summary: Package for GCP-specific Dagster framework solid and resource components.
+
+  - name: dagster-gcp-pandas
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-gcp-pandas && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster-gcp", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - pandas-gbq
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_gcp_pandas
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-gcp-pandas
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-gcp-pandas/LICENSE
+      summary: Package for storing Pandas DataFrames in GCP.
 
   - name: dagster-mlflow
     build:
