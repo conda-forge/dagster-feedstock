@@ -88,7 +88,7 @@ source:
 
   - folder: dagster-gcp-pandas
     url: https://pypi.io/packages/source/d/dagster-gcp-pandas/dagster-gcp-pandas-{{ lib_version }}.tar.gz
-    sha256: 6e330f48a67ecdece8980f392b88569bc9b134aef45c03ea913113d2f1ebae36
+    sha256: 9877dc0a6376d55c168a5cb6d0987dae9d0f3acc23f1e05c861aa9c1ea2f9732
 
   - folder: dagster-ge
     url: https://pypi.io/packages/source/d/dagster-ge/dagster-ge-{{ lib_version }}.tar.gz
