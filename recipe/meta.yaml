@@ -74,6 +74,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster-duckdb-pandas/dagster-duckdb-pandas-{{ lib_version }}.tar.gz
     sha256: cdea3a2b32acfa9983924a0995b64a1a145354e150a6483b2f3640f27b92f345
 
+  - folder: dagster-duckdb-polars
+    url: https://pypi.io/packages/source/d/dagster-duckdb-polars/dagster-duckdb-polars-{{ lib_version }}.tar.gz
+    sha256: 79df6badd06f72937eb7a298b0642254b9d11b39b922d57ce2167b3a4b603203
+
   - folder: dagster-duckdb-pyspark
     url: https://pypi.io/packages/source/d/dagster-duckdb-pyspark/dagster-duckdb-pyspark-{{ lib_version }}.tar.gz
     sha256: a2884739fcad8daebd970308ce457afe5d11f5ad2b39845c4d72ac3fe766819c
@@ -248,7 +252,7 @@ outputs:
         - tomli
         - toposort >=1.0
         - tqdm
-        - typing_extensions >=4.0.1
+        - typing_extensions >=4.4.0
         - universal_pathlib
         - watchdog >=0.8.3
       run_constrained:
@@ -541,6 +545,40 @@ outputs:
       license_family: APACHE
       license_file: dagster-duckdb-pandas/LICENSE
       summary: Package for storing Pandas DataFrames in DuckDB.
+
+  - name: dagster-duckdb-polars
+    build:
+      noarch: python
+      version: {{ lib_version }}
+      number: {{ build_number }}
+      script: cd dagster-duckdb-polars && {{ PYTHON }} -m pip install . -vv --no-deps
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster-duckdb", max_pin="x.x.x") }}
+        # TODO: get polars-with-X outputs
+        - polars
+        - pyarrow >=4.0.0
+        - python >=3.6
+
+    test:
+      requires:
+        - pip
+      imports:
+        - dagster_duckdb_polars
+      commands:
+        - pip check
+
+    about:
+      home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-duckdb-polars
+      license: Apache-2.0
+      license_family: APACHE
+      license_file:   dagster-duckdb-polars/LICENSE
+      summary: Package for storing Polars DataFrames in DuckDB.
 
   - name: dagster-duckdb-pyspark
     build:
