@@ -95,7 +95,7 @@ source:
     sha256: 1be841db3835ceb43998388e958cffd79e56883fdd26dc4c2983a465282052e3
 
   - folder: dagster-gcp-pyspark
-    url: https://pypi.io/packages/source/d/dagster-gcp-pyspark/dagster-gcp-pyspark-{{ lib_version }}.tar.gz
+    url: https://pypi.io/packages/source/d/dagster-gcp-pyspark/dagster_gcp_pyspark-{{ lib_version }}.tar.gz
     sha256: 6f5e67f966cc28643e8013a7565d47fdb7371cdae7a0d14ce30fd433f7bf2042
 
   - folder: dagster-ge
