@@ -1,7 +1,25 @@
 {% set version = "1.2.2" %}
+
 # this appears to be the pattern at present, but may not hold in the future
 {% set lib_version = "0.18." ~ version.split(".")[-1] %}
 {% set build_number = 0 %}
+
+# during some re-renders, py_epoch will be be set
+{% if py_epoch is not defined %}
+{% set py_epoch = "10" %}
+{% endif %}
+
+# handle some python-specific runtime deps... only build addons on 3.10 for now
+# TODO; reconsider splitting (usually requires building several packages twice)
+{% if py_epoch == "10"}
+  {% set py_spec = "python >=3.11" %}
+  {% set grpcio_spec = "grpcio >=1.44.0" %}
+  {% set build_plugins = true %}
+{% else %}
+  {% set grpcio_spec = "grpcio >=1.44.0,<1.48.0" %}
+  {% set py_spec = "python >=3.7,<3.11" %}
+  {% set build_plugins = false %}
+{% endif %}
 
 package:
   name: dagster-meta
@@ -13,6 +31,7 @@ source:
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
     sha256: b3d8362da443e9325cb0185454665c749545a0f360c629e577ceb5ee912bb9f6
 
+  {% if build_plugins %}
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
     sha256: dd313d4f8b77fe77ab143f4f76602cfa5b720c560083f4af4187233f682fd7ee
@@ -193,6 +212,7 @@ source:
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
     sha256: 85225b4b9adf999f6b07882ee604d9b9fba256ba0d1831b272d3e2fccdb47285
+    {% endif %}
 
 
 build:
@@ -202,10 +222,10 @@ build:
 
 requirements:
   host:
-    - python >=3.7
     - pip
+    - {{ py_spec }}
   run:
-    - python >=3.7
+    - {{ py_spec }}
 
 
 test:
@@ -227,23 +247,23 @@ outputs:
 
     requirements:
       host:
+        - {{ py_spec }}
         - pip
-        - python >=3.7
       run:
+        - {{ py_spec }}
+        - {{ grpcio_spec }}
+        - grpcio-health-checking >=1.44.0
         - alembic >=1.2.1,!=1.6.3,!=1.7.0
         - click >=5.0
         - coloredlogs >=6.1,<=14.0
         - croniter >=0.3.34
         - docstring_parser
-        - grpcio >=1.44.0
-        - grpcio-health-checking >=1.44.0
         - jinja2
         - packaging >=20.9
         - pendulum
         - protobuf >=3.20.0
         - psutil >=1.0
         - pydantic
-        - python >=3.7
         - python-dateutil
         - python-dotenv
         - pytz
@@ -312,6 +332,7 @@ outputs:
         Building a data platform with Dagster makes your stakeholders more independent and your systems
         more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
+  {% if build_plugins %}
   - name: dagster-graphql
     build:
       version: {{ version }}
@@ -1782,6 +1803,8 @@ outputs:
         - dagster_wandb
       commands:
         - pip check
+
+  {% endif %}
 
 about:
   home: https://github.com/dagster-io
