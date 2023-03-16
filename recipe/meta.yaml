@@ -27,14 +27,14 @@ package:
 
 source:
   # uses main version
-  - folder: dagit
-    url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: b3d8362da443e9325cb0185454665c749545a0f360c629e577ceb5ee912bb9f6
-
-  {% if build_plugins %}
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
     sha256: dd313d4f8b77fe77ab143f4f76602cfa5b720c560083f4af4187233f682fd7ee
+
+  {% if build_plugins %}
+  - folder: dagit
+    url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
+    sha256: b3d8362da443e9325cb0185454665c749545a0f360c629e577ceb5ee912bb9f6
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
