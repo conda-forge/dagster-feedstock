@@ -6,19 +6,19 @@
 
 # during some re-renders, py_epoch will be be set
 {% if py_epoch is not defined %}
-{% set py_epoch = "10" %}
+  {% set py_epoch = "10" %}
 {% endif %}
 
 # handle some python-specific runtime deps... only build addons on 3.10 for now
 # TODO; reconsider splitting (usually requires building several packages twice)
-{% if py_epoch == "10"}
+{% if py_epoch == "10" %}
   {% set py_spec = "python >=3.11" %}
   {% set grpcio_spec = "grpcio >=1.44.0" %}
-  {% set build_plugins = true %}
+  {% set build_plugins = True %}
 {% else %}
   {% set grpcio_spec = "grpcio >=1.44.0,<1.48.0" %}
   {% set py_spec = "python >=3.7,<3.11" %}
-  {% set build_plugins = false %}
+  {% set build_plugins = False %}
 {% endif %}
 
 package:
@@ -212,7 +212,7 @@ source:
   - folder: dagstermill
     url: https://pypi.io/packages/source/d/dagstermill/dagstermill-{{ lib_version }}.tar.gz
     sha256: 85225b4b9adf999f6b07882ee604d9b9fba256ba0d1831b272d3e2fccdb47285
-    {% endif %}
+  {% endif %}
 
 
 build:
