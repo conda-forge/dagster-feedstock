@@ -4,21 +4,22 @@
 {% set lib_version = "0.18." ~ version.split(".")[-1] %}
 {% set build_number = 0 %}
 
-# during some re-renders, py_epoch will be be set
+# only one noarch build should do all the plugins
+{% set build_plugins = True %}
+{% set py_spec = "python >=3.7,<3.11" %}
+{% set grpcio_spec = "grpcio >=1.44.0,<1.48.0" %}
+
+# during some re-renders, py_epoch will not be set
 {% if py_epoch is not defined %}
-  {% set py_epoch = "eleven" %}
+  {% set py_epoch = "ten" %}
 {% endif %}
 
-# handle some python-specific runtime deps... only build addons on 3.11 for now
+# handle some python-specific runtime deps... only build addons on 3.10 for now
 # TODO; reconsider splitting (usually requires building several packages twice)
 {% if py_epoch == "eleven" %}
   {% set py_spec = "python >=3.11" %}
   {% set grpcio_spec = "grpcio >=1.44.0" %}
   {% set build_plugins = False %}
-{% elif py_epoch == "ten" %}
-  {% set grpcio_spec = "grpcio >=1.44.0,<1.48.0" %}
-  {% set py_spec = "python >=3.7,<3.11" %}
-  {% set build_plugins = True %}
 {% endif %}
 
 package:
