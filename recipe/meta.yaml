@@ -6,12 +6,12 @@
 
 # during some re-renders, py_epoch will be be set
 {% if py_epoch is not defined %}
-  {% set py_epoch = "11" %}
+  {% set py_epoch = "eleven" %}
 {% endif %}
 
 # handle some python-specific runtime deps... only build addons on 3.11 for now
 # TODO; reconsider splitting (usually requires building several packages twice)
-{% if py_epoch == "11" %}
+{% if py_epoch == "eleven" %}
   {% set py_spec = "python >=3.11" %}
   {% set grpcio_spec = "grpcio >=1.44.0" %}
   {% set build_plugins = False %}
