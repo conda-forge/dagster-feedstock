@@ -554,7 +554,7 @@ outputs:
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-duckdb", max_pin="x.x.x") }}
-        - pandas
+        - pandas <2
         - python >=3.6
 
     test:
@@ -861,7 +861,8 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - dbt-core
+        - dbt-core >=1.1
+        - networkx
         - python >=3.6
         - requests
         - typer
@@ -931,7 +932,7 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-pandas", max_pin="x.x.x") }}
         - dataclasses
-        - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27,!=0.14.0
+        - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27,!=0.14.0,!=0.16.8
         - python >=3.6
 
     test:
@@ -1069,6 +1070,7 @@ outputs:
       run:
         - {{ pin_subpackage("dagster-gcp", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - pandas <2
     test:
       requires:
         - {{ py_spec }}
@@ -1124,7 +1126,7 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - mlflow <1.27.0
+        - mlflow
         - pandas
         - python >=3.6
     test:
