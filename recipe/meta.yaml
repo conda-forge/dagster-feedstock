@@ -9,7 +9,7 @@
 {% set build_plugins = True %}
 {% set py_spec = "python >=3.7,<3.11" %}
 {% set grpcio_spec = "grpcio >=1.44.0,<1.48.0" %}
-{% set epoch_build_number = 2 * build_number %}
+{% set epoch_build_number = 1 + (2 * build_number) %}
 # during some re-renders, grpcio_epoch will not be set
 {% if grpcio_epoch is not defined %}
   {% set grpcio_epoch = '10' %}
@@ -21,7 +21,7 @@
   {% set py_spec = "python >=3.11" %}
   {% set grpcio_spec = "grpcio >=1.44.0" %}
   {% set build_plugins = False %}
-  {% set epoch_build_number = (2 * build_number) + 1 %}
+  {% set epoch_build_number = 2 * build_number %}
 {% endif %}
 
 package:
