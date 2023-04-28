@@ -4,7 +4,7 @@
 {% set lib_version = "0.19." ~ version.split(".")[-1] %}
 
 # this should increase by single increments, but is used below
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 # during some re-renders, grpcio_epoch will not be set
 {% if grpcio_epoch is not defined %}
