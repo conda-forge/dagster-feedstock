@@ -1138,6 +1138,8 @@ outputs:
       requires:
         - {{ py_spec }}
         - pip
+        # TODO: remove after https://github.com/conda-forge/databricks-cli-feedstock/pull/23
+        - urllib3 <2
       imports:
         - dagster_mlflow
       commands:
