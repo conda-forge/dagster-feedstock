@@ -1805,7 +1805,7 @@ outputs:
         - python >=3.7
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - wandb >=0.13.5
+        - wandb >=0.13.5,<0.15.4
     test:
       requires:
         - {{ py_spec }}
