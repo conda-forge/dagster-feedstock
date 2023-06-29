@@ -1,4 +1,0 @@
-# used to control some py-specific values... build addons on oldest
-grpcio_epoch:
-  - '10'
-  - '11'
