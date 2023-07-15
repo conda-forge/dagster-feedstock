@@ -316,15 +316,6 @@ Package license: Apache-2.0
 
 Summary: A Dagster integration for papermill
 
-About dagit
------------
-
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
-
-Package license: Apache-2.0
-
-Summary: Dagster UI
-
 About dagster-celery-docker
 ---------------------------
 
@@ -415,6 +406,24 @@ Package license: Apache-2.0
 
 Summary: Package for integrating Snowflake and PySpark with Dagster.
 
+About dagster-webserver
+-----------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-webserver
+
+Package license: Apache-2.0
+
+Summary: Web UI for dagster.
+
+About dagit
+-----------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
+
+Package license: Apache-2.0
+
+Summary: Dagster UI
+
 About dagster-gcp-pandas
 ------------------------
 
@@ -496,6 +505,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--ssh-green.svg)](https://anaconda.org/conda-forge/dagster-ssh) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-ssh.svg)](https://anaconda.org/conda-forge/dagster-ssh) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-ssh.svg)](https://anaconda.org/conda-forge/dagster-ssh) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-ssh.svg)](https://anaconda.org/conda-forge/dagster-ssh) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--twilio-green.svg)](https://anaconda.org/conda-forge/dagster-twilio) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-twilio.svg)](https://anaconda.org/conda-forge/dagster-twilio) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-twilio.svg)](https://anaconda.org/conda-forge/dagster-twilio) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-twilio.svg)](https://anaconda.org/conda-forge/dagster-twilio) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--wandb-green.svg)](https://anaconda.org/conda-forge/dagster-wandb) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-wandb.svg)](https://anaconda.org/conda-forge/dagster-wandb) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-wandb.svg)](https://anaconda.org/conda-forge/dagster-wandb) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-wandb.svg)](https://anaconda.org/conda-forge/dagster-wandb) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--webserver-green.svg)](https://anaconda.org/conda-forge/dagster-webserver) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-webserver.svg)](https://anaconda.org/conda-forge/dagster-webserver) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-webserver.svg)](https://anaconda.org/conda-forge/dagster-webserver) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-webserver.svg)](https://anaconda.org/conda-forge/dagster-webserver) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagstermill-green.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) |
 
 Installing dagster
@@ -508,16 +518,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `dagit, dagster, dagster-airbyte, dagster-airflow, dagster-aws, dagster-celery, dagster-celery-docker, dagster-celery-k8s, dagster-census, dagster-dask, dagster-datadog, dagster-dbt, dagster-docker, dagster-duckdb, dagster-duckdb-pandas, dagster-duckdb-polars, dagster-duckdb-pyspark, dagster-fivetran, dagster-gcp, dagster-gcp-pandas, dagster-gcp-pyspark, dagster-ge, dagster-github, dagster-graphql, dagster-k8s, dagster-managed-elements, dagster-mlflow, dagster-msteams, dagster-mysql, dagster-pagerduty, dagster-pandas, dagster-pandera, dagster-papertrail, dagster-postgres, dagster-prometheus, dagster-pyspark, dagster-shell, dagster-slack, dagster-snowflake, dagster-snowflake-pandas, dagster-snowflake-pyspark, dagster-spark, dagster-ssh, dagster-twilio, dagster-wandb, dagstermill` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `dagit, dagster, dagster-airbyte, dagster-airflow, dagster-aws, dagster-celery, dagster-celery-docker, dagster-celery-k8s, dagster-census, dagster-dask, dagster-datadog, dagster-dbt, dagster-docker, dagster-duckdb, dagster-duckdb-pandas, dagster-duckdb-polars, dagster-duckdb-pyspark, dagster-fivetran, dagster-gcp, dagster-gcp-pandas, dagster-gcp-pyspark, dagster-ge, dagster-github, dagster-graphql, dagster-k8s, dagster-managed-elements, dagster-mlflow, dagster-msteams, dagster-mysql, dagster-pagerduty, dagster-pandas, dagster-pandera, dagster-papertrail, dagster-postgres, dagster-prometheus, dagster-pyspark, dagster-shell, dagster-slack, dagster-snowflake, dagster-snowflake-pandas, dagster-snowflake-pyspark, dagster-spark, dagster-ssh, dagster-twilio, dagster-wandb, dagster-webserver, dagstermill` can be installed with `conda`:
 
 ```
-conda install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagstermill
+conda install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagster-webserver dagstermill
 ```
 
 or with `mamba`:
 
 ```
-mamba install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagstermill
+mamba install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagster-webserver dagstermill
 ```
 
 It is possible to list all of the versions of `dagit` available on your platform with `conda`:
