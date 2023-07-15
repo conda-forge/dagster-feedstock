@@ -18,7 +18,7 @@ source:
     sha256: ea4c18c6771b9d8c146b8d0450a3373637c4405a8feb491f9348031260a20694
 
   - folder: dagster-webserver
-    url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
+    url: https://pypi.io/packages/source/d/dagster-webserver/dagster_webserver-{{ version }}.tar.gz
     sha256: f5cf4c224711aaced2198b78303acb4801d0c84c05333cb67c912723463aa781
 
   - folder: dagit
