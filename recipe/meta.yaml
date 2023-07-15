@@ -17,6 +17,10 @@ source:
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
     sha256: ea4c18c6771b9d8c146b8d0450a3373637c4405a8feb491f9348031260a20694
 
+  - folder: dagster-webserver
+    url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
+    sha256: f5cf4c224711aaced2198b78303acb4801d0c84c05333cb67c912723463aa781
+
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
     sha256: 5d99927c3fa91e7aceef878b4289501a522da831228129bea45c91ff5df1f6f6
@@ -315,6 +319,43 @@ outputs:
         Building a data platform with Dagster makes your stakeholders more independent and your systems
         more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
+  - name: dagster-webserver
+    build:
+      version: {{ version }}
+      noarch: python
+      script: cd dagster-webserver && {{ PYTHON }} -m pip install . -vv --no-deps
+      entry_points:
+        - dagster-webserver = dagster_webserver.cli:main
+        - dagster-webserver-debug = dagster_webserver.debug:main
+
+    requirements:
+      host:
+        - pip
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster-graphql", max_pin="x.x.x") }}
+        - click >=7.0,<9.0
+        - starlette
+        - uvicorn-standard
+    test:
+      requires:
+        - {{ py_spec }}
+        - pip
+      imports:
+        - dagster_webserver
+      commands:
+        - pip check
+        - dagster-webserver --help
+        - dagster-webserver-debug --help
+
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-webserver
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagster-webserver/LICENSE
+      summary: Web UI for dagster.
+
   - name: dagster-graphql
     build:
       version: {{ version }}
@@ -535,7 +576,7 @@ outputs:
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-duckdb", max_pin="x.x.x") }}
-        - pandas <2
+        - pandas
         - python >=3.6
 
     test:
@@ -601,7 +642,8 @@ outputs:
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-duckdb", max_pin="x.x.x") }}
-        - pandas <2
+        - pandas
+        - pyarrow
         - pyspark >=2.0.2
         - python >=3.6
 
@@ -795,8 +837,8 @@ outputs:
       noarch: python
       version: {{ version }}
       entry_points:
-        - dagit = dagit.cli:main
-        - dagit-debug = dagit.debug:main
+        - dagit = dagster_webserver.cli:main
+        - dagit-debug = dagster_webserver.debug:main
       script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps
 
     requirements:
@@ -804,11 +846,8 @@ outputs:
         - pip
         - python >=3.6
       run:
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - {{ pin_subpackage("dagster-graphql", max_pin="x.x.x") }}
-        - click >=7.0,<9.0
-        - starlette
-        - uvicorn-standard
+        - {{ pin_subpackage("dagster-webserver", max_pin="x.x.x") }}
+        - python >=3.6
 
     test:
       requires:
@@ -816,8 +855,6 @@ outputs:
         - pip
       imports:
         - dagit
-        - dagit.schema
-        - dagit.templates
       commands:
         - pip check
         - dagit --help
@@ -836,6 +873,7 @@ outputs:
       script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
       entry_points:
         - dagster-dbt-cloud = dagster_dbt.cloud.cli:app
+        - dagster-dbt = dagster_dbt.cli:app
 
     requirements:
       host:
@@ -858,6 +896,7 @@ outputs:
       commands:
         - pip check
         - dagster-dbt-cloud --help
+        - dagster-dbt --help
 
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-dbt
@@ -1053,7 +1092,7 @@ outputs:
       run:
         - {{ pin_subpackage("dagster-gcp", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - pandas <2
+        - pandas
     test:
       requires:
         - {{ py_spec }}
