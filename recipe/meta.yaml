@@ -873,7 +873,7 @@ outputs:
       script: cd dagster-dbt && {{ PYTHON }} -m pip install . -vv --no-deps
       entry_points:
         - dagster-dbt-cloud = dagster_dbt.cloud.cli:app
-        - dagster-dbt = dagster_dbt.cli:app
+        - dagster-dbt = dagster_dbt.cli.app:app
 
     requirements:
       host:
