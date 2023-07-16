@@ -3,6 +3,7 @@ About dagster-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/dagster-feedstock/blob/main/LICENSE.txt)
 
+
 About dagster
 -------------
 
@@ -15,6 +16,7 @@ Summary: The data orchestration platform built for productivity.
 Documentation: https://dagster.readthedocs.io
 
 Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
 About dagster
 -------------
 
@@ -34,6 +36,7 @@ Dagster is designed for data platform engineers, data engineers, and full-stack 
 Building a data platform with Dagster makes your stakeholders more independent and your systems
 more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
+
 About dagster-airbyte
 ---------------------
 
@@ -42,6 +45,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-a
 Package license: Apache-2.0
 
 Summary: Package for integrating Airbyte with Dagster.
+
 About dagster-airflow
 ---------------------
 
@@ -50,6 +54,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-a
 Package license: Apache-2.0
 
 Summary: Airflow plugin for Dagster
+
 About dagster-aws
 -----------------
 
@@ -58,6 +63,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-a
 Package license: Apache-2.0
 
 Summary: Package for AWS-specific Dagster framework solid and resource components.
+
 About dagster-celery
 --------------------
 
@@ -66,6 +72,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-c
 Package license: Apache-2.0
 
 Summary: Package for using Celery as Dagster's execution engine.
+
 About dagster-census
 --------------------
 
@@ -74,6 +81,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-c
 Package license: Apache-2.0
 
 Summary: Package for integrating Census with Dagster.
+
 About dagster-dask
 ------------------
 
@@ -82,6 +90,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-d
 Package license: Apache-2.0
 
 Summary: Package for using Dask as Dagster's execution engine.
+
 About dagster-datadog
 ---------------------
 
@@ -90,6 +99,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for datadog Dagster framework components.
+
 About dagster-dbt
 -----------------
 
@@ -98,6 +108,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-d
 Package license: Apache-2.0
 
 Summary: A Dagster integration for dbt
+
 About dagster-docker
 --------------------
 
@@ -106,6 +117,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Dagster integration for docker
+
 About dagster-duckdb
 --------------------
 
@@ -114,6 +126,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-d
 Package license: Apache-2.0
 
 Summary: Package for DuckDB-specific Dagster framework op and resource components.
+
 About dagster-fivetran
 ----------------------
 
@@ -122,6 +135,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for integrating Fivetran with Dagster.
+
 About dagster-github
 --------------------
 
@@ -130,6 +144,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Github plugin for Dagster
+
 About dagster-graphql
 ---------------------
 
@@ -138,6 +153,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-g
 Package license: Apache-2.0
 
 Summary: The GraphQL frontend to python dagster.
+
 About dagster-k8s
 -----------------
 
@@ -146,6 +162,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Dagster integration for k8s
+
 About dagster-managed-elements
 ------------------------------
 
@@ -154,6 +171,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for Managed elements with Dagster.
+
 About dagster-mlflow
 --------------------
 
@@ -162,6 +180,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for mlflow Dagster framework components
+
 About dagster-msteams
 ---------------------
 
@@ -170,6 +189,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Microsoft Teams client resource for posting to Microsoft Teams
+
 About dagster-mysql
 -------------------
 
@@ -178,6 +198,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Dagster integration for MySQL
+
 About dagster-pagerduty
 -----------------------
 
@@ -186,6 +207,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for pagerduty Dagster framework components.
+
 About dagster-pandas
 --------------------
 
@@ -194,6 +216,7 @@ Home: https://github.com/dagster-io/dagster
 Package license: Apache-2.0
 
 Summary: Utilities and examples for working with pandas and dagster, an opinionated framework for expressing data pipelines
+
 About dagster-pandera
 ---------------------
 
@@ -202,6 +225,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Integration layer for dagster and pandera.
+
 About dagster-papertrail
 ------------------------
 
@@ -210,6 +234,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for papertrail Dagster framework components.
+
 About dagster-postgres
 ----------------------
 
@@ -218,6 +243,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Dagster integration for postgres
+
 About dagster-prometheus
 ------------------------
 
@@ -226,6 +252,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Dagster integration for prometheus
+
 About dagster-shell
 -------------------
 
@@ -234,6 +261,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for Dagster shell ops.
+
 About dagster-slack
 -------------------
 
@@ -242,6 +270,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Slack client resource for posting to Slack
+
 About dagster-snowflake
 -----------------------
 
@@ -250,6 +279,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for Snowflake Dagster framework components.
+
 About dagster-spark
 -------------------
 
@@ -258,6 +288,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for Spark Dagster framework components.
+
 About dagster-ssh
 -----------------
 
@@ -266,6 +297,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for ssh Dagster framework components.
+
 About dagster-twilio
 --------------------
 
@@ -274,6 +306,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: A Dagster integration for twilio
+
 About dagstermill
 -----------------
 
@@ -282,14 +315,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagstermi
 Package license: Apache-2.0
 
 Summary: A Dagster integration for papermill
-About dagit
------------
 
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
-
-Package license: Apache-2.0
-
-Summary: Dagster UI
 About dagster-celery-docker
 ---------------------------
 
@@ -298,6 +324,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-c
 Package license: Apache-2.0
 
 Summary: A Dagster integration for celery-docker
+
 About dagster-celery-k8s
 ------------------------
 
@@ -306,6 +333,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-c
 Package license: Apache-2.0
 
 Summary: A Dagster integration for celery-k8s-executor
+
 About dagster-duckdb-pandas
 ---------------------------
 
@@ -314,6 +342,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-d
 Package license: Apache-2.0
 
 Summary: Package for storing Pandas DataFrames in DuckDB.
+
 About dagster-duckdb-polars
 ---------------------------
 
@@ -322,6 +351,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-d
 Package license: Apache-2.0
 
 Summary: Package for storing Polars DataFrames in DuckDB.
+
 About dagster-duckdb-pyspark
 ----------------------------
 
@@ -330,6 +360,7 @@ Home: https://github.com/dagster-io/dagster/blob/master/python_modules/dagster-d
 Package license: Apache-2.0
 
 Summary: Package for storing PySpark DataFrames in DuckDB.
+
 About dagster-gcp
 -----------------
 
@@ -338,6 +369,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for GCP-specific Dagster framework solid and resource components.
+
 About dagster-ge
 ----------------
 
@@ -346,6 +378,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for GE-specific Dagster framework solid and resource components.
+
 About dagster-pyspark
 ---------------------
 
@@ -354,6 +387,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for PySpark Dagster framework components.
+
 About dagster-snowflake-pandas
 ------------------------------
 
@@ -362,6 +396,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for integrating Snowflake and Pandas with Dagster.
+
 About dagster-snowflake-pyspark
 -------------------------------
 
@@ -370,6 +405,25 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for integrating Snowflake and PySpark with Dagster.
+
+About dagster-webserver
+-----------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-webserver
+
+Package license: Apache-2.0
+
+Summary: Web UI for dagster.
+
+About dagit
+-----------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
+
+Package license: Apache-2.0
+
+Summary: Dagster UI
+
 About dagster-gcp-pandas
 ------------------------
 
@@ -378,6 +432,7 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Package for storing Pandas DataFrames in GCP.
+
 About dagster-gcp-pyspark
 -------------------------
 
@@ -450,6 +505,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--ssh-green.svg)](https://anaconda.org/conda-forge/dagster-ssh) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-ssh.svg)](https://anaconda.org/conda-forge/dagster-ssh) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-ssh.svg)](https://anaconda.org/conda-forge/dagster-ssh) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-ssh.svg)](https://anaconda.org/conda-forge/dagster-ssh) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--twilio-green.svg)](https://anaconda.org/conda-forge/dagster-twilio) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-twilio.svg)](https://anaconda.org/conda-forge/dagster-twilio) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-twilio.svg)](https://anaconda.org/conda-forge/dagster-twilio) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-twilio.svg)](https://anaconda.org/conda-forge/dagster-twilio) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--wandb-green.svg)](https://anaconda.org/conda-forge/dagster-wandb) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-wandb.svg)](https://anaconda.org/conda-forge/dagster-wandb) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-wandb.svg)](https://anaconda.org/conda-forge/dagster-wandb) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-wandb.svg)](https://anaconda.org/conda-forge/dagster-wandb) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--webserver-green.svg)](https://anaconda.org/conda-forge/dagster-webserver) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-webserver.svg)](https://anaconda.org/conda-forge/dagster-webserver) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-webserver.svg)](https://anaconda.org/conda-forge/dagster-webserver) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-webserver.svg)](https://anaconda.org/conda-forge/dagster-webserver) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagstermill-green.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagstermill.svg)](https://anaconda.org/conda-forge/dagstermill) |
 
 Installing dagster
@@ -462,16 +518,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `dagit, dagster, dagster-airbyte, dagster-airflow, dagster-aws, dagster-celery, dagster-celery-docker, dagster-celery-k8s, dagster-census, dagster-dask, dagster-datadog, dagster-dbt, dagster-docker, dagster-duckdb, dagster-duckdb-pandas, dagster-duckdb-polars, dagster-duckdb-pyspark, dagster-fivetran, dagster-gcp, dagster-gcp-pandas, dagster-gcp-pyspark, dagster-ge, dagster-github, dagster-graphql, dagster-k8s, dagster-managed-elements, dagster-mlflow, dagster-msteams, dagster-mysql, dagster-pagerduty, dagster-pandas, dagster-pandera, dagster-papertrail, dagster-postgres, dagster-prometheus, dagster-pyspark, dagster-shell, dagster-slack, dagster-snowflake, dagster-snowflake-pandas, dagster-snowflake-pyspark, dagster-spark, dagster-ssh, dagster-twilio, dagster-wandb, dagstermill` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `dagit, dagster, dagster-airbyte, dagster-airflow, dagster-aws, dagster-celery, dagster-celery-docker, dagster-celery-k8s, dagster-census, dagster-dask, dagster-datadog, dagster-dbt, dagster-docker, dagster-duckdb, dagster-duckdb-pandas, dagster-duckdb-polars, dagster-duckdb-pyspark, dagster-fivetran, dagster-gcp, dagster-gcp-pandas, dagster-gcp-pyspark, dagster-ge, dagster-github, dagster-graphql, dagster-k8s, dagster-managed-elements, dagster-mlflow, dagster-msteams, dagster-mysql, dagster-pagerduty, dagster-pandas, dagster-pandera, dagster-papertrail, dagster-postgres, dagster-prometheus, dagster-pyspark, dagster-shell, dagster-slack, dagster-snowflake, dagster-snowflake-pandas, dagster-snowflake-pyspark, dagster-spark, dagster-ssh, dagster-twilio, dagster-wandb, dagster-webserver, dagstermill` can be installed with `conda`:
 
 ```
-conda install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagstermill
+conda install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagster-webserver dagstermill
 ```
 
 or with `mamba`:
 
 ```
-mamba install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagstermill
+mamba install dagit dagster dagster-airbyte dagster-airflow dagster-aws dagster-celery dagster-celery-docker dagster-celery-k8s dagster-census dagster-dask dagster-datadog dagster-dbt dagster-docker dagster-duckdb dagster-duckdb-pandas dagster-duckdb-polars dagster-duckdb-pyspark dagster-fivetran dagster-gcp dagster-gcp-pandas dagster-gcp-pyspark dagster-ge dagster-github dagster-graphql dagster-k8s dagster-managed-elements dagster-mlflow dagster-msteams dagster-mysql dagster-pagerduty dagster-pandas dagster-pandera dagster-papertrail dagster-postgres dagster-prometheus dagster-pyspark dagster-shell dagster-slack dagster-snowflake dagster-snowflake-pandas dagster-snowflake-pyspark dagster-spark dagster-ssh dagster-twilio dagster-wandb dagster-webserver dagstermill
 ```
 
 It is possible to list all of the versions of `dagit` available on your platform with `conda`:
