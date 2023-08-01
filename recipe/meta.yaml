@@ -880,10 +880,11 @@ outputs:
         - dbt-core <1.6
         - jinja2
         - networkx
+        - orjson
         - python >=3.6
         - requests
         - rich
-        - typer
+        - typer >=0.9.0
 
     test:
       requires:
