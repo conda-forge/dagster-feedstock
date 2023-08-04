@@ -259,7 +259,7 @@ outputs:
         - toposort >=1.0
         - tqdm
         - typing_extensions >=4.4.0
-        - universal_pathlib
+        - universal_pathlib <0.1.0
         - watchdog >=0.8.3
       run_constrained:
         - pywin32 !=226
