@@ -952,7 +952,7 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-pandas", max_pin="x.x.x") }}
         - dataclasses
-        - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27
+        - great-expectations >=0.11.9,!=0.12.8,!=0.13.17,!=0.13.27,<0.17.12
         - python >=3.6
 
     test:
