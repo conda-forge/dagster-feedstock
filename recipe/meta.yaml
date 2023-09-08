@@ -640,7 +640,7 @@ outputs:
         - {{ pin_subpackage("dagster-duckdb", max_pin="x.x.x") }}
         - pandas <2.1
         - pyarrow
-        - pyspark >=2.0.2
+        - pyspark >=3
         - python >=3.6
 
     test:
@@ -703,7 +703,7 @@ outputs:
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - {{ pin_subpackage("dagster-spark", max_pin="x.x.x") }}
-        - pyspark
+        - pyspark >=3
         - python >=3.6
 
     test:
