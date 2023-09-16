@@ -877,7 +877,7 @@ outputs:
         - python >=3.6
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - dbt-core <1.7
+        - dbt-core <1.7.0
         - jinja2
         - networkx
         - orjson
