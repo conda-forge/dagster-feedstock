@@ -371,7 +371,6 @@ outputs:
         - python >=3.6
         - requests
         - starlette
-        - urllib3 <2.0.0
 
     test:
       requires:
@@ -1019,7 +1018,6 @@ outputs:
         - docker-py
         - docker-image-py
         - python >=3.6
-        - urllib3 <2
 
     test:
       requires:
@@ -1154,8 +1152,6 @@ outputs:
       requires:
         - python >=3.8
         - pip
-        # TODO: remove after https://github.com/conda-forge/databricks-cli-feedstock/pull/23
-        - urllib3 <2
       imports:
         - dagster_mlflow
       commands:
