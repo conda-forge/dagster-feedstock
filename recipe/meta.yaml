@@ -1148,12 +1148,12 @@ outputs:
         - mlflow
         - pandas
         - python >=3.6
-        # TODO: investigate more upstream
-        - urllib3 <2
     test:
       requires:
         - python >=3.8
         - pip
+        # TODO: investigate more upstream
+        - urllib3 <2
       imports:
         - dagster_mlflow
       commands:
