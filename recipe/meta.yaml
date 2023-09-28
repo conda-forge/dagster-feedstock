@@ -10,7 +10,7 @@ package:
 source:
   # uses main version
   - folder: dagster-ext-process
-    url: https://pypi.io/packages/source/d/dagster/dagster-ext-process-{{ version }}.tar.gz
+    url: https://pypi.io/packages/source/d/dagster-ext-process/dagster-ext-process-{{ version }}.tar.gz
     sha256: f73e79a5c323036b0b37c40b6e6c85f35698d5934bb9f990122533197785ee31
     patches:
       - 0000-dagster-ext-no-entry-point.diff
