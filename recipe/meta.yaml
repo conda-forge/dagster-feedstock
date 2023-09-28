@@ -11,7 +11,7 @@ source:
   # uses main version
   - folder: dagster-ext-process
     url: https://pypi.io/packages/source/d/dagster-ext-process/dagster-ext-process-{{ version }}.tar.gz
-    sha256: f73e79a5c323036b0b37c40b6e6c85f35698d5934bb9f990122533197785ee31
+    sha256: c5639c053fdc0ca4d0fca5a5d55cb9214632a3a79f06674d52fab91849253712
     patches:
       - 0000-dagster-ext-no-entry-point.diff
 
