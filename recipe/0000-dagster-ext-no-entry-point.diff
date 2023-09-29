@@ -1,0 +1,10 @@
+diff --git a/python_modules/dagster-ext/setup.py b/python_modules/dagster-ext/setup.py
+index baa489e7f3..8195a14d51 100644
+--- a/python_modules/dagster-ext/setup.py
++++ b/python_modules/dagster-ext/setup.py
+@@ -41,5 +41,4 @@ def get_version() -> str:
+         ],
+     },
+     zip_safe=False,
+-    entry_points={"console_scripts": ["dagster-graphql = dagster_graphql.cli:main"]},
+ )
