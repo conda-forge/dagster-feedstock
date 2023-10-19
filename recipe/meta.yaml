@@ -205,7 +205,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -285,7 +285,7 @@ outputs:
         - pyyaml >=5.1
         - requests
         - setuptools
-        - sqlalchemy >=1.0,<2.0.0
+        - sqlalchemy >=1.0
         - tabulate
         - tomli
         - toposort >=1.0
