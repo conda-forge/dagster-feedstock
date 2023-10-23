@@ -205,7 +205,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -1826,7 +1826,8 @@ outputs:
 
     test:
       requires:
-        - python >=3.8
+        # FIXME: https://github.com/conda-forge/dagster-feedstock/issues/297
+        - python >=3.8,<12
         - pip
       imports:
         - dagstermill
