@@ -268,7 +268,7 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - docker-py >=5.0.3,<6
         - lazy-object-proxy
-        - pendulum
+        - pendulum <3
         - python >=3.8
         - python-dateutil >=2.8.0
 
