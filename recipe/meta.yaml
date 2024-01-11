@@ -113,6 +113,7 @@ outputs:
         - requests
         - setuptools
         - sqlalchemy >=1.0,<3
+        - structlog
         - tabulate
         - tomli <3
         - toposort >=1.0
