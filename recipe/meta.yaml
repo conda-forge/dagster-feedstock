@@ -1,4 +1,4 @@
-{% set version = "1.5.13" %}
+{% set version = "1.6.0" %}
 
 package:
   name: dagster-meta
@@ -8,27 +8,27 @@ source:
   # uses main version
   - folder: dagster-pipes
     url: https://pypi.io/packages/source/d/dagster-pipes/dagster-pipes-{{ version }}.tar.gz
-    sha256: 17dbbceb1291175d2c973dd55c4c3daf02b85084484e257f10b66d98244ccd5a
+    sha256: b3561c4606da1220b2718e38c68fa724f01f72f82262b20614d183a0e78d8bff
 
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: bd032d3b7c4823533bdae894f22baf3753639f3d8363a904b161603c930457a1
+    sha256: 9ecb53455a2c73b2f79ae251416b548dfcae5ebae30892dac666617ae460a3de
 
   - folder: dagster-webserver
-    url: https://pypi.io/packages/source/d/dagster-webserver/dagster_webserver-{{ version }}.tar.gz
-    sha256: d512cb0962dfbae1d83cc2497b05922509eed32dfacdcadfb7a6ed40a8267cf9
+    url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
+    sha256: 70ee48c3cfd9600936cfdb6823f5fa2273d10068a328b25394ae49057fc289cf
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: ae5224f65dbd4183bb6670184a9f0e1918976d70f753e9357388062fb30309b5
+    sha256: e14c0fe58e1d6199639f29fc655fe006ef9fc0c5f7d1bb49dbc8dceecb277d22
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: 4c0da0feb06824e9c024fa54a2c9f1a7d0d82c85930bfbcfe5d164693ce8b7d7
+    sha256: c5aee8c43245a60096a36d886fac318ae34115dd39b30775ab92a3bd952771f9
 
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
-    sha256: 96fa8da3034a672bde0851d820d570f39e937c7ef20db3a795705db83d5e1034
+    sha256: b2eb81c8a080a37b46bb5231a60003df16bfd03015f4e653572f5afb11e697ad
 
 build:
   noarch: python
@@ -100,23 +100,24 @@ outputs:
         - jinja2
         - packaging >=20.9
         - pendulum <3
-        - protobuf >=3.20.0
+        - protobuf >=3.20.0,<5
         - psutil >=1.0
-        - pydantic >1.10.0,!=1.10.7
+        - pydantic >1.10.0,!=1.10.7,<3
         - python >=3.8
         - python-dateutil
         - python-dotenv
         - pytz
         - pywin32-on-windows
         - pyyaml >=5.1
+        - rich
         - requests
         - setuptools
-        - sqlalchemy >=1.0
+        - sqlalchemy >=1.0,<3
         - tabulate
-        - tomli
+        - tomli <3
         - toposort >=1.0
-        - tqdm
-        - typing_extensions >=4.4.0
+        - tqdm <5
+        - typing_extensions >=4.4.0,<5
         - universal_pathlib
         - watchdog >=0.8.3
       run_constrained:
@@ -225,8 +226,8 @@ outputs:
         - python >=3.8
       run:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - gql-with-requests >=3.0.0
-        - graphene >=3
+        - gql-with-requests >=3.0.0,<4.0.0
+        - graphene >=3,<4
         - python >=3.8
         - requests
         - starlette
