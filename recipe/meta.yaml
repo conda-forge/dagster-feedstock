@@ -1,4 +1,4 @@
-{% set version = "1.6.4" %}
+{% set version = "1.6.5" %}
 
 package:
   name: dagster-meta
@@ -8,27 +8,27 @@ source:
   # uses main version
   - folder: dagster-pipes
     url: https://pypi.io/packages/source/d/dagster-pipes/dagster-pipes-{{ version }}.tar.gz
-    sha256: 7dc8226782a2325bd8872c72648dbb830f83cd0dc90ba785b2f70086c8579ae9
+    sha256: 36d8c35adb7fe95136c56b38280275476632a87864c3daa5473d82eaf5033766
 
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: d306226480fd61d675db24821597f7f97bd2fd0c8d82badd05a1162783ae58c0
+    sha256: 1e0fff0ddf29a2f01a0147d4a8ab119774d6e4fc88f3c3087c17827cac2ea380
 
   - folder: dagster-webserver
     url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
-    sha256: 7a2845515e6fc4549332b745fbe94eb2c266b514eeee06d38d8f2b5e336adcd0
+    sha256: 8c560d45d9ece4d42aa3e8bc4686dfe5211635db694013ec1578cc36e0dd81b2
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: 362a53cecef4df5444f215e7b12cb6bed53d439c0532531d37da82a1eeb4eff9
+    sha256: 64d3b054f64f86c5460a3c257ed869dcd852857d7a4aa57af5208215a887cd4b
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: a347c1265bbe8110689e9537c5fe603c82189b172a4fb0c47b059eb30332c6bb
+    sha256: 5cf12212032677183d58bf46be49fd1d1cebb10456daa0f16be2bb216ab774a8
 
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
-    sha256: f17437aa34cc3cc7440d55a0f3ea715c84bc28d25e4b2b9d9207fdb457028ad7
+    sha256: 06787f700b02dae9a204fb60fc18ee217ea0a3e39001915d47ed156eb71af771
 
 build:
   noarch: python
