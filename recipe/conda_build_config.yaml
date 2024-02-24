@@ -1,0 +1,6 @@
+# for disjoint python dependencies  e.g. `protobuf`
+dagster_epoch:
+  - nine
+  - ten
+  - eleven
+  - twelve

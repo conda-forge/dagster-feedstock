@@ -1,5 +1,32 @@
 {% set version = "1.6.6" %}
 
+{% if dagster_epoch is undefied or dagster_epoch == "eight" %}
+  {% set dagster_python = "python >=3.8,<3.9" %}
+  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
+  {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
+  {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+{% elif dagster_epoch == "nine" %}
+  {% set dagster_python = "python >=3.9,<3.10" %}
+  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
+  {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
+  {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+{% elif dagster_epoch == "ten" %}
+  {% set dagster_python = "python >=3.10,<3.11" %}
+  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
+  {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
+  {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+{% elif dagster_epoch == "eleven" %}
+  {% set dagster_python = "python >=3.11,<3.12" %}
+  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
+  {% set dagster_protobuf = "protobuf >=4,<5" %}
+  {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+{% elif dagster_epoch == "twelve" %}
+  {% set dagster_python = "python >=3.12" %}
+  {% set dagster_pendulum = "pendulum =3,<4" %}
+  {% set dagster_protobuf = "protobuf >=4,<5" %}
+  {% set dagster_universal_pathlib = "unversal_pathlib" %}
+{% endif %}
+
 package:
   name: dagster-meta
   version: {{ version }}
@@ -90,6 +117,9 @@ outputs:
         - pip
       run:
         - {{ pin_subpackage("dagster-pipes", max_pin="x.x.x") }}
+        - {{ dagster_pendulum }}
+        - {{ dagster_protobuf }}
+        - {{ dagster_universal_pathlib }}
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
         - click >=5.0
         - coloredlogs >=6.1,<=14.0
@@ -99,11 +129,6 @@ outputs:
         - grpcio-health-checking >=1.44.0
         - jinja2
         - packaging >=20.9
-        # technically looser upstream, but would add a lot of complexity:
-        # pendulum>=0.7.0,<4; python_version>='3.9'",
-        # pendulum>=0.7.0,<3; python_version<'3.9'",  # https://github.com/dagster-io/dagster/issues/19500
-        - pendulum >=0.7.0,<3
-        - protobuf >=3.20.0,<5
         - psutil >=1.0
         - pydantic >1.10.0,!=1.10.7,<3
         - python >=3.8
@@ -122,10 +147,10 @@ outputs:
         - toposort >=1.0
         - tqdm <5
         - typing_extensions >=4.4.0,<5
-        - universal_pathlib
         - watchdog >=0.8.3
       run_constrained:
         - pywin32 !=226
+        - {{ dagster_python }}
 
     test:
       requires:
