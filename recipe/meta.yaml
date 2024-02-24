@@ -5,26 +5,31 @@
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+  {% set dagster_only_core = True %}
 {% elif dagster_epoch == "nine" %}
   {% set dagster_python = "python >=3.9,<3.10" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+  {% set dagster_only_core = True %}
 {% elif dagster_epoch == "ten" %}
   {% set dagster_python = "python >=3.10,<3.11" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+  {% set dagster_only_core = False %}
 {% elif dagster_epoch == "eleven" %}
   {% set dagster_python = "python >=3.11,<3.12" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=4,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
+  {% set dagster_only_core = True %}
 {% elif dagster_epoch == "twelve" %}
   {% set dagster_python = "python >=3.12" %}
   {% set dagster_pendulum = "pendulum =3,<4" %}
   {% set dagster_protobuf = "protobuf >=4,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib" %}
+  {% set dagster_only_core = True %}
 {% endif %}
 
 package:
@@ -203,6 +208,8 @@ outputs:
         Building a data platform with Dagster makes your stakeholders more independent and your systems
         more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
+{% if not dagster_only_core %}
+
   - name: dagster-webserver
     build:
       version: {{ version }}
@@ -355,6 +362,8 @@ outputs:
       license_family: APACHE
       license_file: dagit/LICENSE
       summary: Dagster UI
+
+{% endif %}
 
 about:
   home: https://github.com/dagster-io
