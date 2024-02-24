@@ -1,30 +1,30 @@
 {% set version = "1.6.6" %}
 
-{% if dagster_epoch is undefined or dagster_epoch == "eight" %}
+{% if dagster_epoch is defined and dagster_epoch == "eight" %}
   {% set dagster_python = "python >=3.8,<3.9" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
   {% set dagster_only_core = True %}
-{% elif dagster_epoch == "nine" %}
+{% elif dagster_epoch is defined and dagster_epoch == "nine" %}
   {% set dagster_python = "python >=3.9,<3.10" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
   {% set dagster_only_core = True %}
-{% elif dagster_epoch == "ten" %}
+{% elif dagster_epoch is defined and dagster_epoch == "ten" %}
   {% set dagster_python = "python >=3.10,<3.11" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
   {% set dagster_only_core = False %}
-{% elif dagster_epoch == "eleven" %}
+{% elif dagster_epoch is unefined or dagster_epoch == "eleven" %}
   {% set dagster_python = "python >=3.11,<3.12" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=4,<5" %}
   {% set dagster_universal_pathlib = "unversal_pathlib >=0.2.0" %}
   {% set dagster_only_core = True %}
-{% elif dagster_epoch == "twelve" %}
+{% elif dagster_epoch is defined and dagster_epoch == "twelve" %}
   {% set dagster_python = "python >=3.12" %}
   {% set dagster_pendulum = "pendulum =3,<4" %}
   {% set dagster_protobuf = "protobuf >=4,<5" %}
@@ -46,6 +46,7 @@ source:
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
     sha256: 295a6646eafc6360eea328194d224a27a39d4697da7c8495468ea215ee80c975
 
+{% if not dagster_only_core %}
   - folder: dagster-webserver
     url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
     sha256: b3ed08ac55a4700e8190b7f552b152e6d7e055b4d5d54f9f3eb123faeb8e5151
@@ -61,6 +62,8 @@ source:
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
     sha256: f58a5806951b1ead24c7a05da817bf466e84d340c33024faa29d8513e7c87de5
+{% endif %}
+
 
 build:
   noarch: python
