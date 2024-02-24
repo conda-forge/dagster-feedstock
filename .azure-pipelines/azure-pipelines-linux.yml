@@ -8,11 +8,26 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_:
-        CONFIG: linux_64_
+      linux_64_dagster_epocheleven:
+        CONFIG: linux_64_dagster_epocheleven
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_
+        SHORT_CONFIG: linux_64_dagster_epocheleven
+      linux_64_dagster_epochnine:
+        CONFIG: linux_64_dagster_epochnine
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        SHORT_CONFIG: linux_64_dagster_epochnine
+      linux_64_dagster_epochten:
+        CONFIG: linux_64_dagster_epochten
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        SHORT_CONFIG: linux_64_dagster_epochten
+      linux_64_dagster_epochtwelve:
+        CONFIG: linux_64_dagster_epochtwelve
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        SHORT_CONFIG: linux_64_dagster_epochtwelve
   timeoutInMinutes: 360
 
   steps:

@@ -1,6 +1,6 @@
 {% set version = "1.6.6" %}
 
-{% if dagster_epoch is undefied or dagster_epoch == "eight" %}
+{% if dagster_epoch is undefined or dagster_epoch == "eight" %}
   {% set dagster_python = "python >=3.8,<3.9" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
