@@ -1,30 +1,34 @@
 {% set version = "1.6.6" %}
 
-{% if dagster_epoch is defined and dagster_epoch == "eight" %}
+{% if dagster_epoch is not defined %}
+  {% set dagster_epoch = "eleven" %}
+{% endif %}
+
+{% if dagster_epoch == "eight" %}
   {% set dagster_python = "python >=3.8,<3.9" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
   {% set dagster_only_core = True %}
-{% elif dagster_epoch is defined and dagster_epoch == "nine" %}
+{% elif dagster_epoch == "nine" %}
   {% set dagster_python = "python >=3.9,<3.10" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
   {% set dagster_only_core = True %}
-{% elif dagster_epoch is defined and dagster_epoch == "ten" %}
+{% elif dagster_epoch == "ten" %}
   {% set dagster_python = "python >=3.10,<3.11" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
   {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
   {% set dagster_only_core = False %}
-{% elif dagster_epoch is undefined or dagster_epoch == "eleven" %}
+{% elif dagster_epoch == "eleven" %}
   {% set dagster_python = "python >=3.11,<3.12" %}
   {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
   {% set dagster_protobuf = "protobuf >=4,<5" %}
   {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
   {% set dagster_only_core = True %}
-{% elif dagster_epoch is defined and dagster_epoch == "twelve" %}
+{% elif dagster_epoch == "twelve" %}
   {% set dagster_python = "python >=3.12" %}
   {% set dagster_pendulum = "pendulum =3,<4" %}
   {% set dagster_protobuf = "protobuf >=4,<5" %}
@@ -311,6 +315,8 @@ outputs:
         - pendulum >=0.7.0,<3
         - python >=3.8
         - python-dateutil >=2.8.0
+        # docker version pinned above requires this but has no pin
+        - urllib3 <2
 
     test:
       requires:
