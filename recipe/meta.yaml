@@ -84,7 +84,7 @@ outputs:
     build:
       version: {{ version }}
       noarch: python
-      script: cd dagster-pipes && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      script: cd dagster-pipes && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
     requirements:
       host:
@@ -114,7 +114,7 @@ outputs:
       entry_points:
         - dagster = dagster.cli:main
         - dagster-daemon = dagster.daemon.cli:main
-      script: cd dagster && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      script: cd dagster && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
     requirements:
       host:
@@ -214,7 +214,7 @@ outputs:
     build:
       version: {{ version }}
       noarch: python
-      script: cd dagster-webserver && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      script: cd dagster-webserver && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
       entry_points:
         - dagster-webserver = dagster_webserver.cli:main
         - dagster-webserver-debug = dagster_webserver.debug:main
@@ -254,7 +254,7 @@ outputs:
       noarch: python
       entry_points:
         - dagster-graphql = dagster_graphql.cli:main
-      script: cd dagster-graphql && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      script: cd dagster-graphql && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
     requirements:
       host:
@@ -295,7 +295,7 @@ outputs:
         # TODO: remove after https://github.com/dagster-io/dagster/pull/9932
         - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/hooks/__init__.py").touch()'
         - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/links/__init__.py").touch()'
-        - cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+        - cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
     requirements:
       host:
@@ -336,7 +336,7 @@ outputs:
       entry_points:
         - dagit = dagster_webserver.cli:main
         - dagit-debug = dagster_webserver.debug:main
-      script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
     requirements:
       host:
