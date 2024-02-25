@@ -117,6 +117,7 @@ outputs:
   - name: dagster
     build:
       noarch: python
+      string: {{ dagster_epoch }}
       version: {{ version }}
       entry_points:
         - dagster = dagster.cli:main
