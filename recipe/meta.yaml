@@ -8,7 +8,7 @@
 
 # this allows for effectively using selectors downstream
 {% set dagster_build_number = build_number * 100 + (dagster_epoch | int) %}
-{% set dagster_python = "python >=3." ~ dagster_epoch ~ ",<3." ~ ((dagster_epoch | int) + 1) %}
+{% set dagster_python = "python >=3." ~ dagster_epoch ~ ",<3." ~ ((dagster_epoch | int) + 1) ~ ".0a0" %}
 
 # "pendulum>=3,<4; python_version>='3.12'",
 # "pendulum>=0.7.0,<4; python_version>='3.9' and python_version<'3.12'",
@@ -113,10 +113,10 @@ outputs:
       script: cd dagster && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
     requirements:
       host:
-        - {{ dagster_python }}
+        - python >=3.8
         - pip
       run:
-        - {{ dagster_python }}
+        - python >=3.8
         - {{ pin_subpackage("dagster-pipes", max_pin="x.x.x") }}
         - {{ dagster_pendulum }}
         - {{ dagster_protobuf }}
@@ -150,6 +150,7 @@ outputs:
         - watchdog >=0.8.3
       run_constrained:
         - pywin32 !=226
+        - {{ dagster_python }}
     test:
       requires:
         - python >=3.8
