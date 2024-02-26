@@ -16,14 +16,14 @@
 {% set dagster_pendulum = "pendulum" ~ {
   "8":  " >=0.7.0,<3",
   "12": " >=3,<4",
-}.get(dagster_epoch, ">=0.7.0,<4") %}
+}.get(dagster_epoch, " >=0.7.0,<4") %}
 
 # "protobuf>=3.20.0,<5; python_version<'3.11'",  # min protobuf version to be compatible with both protobuf 3 and 4
 # "protobuf>=4,<5; python_version>='3.11'",
 {% set dagster_protobuf = "protobuf" ~ {
   "11": " >=4,<5",
   "12": " >=4,<5",
-}.get(dagster_epoch, ">=3.20.0,<5") %}
+}.get(dagster_epoch, " >=3.20.0,<5") %}
 
 # "universal_pathlib; python_version<'3.12'",
 # "universal_pathlib>=0.2.0; python_version>='3.12'",
