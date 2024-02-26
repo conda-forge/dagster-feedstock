@@ -5,6 +5,6 @@ channel_sources:
 channel_targets:
 - conda-forge main
 dagster_epoch:
-- eleven
+- '10'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64

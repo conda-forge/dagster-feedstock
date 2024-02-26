@@ -1,7 +1,7 @@
 # for disjoint python dependencies  e.g. `protobuf`
 dagster_epoch:
-  - 8
-  - 9
-  - 10
-  - 11
-  - 12
+  - "8"
+  - "9"
+  - "10"
+  - "11"
+  - "12"

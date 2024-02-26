@@ -3,32 +3,32 @@
 
 # we need _some_ default in order to render
 {% if dagster_epoch is not defined %}
-  {% set dagster_epoch = 11 %}
+  {% set dagster_epoch = "11" %}
 {% endif %}
 
 # this allows for effectively using selectors downstream
-{% set dagster_build_number = build_number * 100 + dagster_epoch %}
-{% set dagster_python = "python >=3." + dagster_epoch, "<3." + (dagster_epoch + 1) %}
+{% set dagster_build_number = build_number * 100 + (dagster_epoch | int) %}
+{% set dagster_python = "python >=3." ~ dagster_epoch ~ ",<3." ~ ((dagster_epoch | int) + 1) %}
 
 # "pendulum>=3,<4; python_version>='3.12'",
 # "pendulum>=0.7.0,<4; python_version>='3.9' and python_version<'3.12'",
 # "pendulum>=0.7.0,<3; python_version<'3.9'",  # https://github.com/dagster-io/dagster/issues/19500
 {% set dagster_pendulum = "pendulum" ~ {
-  8:  " >=0.7.0,<3",
-  12: " >=3,<4",
+  "8":  " >=0.7.0,<3",
+  "12": " >=3,<4",
 }.get(dagster_epoch, ">=0.7.0,<4") %}
 
 # "protobuf>=3.20.0,<5; python_version<'3.11'",  # min protobuf version to be compatible with both protobuf 3 and 4
 # "protobuf>=4,<5; python_version>='3.11'",
 {% set dagster_protobuf = "protobuf" ~ {
-  11: " >=4,<5",
-  12: " >=4,<5",
+  "11": " >=4,<5",
+  "12": " >=4,<5",
 }.get(dagster_epoch, ">=3.20.0,<5") %}
 
 # "universal_pathlib; python_version<'3.12'",
 # "universal_pathlib>=0.2.0; python_version>='3.12'",
 {% set dagster_universal_pathlib = "universal_pathlib" ~ {
-  12: ">=0.2.0",
+  "12": ">=0.2.0",
 }.get(dagster_epoch, "") %}
 
 package:
