@@ -1,40 +1,35 @@
 {% set version = "1.6.6" %}
+{% set build_number = 0 %}
 
+# we need _some_ default in order to render
 {% if dagster_epoch is not defined %}
-  {% set dagster_epoch = "eleven" %}
+  {% set dagster_epoch = 11 %}
 {% endif %}
 
-{% if dagster_epoch == "eight" %}
-  {% set dagster_python = "python >=3.8,<3.9" %}
-  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
-  {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
-  {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
-  {% set dagster_only_core = True %}
-{% elif dagster_epoch == "nine" %}
-  {% set dagster_python = "python >=3.9,<3.10" %}
-  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
-  {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
-  {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
-  {% set dagster_only_core = True %}
-{% elif dagster_epoch == "ten" %}
-  {% set dagster_python = "python >=3.10,<3.11" %}
-  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
-  {% set dagster_protobuf = "protobuf >=3.20.0,<5" %}
-  {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
-  {% set dagster_only_core = False %}
-{% elif dagster_epoch == "eleven" %}
-  {% set dagster_python = "python >=3.11,<3.12" %}
-  {% set dagster_pendulum = "pendulum >=0.7.0,<4" %}
-  {% set dagster_protobuf = "protobuf >=4,<5" %}
-  {% set dagster_universal_pathlib = "universal_pathlib >=0.2.0" %}
-  {% set dagster_only_core = True %}
-{% elif dagster_epoch == "twelve" %}
-  {% set dagster_python = "python >=3.12" %}
-  {% set dagster_pendulum = "pendulum =3,<4" %}
-  {% set dagster_protobuf = "protobuf >=4,<5" %}
-  {% set dagster_universal_pathlib = "universal_pathlib" %}
-  {% set dagster_only_core = True %}
-{% endif %}
+# this allows for effectively using selectors downstream
+{% set dagster_build_number = build_number * 100 + dagster_epoch %}
+{% set dagster_python = "python >=3." + dagster_epoch, "<3." + (dagster_epoch + 1) %}
+
+# "pendulum>=3,<4; python_version>='3.12'",
+# "pendulum>=0.7.0,<4; python_version>='3.9' and python_version<'3.12'",
+# "pendulum>=0.7.0,<3; python_version<'3.9'",  # https://github.com/dagster-io/dagster/issues/19500
+{% set dagster_pendulum = "pendulum" ~ {
+  8:  " >=0.7.0,<3",
+  12: " >=3,<4",
+}.get(dagster_epoch, ">=0.7.0,<4") %}
+
+# "protobuf>=3.20.0,<5; python_version<'3.11'",  # min protobuf version to be compatible with both protobuf 3 and 4
+# "protobuf>=4,<5; python_version>='3.11'",
+{% set dagster_protobuf = "protobuf" ~ {
+  11: " >=4,<5",
+  12: " >=4,<5",
+}.get(dagster_epoch, ">=3.20.0,<5") %}
+
+# "universal_pathlib; python_version<'3.12'",
+# "universal_pathlib>=0.2.0; python_version>='3.12'",
+{% set dagster_universal_pathlib = "universal_pathlib" ~ {
+  12: ">=0.2.0",
+}.get(dagster_epoch, "") %}
 
 package:
   name: dagster-meta
@@ -50,7 +45,6 @@ source:
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
     sha256: 295a6646eafc6360eea328194d224a27a39d4697da7c8495468ea215ee80c975
 
-{% if not dagster_only_core %}
   - folder: dagster-webserver
     url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
     sha256: b3ed08ac55a4700e8190b7f552b152e6d7e055b4d5d54f9f3eb123faeb8e5151
@@ -66,12 +60,10 @@ source:
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
     sha256: f58a5806951b1ead24c7a05da817bf466e84d340c33024faa29d8513e7c87de5
-{% endif %}
-
 
 build:
   noarch: python
-  number: 0
+  number: {{ build_number }}
 
 requirements:
   host:
@@ -80,11 +72,9 @@ requirements:
   run:
     - python >=3.8
 
-
 test:
   commands:
     - echo "tests in outputs"
-
 
 outputs:
   - name: dagster-pipes
@@ -92,7 +82,6 @@ outputs:
       version: {{ version }}
       noarch: python
       script: cd dagster-pipes && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-
     requirements:
       host:
         - pip
@@ -106,7 +95,6 @@ outputs:
         - dagster_pipes
       commands:
         - pip check
-
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-pipes
       license: Apache-2.0
@@ -116,19 +104,19 @@ outputs:
 
   - name: dagster
     build:
+      number: {{ dagster_build_number }}
       noarch: python
-      string: {{ dagster_epoch }}
       version: {{ version }}
       entry_points:
         - dagster = dagster.cli:main
         - dagster-daemon = dagster.daemon.cli:main
       script: cd dagster && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-
     requirements:
       host:
-        - python >=3.8
+        - {{ dagster_python }}
         - pip
       run:
+        - {{ dagster_python }}
         - {{ pin_subpackage("dagster-pipes", max_pin="x.x.x") }}
         - {{ dagster_pendulum }}
         - {{ dagster_protobuf }}
@@ -144,7 +132,6 @@ outputs:
         - packaging >=20.9
         - psutil >=1.0
         - pydantic >1.10.0,!=1.10.7,<3
-        - python >=3.8
         - python-dateutil
         - python-dotenv
         - pytz
@@ -163,8 +150,6 @@ outputs:
         - watchdog >=0.8.3
       run_constrained:
         - pywin32 !=226
-        - {{ dagster_python }}
-
     test:
       requires:
         - python >=3.8
@@ -199,7 +184,6 @@ outputs:
         - pip check
         - dagster --help
         - dagster-daemon --help
-
     about:
       home: https://github.com/dagster-io/dagster
       license: Apache-2.0
@@ -216,8 +200,6 @@ outputs:
         Building a data platform with Dagster makes your stakeholders more independent and your systems
         more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
-{% if not dagster_only_core %}
-
   - name: dagster-webserver
     build:
       version: {{ version }}
@@ -226,7 +208,6 @@ outputs:
       entry_points:
         - dagster-webserver = dagster_webserver.cli:main
         - dagster-webserver-debug = dagster_webserver.debug:main
-
     requirements:
       host:
         - pip
@@ -248,7 +229,6 @@ outputs:
         - pip check
         - dagster-webserver --help
         - dagster-webserver-debug --help
-
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-webserver
       license: Apache-2.0
@@ -262,8 +242,8 @@ outputs:
       noarch: python
       entry_points:
         - dagster-graphql = dagster_graphql.cli:main
-      script: cd dagster-graphql && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-
+      script:
+        - cd dagster-graphql && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
     requirements:
       host:
         - pip
@@ -275,7 +255,6 @@ outputs:
         - python >=3.8
         - requests
         - starlette
-
     test:
       requires:
         - python >=3.8
@@ -287,7 +266,6 @@ outputs:
       commands:
         - dagster-graphql --help
         - pip check
-
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql
       license: Apache-2.0
@@ -300,11 +278,7 @@ outputs:
       noarch: python
       version: {{ version }}
       script:
-        # TODO: remove after https://github.com/dagster-io/dagster/pull/9932
-        - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/hooks/__init__.py").touch()'
-        - {{ PYTHON }} -c '__import__("pathlib").Path("dagster-airflow/dagster_airflow/links/__init__.py").touch()'
         - cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-
     requirements:
       host:
         - pip
@@ -313,12 +287,9 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - docker-py >=5.0.3,<6
         - lazy-object-proxy
-        - pendulum >=0.7.0,<3
         - python >=3.8
-        - python-dateutil >=2.8.0
         # docker version pinned above requires this but has no pin
         - urllib3 <2
-
     test:
       requires:
         - python >=3.8
@@ -331,7 +302,6 @@ outputs:
         - dagster_airflow
       commands:
         - pip check
-
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
       license: Apache-2.0
@@ -347,7 +317,6 @@ outputs:
         - dagit = dagster_webserver.cli:main
         - dagit-debug = dagster_webserver.debug:main
       script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-
     requirements:
       host:
         - pip
@@ -355,7 +324,6 @@ outputs:
       run:
         - {{ pin_subpackage("dagster-webserver", max_pin="x.x.x") }}
         - python >=3.8
-
     test:
       requires:
         - python >=3.8
@@ -365,7 +333,6 @@ outputs:
       commands:
         - pip check
         - dagit --help
-
     about:
       home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
       license: Apache-2.0
@@ -373,7 +340,6 @@ outputs:
       license_file: dagit/LICENSE
       summary: Dagster UI
 
-{% endif %}
 
 about:
   home: https://github.com/dagster-io
