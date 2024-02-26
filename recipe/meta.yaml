@@ -2,10 +2,16 @@
 {% set build_number = 0 %}
 {% set min_python = "python >=3.8" %}
 
+# some upstreams aren't ready for 3.11+
+{% set dagster_default_epoch = "10" %}
+
 # we need _some_ default in order to render
 {% if dagster_epoch is not defined %}
-  {% set dagster_epoch = "11" %}
+  {% set dagster_epoch = dagster_default_epoch %}
 {% endif %}
+
+# airflow doesn't solve (even slowly) on python 3.11+
+{% set dagster_core_only = dagster_epoch != dagster_default_epoch %}
 
 # this allows for effectively using selectors downstream
 {% set dagster_build_number = build_number * 100 + (dagster_epoch | int) %}
@@ -276,6 +282,38 @@ outputs:
       license_file: dagster-graphql/LICENSE
       summary: The GraphQL frontend to python dagster.
 
+  - name: dagit
+    build:
+      noarch: python
+      version: {{ version }}
+      entry_points:
+        - dagit = dagster_webserver.cli:main
+        - dagit-debug = dagster_webserver.debug:main
+      script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+    requirements:
+      host:
+        - {{ min_python }}
+        - pip
+      run:
+        - {{ min_python }}
+        - {{ pin_subpackage("dagster-webserver", max_pin="x.x.x") }}
+    test:
+      requires:
+        - {{ dagster_python }}
+        - pip
+      imports:
+        - dagit
+      commands:
+        - pip check
+        - dagit --help
+    about:
+      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
+      license: Apache-2.0
+      license_family: APACHE
+      license_file: dagit/LICENSE
+      summary: Dagster UI
+
+{% if not dagster_core_only %}
   - name: dagster-airflow
     build:
       noarch: python
@@ -312,38 +350,7 @@ outputs:
       license_family: APACHE
       license_file: dagster-airflow/LICENSE
       summary: Airflow plugin for Dagster
-
-  - name: dagit
-    build:
-      noarch: python
-      version: {{ version }}
-      entry_points:
-        - dagit = dagster_webserver.cli:main
-        - dagit-debug = dagster_webserver.debug:main
-      script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-    requirements:
-      host:
-        - {{ min_python }}
-        - pip
-      run:
-        - {{ min_python }}
-        - {{ pin_subpackage("dagster-webserver", max_pin="x.x.x") }}
-    test:
-      requires:
-        - {{ dagster_python }}
-        - pip
-      imports:
-        - dagit
-      commands:
-        - pip check
-        - dagit --help
-    about:
-      home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
-      license: Apache-2.0
-      license_family: APACHE
-      license_file: dagit/LICENSE
-      summary: Dagster UI
-
+{% endif %}
 
 about:
   home: https://github.com/dagster-io
