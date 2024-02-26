@@ -1,5 +1,6 @@
 {% set version = "1.6.6" %}
 {% set build_number = 0 %}
+{% set min_python = "python >=3.8" %}
 
 # we need _some_ default in order to render
 {% if dagster_epoch is not defined %}
@@ -67,10 +68,10 @@ build:
 
 requirements:
   host:
+    - {{ min_python }}
     - pip
-    - python >=3.8
   run:
-    - python >=3.8
+    - {{ min_python }}
 
 test:
   commands:
@@ -84,12 +85,13 @@ outputs:
       script: cd dagster-pipes && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
     requirements:
       host:
+        - {{ min_python }}
         - pip
-        - python >=3.8
       run:
-        - python >=3.8
+        - {{ min_python }}
     test:
       requires:
+        - {{ dagster_python }}
         - pip
       imports:
         - dagster_pipes
@@ -113,14 +115,14 @@ outputs:
       script: cd dagster && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
     requirements:
       host:
-        - python >=3.8
+        - {{ min_python }}
         - pip
       run:
-        - python >=3.8
-        - {{ pin_subpackage("dagster-pipes", max_pin="x.x.x") }}
         - {{ dagster_pendulum }}
         - {{ dagster_protobuf }}
         - {{ dagster_universal_pathlib }}
+        - {{ min_python }}
+        - {{ pin_subpackage("dagster-pipes", max_pin="x.x.x") }}
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
         - click >=5.0
         - coloredlogs >=6.1,<=14.0
@@ -149,11 +151,11 @@ outputs:
         - typing_extensions >=4.4.0,<5
         - watchdog >=0.8.3
       run_constrained:
-        - pywin32 !=226
         - {{ dagster_python }}
+        - pywin32 !=226
     test:
       requires:
-        - python >=3.8
+        - {{ dagster_python }}
         - pip
       imports:
         - dagster
@@ -211,18 +213,18 @@ outputs:
         - dagster-webserver-debug = dagster_webserver.debug:main
     requirements:
       host:
+        - {{ min_python }}
         - pip
-        - python >=3.8
       run:
-        - python >=3.8
-        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
+        - {{ min_python }}
         - {{ pin_subpackage("dagster-graphql", max_pin="x.x.x") }}
+        - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - click >=7.0,<9.0
         - starlette !=0.36.0
         - uvicorn-standard
     test:
       requires:
-        - python >=3.8
+        - {{ dagster_python }}
         - pip
       imports:
         - dagster_webserver
@@ -247,18 +249,18 @@ outputs:
         - cd dagster-graphql && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
     requirements:
       host:
+        - {{ min_python }}
         - pip
-        - python >=3.8
       run:
+        - {{ min_python }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - gql-with-requests >=3.0.0,<4.0.0
         - graphene >=3,<4
-        - python >=3.8
         - requests
         - starlette
     test:
       requires:
-        - python >=3.8
+        - {{ dagster_python }}
         - pip
       imports:
         - dagster_graphql
@@ -282,9 +284,10 @@ outputs:
         - cd dagster-airflow && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
     requirements:
       host:
+        - {{ min_python }}
         - pip
-        - python >=3.8
       run:
+        - {{ min_python }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - docker-py >=5.0.3,<6
         - lazy-object-proxy
@@ -293,7 +296,7 @@ outputs:
         - urllib3 <2
     test:
       requires:
-        - python >=3.8
+        - {{ dagster_python }}
         - pip
         - apache-airflow-providers-docker
         - jinja2 <3
@@ -320,14 +323,14 @@ outputs:
       script: cd dagit && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
     requirements:
       host:
+        - {{ min_python }}
         - pip
-        - python >=3.8
       run:
+        - {{ min_python }}
         - {{ pin_subpackage("dagster-webserver", max_pin="x.x.x") }}
-        - python >=3.8
     test:
       requires:
-        - python >=3.8
+        - {{ dagster_python }}
         - pip
       imports:
         - dagit
