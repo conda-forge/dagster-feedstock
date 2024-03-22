@@ -46,6 +46,15 @@ Building a data platform with Dagster makes your stakeholders more independent a
 more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
 
+About dagster-airflow
+---------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
+
+Package license: Apache-2.0
+
+Summary: Airflow plugin for Dagster
+
 About dagster-graphql
 ---------------------
 
@@ -73,22 +82,13 @@ Package license: Apache-2.0
 
 Summary: Dagster UI
 
-About dagster-airflow
----------------------
-
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
-
-Package license: Apache-2.0
-
-Summary: Airflow plugin for Dagster
-
 Current build status
 ====================
 
 
 <table><tr><td>All platforms:</td>
     <td>
-      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8550&branchName=main">
+      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
         <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dagster-feedstock?branchName=main">
       </a>
     </td>
