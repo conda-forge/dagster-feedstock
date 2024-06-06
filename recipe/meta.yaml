@@ -1,6 +1,7 @@
 {% set min_python = "python >=3.8" %}
 {% set min_python = "python >=3.8" %}
-{% set version = "1.7.8" %}
+{% set min_python = "python >=3.8" %}
+{% set version = "1.7.9" %}
 {% set build_number = 0 %}
 {% set min_python = "python >=3.8" %}
 
@@ -48,27 +49,27 @@ source:
   # uses main version
   - folder: dagster-pipes
     url: https://pypi.io/packages/source/d/dagster-pipes/dagster-pipes-{{ version }}.tar.gz
-    sha256: 7431e44323b353cb358259300b6fd71a2f72b37509f7e16f12cd30bb195e0a39
+    sha256: 4d18fd71b065749d4ac3f20aa9ccba5fb0a54227f6c4eb0828a4ba00a182cf39
 
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 84cdd5f104a1e91c1f5bc1ee427eaec50d9ab6312d1edee1f2abf1317758373f
+    sha256: 91be5523d9721fc0ff27ef49f9d392f12966f787c6208a5fa3ceb3142cc4493c
 
   - folder: dagster-webserver
     url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
-    sha256: 3659d832458e33983d67f3c43d46890f8ad50faf1a935e38271c725eacf4b1a6
+    sha256: bc9a493bfc48b103bca32bb94258480de4e404ae36c93bb37d9901629ca24675
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: a96f871a4421a09a42bf1e0d6f36ea8f460b2a455518352d66e504625bc992b4
+    sha256: f745dd89795a160984f2578cf0b837037f3ddd8eec368bb0529c964f629163bc
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: c54ca8bc314b3dcde19beee960b58f8c8e41ff53ecc4d046f3de1c6ee90b0cfc
+    sha256: ca2f37a9d801f25d59ff10e6f18f3d657a6f228797a9bc3f6be0a4cc8d174af3
 
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
-    sha256: 0f87decbb61b644e7e4532e35d28737f17f270f7af6c529034073510aed3cad5
+    sha256: 037ff39932f7c8339d9464e708ad9800e839477787060ff6eedc8ed0b20aeeb0
 
 build:
   noarch: python
