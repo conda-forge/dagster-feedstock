@@ -1,5 +1,6 @@
 {% set min_python = "python >=3.8" %}
 {% set min_python = "python >=3.8" %}
+{% set min_python = "python >=3.8" %}
 {% set version = "1.7.12" %}
 {% set build_number = 0 %}
 {% set min_python = "python >=3.8" %}
