@@ -136,8 +136,8 @@ outputs:
         - croniter >=0.3.34
         - docstring_parser
         - filelock
-        - grpcio >=1.44.0
-        - grpcio-health-checking >=1.44.0
+        - grpcio >=1.44.0,<1.65.0
+        - grpcio-health-checking >=1.44.0,<1.65.0
         - jinja2
         - packaging >=20.9
         - psutil >=1.0
@@ -330,6 +330,7 @@ outputs:
         - docker-py >=5.0.3,<6
         - lazy-object-proxy
         - python >=3.8
+        - setuptools <71.0.0
         # docker version pinned above requires this but has no pin
         - urllib3 <2
     test:
