@@ -1,4 +1,4 @@
-{% set version = "1.7.13" %}
+{% set version = "1.7.14" %}
 {% set build_number = 0 %}
 {% set min_python = "python >=3.8" %}
 
@@ -46,27 +46,27 @@ source:
   # uses main version
   - folder: dagster-pipes
     url: https://pypi.io/packages/source/d/dagster-pipes/dagster-pipes-{{ version }}.tar.gz
-    sha256: 4a70baca8e78045045aedf5dc9319005d1c6eb8e3e84a8f6a5c58ea157853aef
+    sha256: e80b198739e52f83109a236cf3e1277f47feedc754bf4ae55b110800f2fe9fb0
 
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 3a246bc6658ae2deadf96e7f5055210bf07a54817767243ed8ec9c72c876e633
+    sha256: 5f6557170e46d35f526a4559986e5e83007dc10e2e8626e31b79d577138b2e1d
 
   - folder: dagster-webserver
     url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
-    sha256: e8c9042cf464fe6fbe490f80ed70b12790611faf478fce3a3e08c1b6429feabf
+    sha256: 44fd8dce19ea796cb14f8d0c08f6fa7654f067a67c877d4f2c7f8d3a69c3943b
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: fddcc238323c8a44b81a7e9c073fd38ffbbc9a77834ed990bc061e80c884764f
+    sha256: cd59f1127439ec758751994aaaf6820089c30d9a99337aac16b51fe131ee5c04
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: 735381993feaba4d54630c52cdcffb139e558a6389f1ed2441ed4356cd4ee2e9
+    sha256: 33bf5beb7957259e59c1fbbecb6c31d9389dc4657dd231a19e3bf7f287c5a1f9
 
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
-    sha256: 71a269a8c71d7d221e8f4b80228f45ac36b516aee7bbd9879766029c67cff09e
+    sha256: 0dd686a6df0777d441a45f5520cc08741309589cd22883c7acccae84703db46f
 
 build:
   noarch: python
@@ -135,8 +135,8 @@ outputs:
         - croniter >=0.3.34
         - docstring_parser
         - filelock
-        - grpcio >=1.44.0
-        - grpcio-health-checking >=1.44.0
+        - grpcio >=1.44.0,<1.65.0
+        - grpcio-health-checking >=1.44.0,<1.65.0
         - jinja2
         - packaging >=20.9
         - psutil >=1.0
@@ -329,6 +329,7 @@ outputs:
         - docker-py >=5.0.3,<6
         - lazy-object-proxy
         - python >=3.8
+        - setuptools <71.0.0
         # docker version pinned above requires this but has no pin
         - urllib3 <2
     test:
