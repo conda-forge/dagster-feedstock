@@ -225,6 +225,3 @@ Feedstock Maintainers
 * [@mgasner](https://github.com/mgasner/)
 * [@xhochy](https://github.com/xhochy/)
 
-
-<!-- dummy commit to enable rerendering -->
-
