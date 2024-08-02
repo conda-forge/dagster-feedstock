@@ -1,4 +1,3 @@
-{% set min_python = "python >=3.8" %}
 {% set version = "1.7.16" %}
 {% set build_number = 0 %}
 {% set min_python = "python >=3.8" %}
@@ -338,9 +337,8 @@ outputs:
         - {{ dagster_python }}
         - pip
         - apache-airflow-providers-docker
-        - jinja2 <3
-        # TODO: remove after https://github.com/conda-forge/airflow-feedstock/pull/92
-        - pathspec >=0.9.0,<0.10.0
+        # otherwise `swagger-ui-bundle 0.0.6 is not supported on this platform`
+        - swagger-ui-bundle >=1.1.0
       imports:
         - dagster_airflow
       commands:
