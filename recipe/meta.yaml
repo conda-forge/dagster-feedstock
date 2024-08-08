@@ -1,4 +1,4 @@
-{% set version = "1.7.16" %}
+{% set version = "1.8.0" %}
 {% set build_number = 0 %}
 {% set min_python = "python >=3.8" %}
 
@@ -17,13 +17,6 @@
 {% set dagster_build_number = build_number * 100 + (dagster_epoch | int) %}
 {% set dagster_python = "python >=3." ~ dagster_epoch ~ ",<3." ~ ((dagster_epoch | int) + 1) ~ ".0a0" %}
 
-# "pendulum>=3,<4; python_version>='3.12'",
-# "pendulum>=0.7.0,<4; python_version>='3.9' and python_version<'3.12'",
-# "pendulum>=0.7.0,<3; python_version<'3.9'",  # https://github.com/dagster-io/dagster/issues/19500
-{% set dagster_pendulum = "pendulum" ~ {
-  "8":  " >=0.7.0,<3",
-  "12": " >=3,<4",
-}.get(dagster_epoch, " >=0.7.0,<4") %}
 
 # "protobuf>=3.20.0,<5; python_version<'3.11'",  # min protobuf version to be compatible with both protobuf 3 and 4
 # "protobuf>=4,<5; python_version>='3.11'",
@@ -46,27 +39,27 @@ source:
   # uses main version
   - folder: dagster-pipes
     url: https://pypi.io/packages/source/d/dagster-pipes/dagster-pipes-{{ version }}.tar.gz
-    sha256: d78ab631c556966f8e35fc49b297d7a6a03d1546f692a85f024cba1c14fc628b
+    sha256: c9b81b707a5f62966a354b6e8dc927a757e5c1c9b2e0ba85b605aa2180a638fe
 
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: a355be92503325061cc4c1e0401f63927c8e10f3b9b79b951886cd398056014a
+    sha256: 8395d685b4cc4b0e60dec81252883936563738d1003b41ec7f49316d2991dbe3
 
   - folder: dagster-webserver
     url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
-    sha256: a1e0f85dbd79db3cd41038ef392351ecb7fa43fc20b919efa6cf57e8b799d10a
+    sha256: 752722eb2ea46bda0a750c8983324eb561bf0ca1d3859e081d37b7baf816eca3
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: 10068c085df194640d546fc26732caf9f1e27e21abcce1ed0fbcc4e22511089b
+    sha256: 8b20cd285ebbb4c2f7c6c38b6913db98820da99f60e964971517cfacde846d29
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: 8c9e4c6f0d0de3d7cca1aa8fe10c8af15fd567e0f2eb6f6806f07a18c64286ce
+    sha256: 55e3ba81ef92d245574d04fe857008ca3120de16a7ae3e3edea0143cd05e4ab1
 
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
-    sha256: c56e93b46ef67049c9a4c53e58ad7591211a0327e7c98cef3729a72547eff232
+    sha256: 657806dd80bf1120688c88361c0178bd32d16be2a3723cd233b40f759af29265
 
 build:
   noarch: python
@@ -124,7 +117,6 @@ outputs:
         - {{ min_python }}
         - pip
       run:
-        - {{ dagster_pendulum }}
         - {{ dagster_protobuf }}
         - {{ dagster_universal_pathlib }}
         - {{ min_python }}
@@ -154,6 +146,7 @@ outputs:
         - tomli <3
         - toposort >=1.0
         - tqdm <5
+        - tzdata
         - typing_extensions >=4.4.0,<5
         - watchdog >=0.8.3
       run_constrained:
@@ -328,6 +321,7 @@ outputs:
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
         - docker-py >=5.0.3,<6
         - lazy-object-proxy
+        - pendulum
         - python >=3.8
         - setuptools <71.0.0
         # docker version pinned above requires this but has no pin
