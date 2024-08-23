@@ -46,6 +46,15 @@ Building a data platform with Dagster makes your stakeholders more independent a
 more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
 
+About dagster-airflow
+---------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
+
+Package license: Apache-2.0
+
+Summary: Airflow plugin for Dagster
+
 About dagster-graphql
 ---------------------
 
@@ -72,15 +81,6 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
 Package license: Apache-2.0
 
 Summary: Dagster UI
-
-About dagster-airflow
----------------------
-
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
-
-Package license: Apache-2.0
-
-Summary: Airflow plugin for Dagster
 
 Current build status
 ====================
