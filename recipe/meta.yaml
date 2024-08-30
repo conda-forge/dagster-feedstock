@@ -68,7 +68,6 @@ build:
 requirements:
   host:
     - {{ min_python }}
-    - pip
   run:
     - {{ min_python }}
 
@@ -86,6 +85,7 @@ outputs:
       host:
         - {{ min_python }}
         - pip
+        - setuptools
       run:
         - {{ min_python }}
     test:
@@ -116,6 +116,7 @@ outputs:
       host:
         - {{ min_python }}
         - pip
+        - setuptools
       run:
         - {{ dagster_protobuf }}
         - {{ dagster_universal_pathlib }}
@@ -213,6 +214,7 @@ outputs:
       host:
         - {{ min_python }}
         - pip
+        - setuptools
       run:
         - {{ min_python }}
         - {{ pin_subpackage("dagster-graphql", max_pin="x.x.x") }}
@@ -249,6 +251,7 @@ outputs:
       host:
         - {{ min_python }}
         - pip
+        - setuptools
       run:
         - {{ min_python }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
@@ -286,6 +289,7 @@ outputs:
       host:
         - {{ min_python }}
         - pip
+        - setuptools
       run:
         - {{ min_python }}
         - {{ pin_subpackage("dagster-webserver", max_pin="x.x.x") }}
@@ -316,6 +320,7 @@ outputs:
       host:
         - {{ min_python }}
         - pip
+        - setuptools
       run:
         - {{ min_python }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
