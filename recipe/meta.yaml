@@ -133,7 +133,7 @@ outputs:
         - jinja2
         - packaging >=20.9
         - psutil >=1.0
-        - pydantic >1.10.0,!=1.10.7,<3
+        - pydantic >1.10.0,!=1.10.7,<2.9.0
         - python-dotenv
         - pytz
         - pywin32-on-windows
@@ -149,7 +149,7 @@ outputs:
         - tqdm <5
         - tzdata
         - typing_extensions >=4.4.0,<5
-        - watchdog >=0.8.3
+        - watchdog >=0.8.3,<6
       run_constrained:
         - {{ dagster_python }}
         - pywin32 !=226
