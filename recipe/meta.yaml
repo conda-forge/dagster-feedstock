@@ -133,7 +133,7 @@ outputs:
         - jinja2
         - packaging >=20.9
         - psutil >=1.0
-        - pydantic >1.10.0,!=1.10.7,<2.9.0
+        - pydantic >1.10.0,!=1.10.7,<2.10.0
         - python-dotenv
         - pytz
         - pywin32-on-windows
