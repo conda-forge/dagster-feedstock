@@ -5,3 +5,5 @@ dagster_epoch:
   - "10"
   - "11"
   - "12"
+ignore_version:
+  - python
