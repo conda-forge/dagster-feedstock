@@ -1,6 +1,6 @@
 {% set version = "1.8.11" %}
 {% set build_number = 0 %}
-{% if 1 %}{% set min_python = "python >=3.8" %}{% endif %}
+{% if 1 %}{% set min_python = "python >=3.8,<3.13" %}{% endif %}
 
 # some upstreams aren't ready for 3.11+
 {% set dagster_default_epoch = "10" %}
