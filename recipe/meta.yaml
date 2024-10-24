@@ -1,4 +1,4 @@
-{% set version = "1.8.12" %}
+{% set version = "1.8.13" %}
 {% set build_number = 0 %}
 {% if 1 %}{% set min_python = "python >=3.8,<3.13" %}{% endif %}
 
@@ -39,27 +39,27 @@ source:
   # uses main version
   - folder: dagster-pipes
     url: https://pypi.io/packages/source/d/dagster-pipes/dagster-pipes-{{ version }}.tar.gz
-    sha256: 03ef03916f333478860aba2c4904c108da035e160c16a8cc114ed7152f3a98cc
+    sha256: d7b16c22c662e355ad7fda507e21b5eb7a7bbb479564348961c3d942d081810f
 
   - folder: dagster
     url: https://pypi.io/packages/source/d/dagster/dagster-{{ version }}.tar.gz
-    sha256: 41036a0c780f6862d3911bdfa6c19a62a8d616da74e0e7e97c76de0efe0755ed
+    sha256: 13213c1404a1c4a2a4c66f1762878c971d03c06812e212ac6303cc427a72a2ca
 
   - folder: dagster-webserver
     url: https://pypi.io/packages/source/d/dagster-webserver/dagster-webserver-{{ version }}.tar.gz
-    sha256: 6f155366eb1abe327c88bfa4ee03652b2aaabd9f5fdb73a136b3dcdb0f8d7d58
+    sha256: 83bb342b3e8093b3705ef7606586e8f8ec56d2b650f89ae61e1ed72c21a17155
 
   - folder: dagit
     url: https://pypi.io/packages/source/d/dagit/dagit-{{ version }}.tar.gz
-    sha256: e99e324c5775b7bd3ce78068683cc6ec52fd3f35e7d0c8e7b7393e36cf7e7c18
+    sha256: 46292ad3070bce824d65540ca283a69f33c7f5366ba9e8786f6b5e1a89c99c85
 
   - folder: dagster-graphql
     url: https://pypi.io/packages/source/d/dagster-graphql/dagster-graphql-{{ version }}.tar.gz
-    sha256: eafdd97db23c47b6c46864c8c4616c27d446611924d8d2b68c56bd647764f56f
+    sha256: 57daf117a2e47b3d2acb8f7075acb68226d481ec8cddd0ee61fd6a751d9d3535
 
   - folder: dagster-airflow
     url: https://pypi.io/packages/source/d/dagster-airflow/dagster-airflow-{{ version }}.tar.gz
-    sha256: e9510724babcc893b2a87d1e710b4f6e9b96ac5f53d0a26b9b422823d18950e5
+    sha256: 12185dea2e006def1a149f712c96d6c7ddd8e935c62e4ecb3594c29708cd472f
 
 build:
   noarch: python
@@ -324,13 +324,10 @@ outputs:
       run:
         - {{ min_python }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - docker-py >=5.0.3,<6
         - lazy-object-proxy
         - pendulum
         - python >=3.8
         - setuptools <71.0.0
-        # docker version pinned above requires this but has no pin
-        - urllib3 <2
     test:
       requires:
         - {{ dagster_python }}
