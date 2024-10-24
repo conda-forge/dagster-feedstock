@@ -324,13 +324,10 @@ outputs:
       run:
         - {{ min_python }}
         - {{ pin_subpackage("dagster", max_pin="x.x.x") }}
-        - docker-py >=5.0.3,<6
         - lazy-object-proxy
         - pendulum
         - python >=3.8
         - setuptools <71.0.0
-        # docker version pinned above requires this but has no pin
-        - urllib3 <2
     test:
       requires:
         - {{ dagster_python }}
