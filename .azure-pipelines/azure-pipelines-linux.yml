@@ -23,11 +23,6 @@ jobs:
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
         SHORT_CONFIG: linux_64_dagster_epoch12
-      linux_64_dagster_epoch8:
-        CONFIG: linux_64_dagster_epoch8
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_dagster_epoch8
       linux_64_dagster_epoch9:
         CONFIG: linux_64_dagster_epoch9
         UPLOAD_PACKAGES: 'True'
