@@ -21,9 +21,9 @@
 # "protobuf>=3.20.0,<5; python_version<'3.11'",  # min protobuf version to be compatible with both protobuf 3 and 4
 # "protobuf>=4,<5; python_version>='3.11'",
 {% if dagster_epoch in ["11", "12"] %}
-  {% set dagster_protobuf = " >=4,<5" %}
+  {% set dagster_protobuf = ">=4,<5" %}
 {% else %}
-  {% set dagster_protobuf = " >=3.20.0,<5" %}
+  {% set dagster_protobuf = ">=3.20.0,<5" %}
 {% endif %}
 
 # "universal_pathlib; python_version<'3.12'",
@@ -121,8 +121,6 @@ outputs:
         - pip
         - setuptools
       run:
-        - {{ dagster_protobuf }}
-        - {{ dagster_universal_pathlib }}
         - {{ min_python }}
         - {{ pin_subpackage("dagster-pipes", max_pin="x.x.x") }}
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
@@ -136,6 +134,7 @@ outputs:
         - grpcio-health-checking >=1.44.0
         - jinja2
         - packaging >=20.9
+        - protobuf {{ dagster_protobuf }}
         - psutil >=1.0
         - pydantic >=2,<2.10
         - python-dotenv
@@ -151,8 +150,9 @@ outputs:
         - tomli <3
         - toposort >=1.0
         - tqdm <5
-        - tzdata
         - typing_extensions >=4.4.0,<5
+        - tzdata
+        - universal_pathlib {{ dagster_universal_pathlib }}
         - watchdog >=0.8.3,<6
       run_constrained:
         - {{ dagster_python }}
