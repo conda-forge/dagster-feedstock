@@ -21,9 +21,9 @@
 # "protobuf>=3.20.0,<5; python_version<'3.11'",  # min protobuf version to be compatible with both protobuf 3 and 4
 # "protobuf>=4,<5; python_version>='3.11'",
 {% if dagster_epoch in ["11", "12"] %}
-  {% set dagster_protobuf = ">=4,<5" %}
+  {% set dagster_protobuf = ">=4,<6" %}
 {% else %}
-  {% set dagster_protobuf = ">=3.20.0,<5" %}
+  {% set dagster_protobuf = ">=3.20.0,<6" %}
 {% endif %}
 
 # "universal_pathlib; python_version<'3.12'",
@@ -136,7 +136,7 @@ outputs:
         - packaging >=20.9
         - protobuf {{ dagster_protobuf }}
         - psutil >=1.0
-        - pydantic >=2,<2.10
+        - pydantic >=2,<3.0.0
         - python-dotenv
         - pytz
         - pywin32-on-windows
