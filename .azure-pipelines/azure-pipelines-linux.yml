@@ -11,22 +11,22 @@ jobs:
       linux_64_dagster_epoch10:
         CONFIG: linux_64_dagster_epoch10
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_64_dagster_epoch10
       linux_64_dagster_epoch11:
         CONFIG: linux_64_dagster_epoch11
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_64_dagster_epoch11
       linux_64_dagster_epoch12:
         CONFIG: linux_64_dagster_epoch12
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_64_dagster_epoch12
       linux_64_dagster_epoch9:
         CONFIG: linux_64_dagster_epoch9
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
         SHORT_CONFIG: linux_64_dagster_epoch9
   timeoutInMinutes: 360
   variables: {}
