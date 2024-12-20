@@ -127,7 +127,7 @@ outputs:
         - antlr-python-runtime
         - click >=5.0
         - coloredlogs >=6.1,<=14.0
-        - croniter >=0.3.34,<4
+        - croniter >=0.3.34,!=4.0.0,<6
         - docstring_parser
         - filelock
         - grpcio >=1.44.0
