@@ -1,0 +1,293 @@
+context:
+  version: 1.9.9
+  dagster_python: "python >=3.9,<3.13"
+  build_number: 0
+  dagster_epoch: ${{ dagster_epoch | default("10") }}
+  dagster_core_only: ${{ dagster_epoch | default("10") == "10" }}
+  dagster_epoch_python: |-
+    python 3.${{ dagster_epoch | default("10") }}.*
+  pip_install: -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+  dagster_build_number: ${{ (build_number | int) * 100 + (dagster_epoch | int) }}
+
+recipe:
+  name: dagster-meta
+  version: ${{ version }}
+
+build:
+  noarch: python
+  number: ${{ build_number }}
+
+outputs:
+  - package:
+      name: dagster-pipes
+    source:
+      url: https://pypi.org/packages/source/d/dagster-pipes/dagster-pipes-${{ version }}.tar.gz
+      sha256: 966042447ca7798323be6d14b2fec78b068c1889c94b5e35528d20cb8c22a5b2
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ dagster_python }}
+    tests:
+      - python: {pip_check: true, imports: [dagster_pipes]}
+
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-pipes
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Toolkit for Dagster integrations with transform logic outside of Dagster
+
+  - package:
+      name: dagster
+    source:
+      url: https://pypi.org/packages/source/d/dagster/dagster-${{ version }}.tar.gz
+      sha256: c1892b6adb2c45cb603e95b39e8171e2aa8517f0d90732643358e859f40ce407
+    build:
+      number: ${{ dagster_build_number }}
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+      python:
+        entry_points:
+          - dagster = dagster.cli:main
+          - dagster-daemon = dagster.daemon.cli:main
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - if: dagster_epoch == "12"
+          then: universal_pathlib >=0.2.0
+          else: universal_pathlib
+        - if: dagster_epoch in ["11", "12"]
+          then: protobuf >=4,<6
+          else: protobuf >=3.20.0,<6
+        - ${{ dagster_python }}
+        - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
+        - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
+        - antlr-python-runtime
+        - click >=5.0
+        - coloredlogs >=6.1,<=14.0
+        - docstring_parser
+        - filelock
+        - grpcio >=1.44.0
+        - grpcio-health-checking >=1.44.0
+        - jinja2
+        - packaging >=20.9
+        - psutil >=1.0
+        - pydantic >=2,<3.0.0
+        - python-dotenv
+        - pytz
+        - pywin32-on-windows
+        - pyyaml >=5.1
+        - requests
+        - rich
+        - setuptools
+        - six
+        - sqlalchemy >=1.0,<3
+        - structlog
+        - tabulate
+        - tomli <3
+        - toposort >=1.0
+        - tqdm <5
+        - typing_extensions >=4.4.0,<5
+        - tzdata
+        - watchdog >=0.8.3,<6
+      run_constraints:
+        - ${{ dagster_epoch_python }}
+        - pywin32 !=226
+    tests:
+      - python:
+          pip_check: true
+          imports:
+            - dagster
+            - dagster.api
+            - dagster.check
+            - dagster.cli
+            - dagster.config
+            - dagster.core.definitions
+            - dagster.core.events
+            - dagster.core.execution
+            - dagster.core.executor
+            - dagster.core.instance
+            - dagster.core.launcher
+            - dagster.core.run_coordinator
+            - dagster.core.scheduler
+            - dagster.core.selector
+            - dagster.core.snap
+            - dagster.core.storage
+            - dagster.core.system_config
+            - dagster.core.types
+            - dagster.core.workspace
+            - dagster.daemon
+            - dagster.grpc
+            - dagster.loggers
+            - dagster.seven
+            - dagster.utils
+      - script:
+        - dagster --help
+        - dagster-daemon --help
+    about:
+      homepage: https://github.com/dagster-io/dagster
+      license: Apache-2.0
+      summary: The data orchestration platform built for productivity.
+      documentation: https://dagster.readthedocs.io
+      license_file: LICENSE
+      description: |
+        Dagster lets you define pipelines in terms of the data flow between reusable, logical components,
+        then test locally and run anywhere. With a unified view of pipelines and the assets they produce,
+        Dagster can schedule and orchestrate Pandas, Spark, SQL, or anything else that Python can invoke.
+
+        Dagster is designed for data platform engineers, data engineers, and full-stack data scientists.
+        Building a data platform with Dagster makes your stakeholders more independent and your systems
+        more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
+
+  - package:
+      name: dagster-graphql
+    source:
+      url: https://pypi.org/packages/source/d/dagster-graphql/dagster-graphql-${{ version }}.tar.gz
+      sha256: 35b388d1c0d8c72158ed37f4d8446891e466c143f3cc5241033569951635a293
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+      python:
+        entry_points:
+          - dagster-graphql = dagster_graphql.cli:main
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ dagster_python }}
+        - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
+        - gql-with-requests >=3.0.0,<4.0.0
+        - graphene >=3,<4
+        - requests
+        - starlette
+    tests:
+      - python: {pip_check: true, imports: [dagster_graphql, dagster_graphql.client, dagster_graphql.schema]}
+      - requirements: {run: ["${{ dagster_epoch_python }}"]}
+        script:
+        - dagster-graphql --help
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: The GraphQL frontend to python dagster.
+
+  - package:
+      name: dagster-webserver
+    source:
+      url: https://pypi.org/packages/source/d/dagster-webserver/dagster-webserver-${{ version }}.tar.gz
+      sha256: 0b1fb016d4b1a0767df33f3cb768d0e39f4c8718d998984603ab4977a4f251b1
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+      python:
+        entry_points:
+          - dagster-webserver = dagster_webserver.cli:main
+          - dagster-webserver-debug = dagster_webserver.debug:main
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ dagster_python }}
+        - ${{ pin_subpackage("dagster-graphql", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
+        - click >=7.0,<9.0
+        - starlette !=0.36.0
+        - uvicorn-standard
+    tests:
+      - python: {pip_check: true, imports: [dagster_webserver]}
+      - requirements: {run: ["${{ dagster_epoch_python }}"]}
+        script:
+        - dagster-webserver --help
+        - dagster-webserver-debug --help
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-webserver
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Web UI for dagster.
+
+  - package:
+      name: dagit
+    source:
+      url: https://pypi.org/packages/source/d/dagit/dagit-${{ version }}.tar.gz
+      sha256: 988b37b9b62a8358bf74be8e2be2c7db82b8bb2738f1e5fc8235a1ffb24d2494
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+      python:
+        entry_points:
+          - dagit = dagster_webserver.cli:main
+          - dagit-debug = dagster_webserver.debug:main
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ dagster_python }}
+        - ${{ pin_subpackage("dagster-webserver", upper_bound="x.x.x") }}
+    tests:
+      - python: {pip_check: true, imports: [dagit]}
+      - requirements: {run: ["${{ dagster_epoch_python }}"]}
+        script:
+         - dagit --help
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Dagster UI
+
+  - package:
+      name: dagster-airflow
+    source:
+      url: https://pypi.org/packages/source/d/dagster-airflow/dagster-airflow-${{ version }}.tar.gz
+      sha256: 5b5cec22e1a5b05d81eee9d5adaa64aae6829ce3f59f8884eee6eb26af1e49e2
+    build:
+      skip: dagster_core_only
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ dagster_python }}
+        - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
+        - lazy-object-proxy
+        - pendulum
+        - python >=3.8
+        - setuptools <71.0.0
+    tests:
+      - python: {pip_check: true, imports: [dagster_airflow]}
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Airflow plugin for Dagster
+
+about:
+  homepage: https://github.com/dagster-io
+  summary: The data orchestration platform built for productivity.
+  license: Apache-2.0
+  documentation: https://dagster.readthedocs.io
+  description: >-
+    Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
+extra:
+  feedstock-name: dagster
+  recipe-maintainers:
+    - xhochy
+    - bollwyvl
+    - mgasner
