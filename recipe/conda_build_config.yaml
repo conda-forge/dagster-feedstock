@@ -6,5 +6,3 @@ dagster_epoch:
   - "12"
 ignore_version:
   - python
-zip_keys:
-  - dagster_epoch
