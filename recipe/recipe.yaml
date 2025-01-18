@@ -34,7 +34,10 @@ outputs:
       run:
         - ${{ dagster_python }}
     tests:
-      - python: {pip_check: true, imports: [dagster_pipes]}
+      - python:
+          pip_check: true
+          imports:
+            - dagster_pipes
 
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-pipes
@@ -171,8 +174,15 @@ outputs:
         - requests
         - starlette
     tests:
-      - python: {pip_check: true, imports: [dagster_graphql, dagster_graphql.client, dagster_graphql.schema]}
-      - requirements: {run: ["${{ dagster_epoch_python }}"]}
+      - python:
+          pip_check: true
+          imports:
+            - dagster_graphql
+            - dagster_graphql.client
+            - dagster_graphql.schema
+      - requirements:
+          run:
+            - ${{ dagster_epoch_python }}
         script:
         - dagster-graphql --help
     about:
@@ -206,8 +216,13 @@ outputs:
         - starlette !=0.36.0
         - uvicorn-standard
     tests:
-      - python: {pip_check: true, imports: [dagster_webserver]}
-      - requirements: {run: ["${{ dagster_epoch_python }}"]}
+      - python:
+          pip_check: true
+          imports:
+            - dagster_webserver
+      - requirements:
+          run:
+            - ${{ dagster_epoch_python }}
         script:
         - dagster-webserver --help
         - dagster-webserver-debug --help
@@ -238,8 +253,13 @@ outputs:
         - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster-webserver", upper_bound="x.x.x") }}
     tests:
-      - python: {pip_check: true, imports: [dagit]}
-      - requirements: {run: ["${{ dagster_epoch_python }}"]}
+      - python:
+          pip_check: true
+          imports:
+            - dagit
+      - requirements:
+          run:
+            - ${{ dagster_epoch_python }}
         script:
          - dagit --help
     about:
@@ -270,7 +290,10 @@ outputs:
         - python >=3.8
         - setuptools <71.0.0
     tests:
-      - python: {pip_check: true, imports: [dagster_airflow]}
+      - python:
+          pip_check: true
+          imports:
+            - dagster_airflow
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
       license: Apache-2.0
@@ -281,6 +304,7 @@ about:
   homepage: https://github.com/dagster-io
   summary: The data orchestration platform built for productivity.
   license: Apache-2.0
+  license_file: LICENSE
   documentation: https://dagster.readthedocs.io
   description: >-
     Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
