@@ -97,7 +97,7 @@ outputs:
         - tomli <3
         - toposort >=1.0
         - tqdm <5
-        - typing_extensions >=4.4.0,<5
+        - typing_extensions >=4.10.0,<5
         - tzdata
         - watchdog >=0.8.3,<6
       run_constraints:
