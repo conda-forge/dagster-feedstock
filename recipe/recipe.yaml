@@ -1,5 +1,5 @@
 context:
-  version: 1.9.9
+  version: "1.9.10"
   dagster_python: "python >=3.9,<3.13"
   build_number: 0
   dagster_epoch: ${{ dagster_epoch | default("10") }}
@@ -133,8 +133,8 @@ outputs:
             - dagster.seven
             - dagster.utils
       - script:
-        - dagster --help
-        - dagster-daemon --help
+          - dagster --help
+          - dagster-daemon --help
     about:
       homepage: https://github.com/dagster-io/dagster
       license: Apache-2.0
@@ -184,7 +184,7 @@ outputs:
           run:
             - ${{ dagster_epoch_python }}
         script:
-        - dagster-graphql --help
+          - dagster-graphql --help
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql
       license: Apache-2.0
@@ -224,8 +224,8 @@ outputs:
           run:
             - ${{ dagster_epoch_python }}
         script:
-        - dagster-webserver --help
-        - dagster-webserver-debug --help
+          - dagster-webserver --help
+          - dagster-webserver-debug --help
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-webserver
       license: Apache-2.0
@@ -261,7 +261,7 @@ outputs:
           run:
             - ${{ dagster_epoch_python }}
         script:
-         - dagit --help
+          - dagit --help
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
       license: Apache-2.0
