@@ -1,5 +1,5 @@
 context:
-  version: 1.9.10
+  version: "1.9.11"
   dagster_python: python >=3.9,<3.13
   build_number: 0
   dagster_epoch: ${{ dagster_epoch | default("10") }}
