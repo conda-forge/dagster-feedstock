@@ -3,6 +3,7 @@ schema_version: 1
 
 context:
   version: 1.10.6
+  dagster_lib_version: 0.26.${{ (version | split("."))[3] }}
   dagster_python: python >=3.9,<3.13
   build_number: 0
   dagster_epoch: ${{ dagster_epoch | default("10") }}
@@ -21,6 +22,7 @@ build:
   number: ${{ build_number }}
 
 outputs:
+  # deps of dagster
   - package:
       name: dagster-pipes
     source:
@@ -39,14 +41,41 @@ outputs:
     tests:
       - python:
           pip_check: true
-          imports:
-            - dagster_pipes
+          imports: dagster_pipes
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-pipes
       license: Apache-2.0
       license_file: LICENSE
       summary: Toolkit for Dagster integrations with transform logic outside of Dagster
 
+  - package:
+      name: dagster-shared
+      version: ${{ dagster_lib_version }}
+    source:
+      url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ version }}.tar.gz
+      sha256: df56deb4e1e565cb158fae2380e3ebcd4bb447322aabe57e9f74aa5e0972245c
+    build:
+      number: ${{ dagster_build_number }}
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ dagster_python }}
+    tests:
+      - python:
+          pip_check: true
+          imports: dagster_shared
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/librariees/dagster-shared
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Shared code between dagster and dagster-dg.
+
+  # dagster itself
   - package:
       name: dagster
     source:
@@ -74,6 +103,7 @@ outputs:
           else: protobuf >=3.20.0,<6
         - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
+        - dagster-shared ${{ dagster_lib_version }}.*
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
         - antlr-python-runtime
         - click >=5.0
@@ -152,6 +182,7 @@ outputs:
         Building a data platform with Dagster makes your stakeholders more independent and your systems
         more robust. Developing data pipelines with Dagster makes testing easier and deploying faster.
 
+  # other things that use the main `version`
   - package:
       name: dagster-graphql
     source:
@@ -220,8 +251,7 @@ outputs:
     tests:
       - python:
           pip_check: true
-          imports:
-            - dagster_webserver
+          imports: dagster_webserver
       - requirements:
           run:
             - ${{ dagster_epoch_python }}
@@ -257,8 +287,7 @@ outputs:
     tests:
       - python:
           pip_check: true
-          imports:
-            - dagit
+          imports: dagit
       - requirements:
           run:
             - ${{ dagster_epoch_python }}
