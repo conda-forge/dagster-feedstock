@@ -52,7 +52,7 @@ outputs:
       name: dagster-shared
       version: ${{ dagster_lib_version }}
     source:
-      url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ version }}.tar.gz
+      url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ dagster_lib_version }}.tar.gz
       sha256: df56deb4e1e565cb158fae2380e3ebcd4bb447322aabe57e9f74aa5e0972245c
     build:
       noarch: python
