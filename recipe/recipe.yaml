@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "1.10.6"
+  version: "1.10.5"
   dagster_lib_version: 0.26.${{ (version | split("."))[2] }}
   dagster_python: python >=3.9,<3.13
   build_number: 0
