@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   version: 1.10.6
-  dagster_lib_version: 0.26.${{ (version | split("."))[3] }}
+  dagster_lib_version: 0.26.${{ (version | split("."))[2] }}
   dagster_python: python >=3.9,<3.13
   build_number: 0
   dagster_epoch: ${{ dagster_epoch | default("10") }}
@@ -55,7 +55,6 @@ outputs:
       url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ version }}.tar.gz
       sha256: df56deb4e1e565cb158fae2380e3ebcd4bb447322aabe57e9f74aa5e0972245c
     build:
-      number: ${{ dagster_build_number }}
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
