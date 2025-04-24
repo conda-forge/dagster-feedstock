@@ -2,16 +2,19 @@
 schema_version: 1
 
 context:
+  # source-of-truth
   version: 1.10.12
+  build_number: 0
+  # derived
   dagster_lib_version: 0.26.${{ (version | split("."))[2] }}
   dagster_python: python >=3.9,<3.13
-  build_number: 1
   dagster_epoch: ${{ dagster_epoch | default("10") }}
   dagster_core_only: ${{ dagster_epoch | default("10") == "10" }}
   dagster_epoch_python: |-
     python 3.${{ dagster_epoch | default("10") }}.*
-  pip_install: -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
   dagster_build_number: ${{ (build_number | int) * 100 + (dagster_epoch | int) }}
+  # convenience
+  pip_install: -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
 recipe:
   name: dagster-meta
