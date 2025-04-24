@@ -7,37 +7,11 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/dagster-feedsto
 About dagster
 -------------
 
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/librariees/dagster-shared
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
 
 Package license: Apache-2.0
 
-Summary: Shared code between dagster and dagster-dg.
-
-Documentation: https://dagster.readthedocs.io/
-
-Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
-
-About dagster-cloud-cli
------------------------
-
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-cloud-cli
-
-Package license: Apache-2.0
-
-Summary: Command line interface for Dagster Cloud
-
-Documentation: https://dagster.readthedocs.io/
-
-Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
-
-About dagster-pipes
--------------------
-
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-pipes
-
-Package license: Apache-2.0
-
-Summary: Toolkit for Dagster integrations with transform logic outside of Dagster
+Summary: Dagster UI
 
 Documentation: https://dagster.readthedocs.io/
 
@@ -75,6 +49,19 @@ Documentation: https://dagster.readthedocs.io/
 
 Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
 
+About dagster-cloud-cli
+-----------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-cloud-cli
+
+Package license: Apache-2.0
+
+Summary: Command line interface for Dagster Cloud
+
+Documentation: https://dagster.readthedocs.io/
+
+Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
 About dagster-graphql
 ---------------------
 
@@ -88,6 +75,32 @@ Documentation: https://dagster.readthedocs.io/
 
 Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
 
+About dagster-pipes
+-------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-pipes
+
+Package license: Apache-2.0
+
+Summary: Toolkit for Dagster integrations with transform logic outside of Dagster
+
+Documentation: https://dagster.readthedocs.io/
+
+Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
+About dagster-shared
+--------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/librariees/dagster-shared
+
+Package license: Apache-2.0
+
+Summary: Shared code between dagster and dagster-dg.
+
+Documentation: https://dagster.readthedocs.io/
+
+Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
 About dagster-webserver
 -----------------------
 
@@ -96,19 +109,6 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-w
 Package license: Apache-2.0
 
 Summary: Web UI for dagster.
-
-Documentation: https://dagster.readthedocs.io/
-
-Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
-
-About dagit
------------
-
-Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
-
-Package license: Apache-2.0
-
-Summary: Dagster UI
 
 Documentation: https://dagster.readthedocs.io/
 
