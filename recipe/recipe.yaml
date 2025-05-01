@@ -189,7 +189,7 @@ outputs:
   - package:
       name: dagster-cloud-cli
     source:
-      url: https://pypi.org/packages/source/d/dagster-cloud-cli/dagster-cloud-cli-${{ version }}.tar.gz
+      url: https://pypi.org/packages/source/d/dagster-cloud-cli/dagster_cloud_cli-${{ version }}.tar.gz
       sha256: 69dbf8027f6ca9a4bfcf4e45908c3358ec2f10ea8d99d1c1b25a155de6a9a889
     build:
       noarch: python
