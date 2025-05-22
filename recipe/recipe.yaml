@@ -372,10 +372,12 @@ outputs:
       - requirements:
           run:
             - pip
-            - airflow
+            # errors with:
+            ##  >>> from airflow.hooks.base_hook import BaseHook
+            ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
+            - airflow <3
         script:
-          # TODO: restore after e.g. https://github.com/conda-forge/kombu-feedstock/pull/83
-          # - pip check
+          - pip check
           - python -c "import dagster_airflow"
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
