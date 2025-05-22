@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   # source-of-truth
-  version: 1.10.15
+  version: 1.10.16
   build_number: 0
   # derived
   dagster_lib_version: 0.26.${{ (version | split("."))[2] }}
@@ -30,7 +30,7 @@ outputs:
       name: dagster-pipes
     source:
       url: https://pypi.org/packages/source/d/dagster-pipes/dagster_pipes-${{ version }}.tar.gz
-      sha256: 32d04bf08a4f54b012f08293f04fe9f35d95071c4b0014f4ccb466119bb25f3e
+      sha256: e8842f1a387fddf8ea250545cde9825cbe844ef46ec8e3fa74293ef4c3aa46bc
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -56,7 +56,7 @@ outputs:
       version: ${{ dagster_lib_version }}
     source:
       url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ dagster_lib_version }}.tar.gz
-      sha256: 0472587bd7a582bbe4252d3d57deaa6483afb97bf3394de094a3b80dcefcbc42
+      sha256: 9d5bec229aa60886e16af7da567ba63ebe5ad6fbc04bd9b478b8679204813f85
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -71,7 +71,7 @@ outputs:
         - packaging >=20.9
         - pydantic >=2,<3.0.0
         - tomlkit
-        - typing_extensions >=4.10.0,<5
+        - typing_extensions >=4.11.0,<5
     tests:
       - python:
           pip_check: true
@@ -87,7 +87,7 @@ outputs:
       name: dagster
     source:
       url: https://pypi.org/packages/source/d/dagster/dagster-${{ version }}.tar.gz
-      sha256: 3134866154f12d632ba9355d765a73ba1f53c2cf1ef52931eba51db3468fc5bf
+      sha256: 106652a9a0e48822bb3fcab0cea9c2c0d6b4dff338086756a9761e6e2ddd7cd5
     build:
       number: ${{ dagster_build_number }}
       noarch: python
@@ -190,7 +190,7 @@ outputs:
       name: dagster-cloud-cli
     source:
       url: https://pypi.org/packages/source/d/dagster-cloud-cli/dagster_cloud_cli-${{ version }}.tar.gz
-      sha256: d324e3bebd2133dbcb78e4a092072115446692878d434bb273d432ded07cc33c
+      sha256: f200238e66c29c0276fb20aeddd5b1e6721bf639e3e173f9ddc40e5a942bed75
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -235,7 +235,7 @@ outputs:
       name: dagster-graphql
     source:
       url: https://pypi.org/packages/source/d/dagster-graphql/dagster_graphql-${{ version }}.tar.gz
-      sha256: b875d2225458d00f9b7502219cf8ca57795d06c9e4814796e3687c3142df19bc
+      sha256: 565480dba54be6a4bff208485acf5f0cdc489f9907ec398828d2dfcb6313446d
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -276,7 +276,7 @@ outputs:
       name: dagster-webserver
     source:
       url: https://pypi.org/packages/source/d/dagster-webserver/dagster_webserver-${{ version }}.tar.gz
-      sha256: 2455624151761afd7f5af4d4310795b0645054ae650e6f7c4209c08e333f7c44
+      sha256: 8e111d28bdf68f6275a8bbe95ad4c9ff0874272d8fd69648807978c783030271
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -316,7 +316,7 @@ outputs:
       name: dagit
     source:
       url: https://pypi.org/packages/source/d/dagit/dagit-${{ version }}.tar.gz
-      sha256: 5abdedda7b6843d841bc6d2036580f8be7c217003ef191a390166bb50cb7222b
+      sha256: c76b44f53a1ee7c4e08bee6545c224b77577ebf70403ead27b0b7a283286f7c6
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -351,7 +351,7 @@ outputs:
       name: dagster-airflow
     source:
       url: https://pypi.org/packages/source/d/dagster-airflow/dagster_airflow-${{ version }}.tar.gz
-      sha256: 6593e0b3bf86b0cb70172c8e4d010126ed08ce6aaf274fd79dc46249cd7ce331
+      sha256: 0f9c417b1e0afc62d59ac91056b1899312c32223aa75a4ab2684585a27cbb45b
     build:
       skip: dagster_core_only
       noarch: python
@@ -372,10 +372,12 @@ outputs:
       - requirements:
           run:
             - pip
-            - airflow
+            # errors with:
+            ##  >>> from airflow.hooks.base_hook import BaseHook
+            ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
+            - airflow <3
         script:
-          # TODO: restore after e.g. https://github.com/conda-forge/kombu-feedstock/pull/83
-          # - pip check
+          - pip check
           - python -c "import dagster_airflow"
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
