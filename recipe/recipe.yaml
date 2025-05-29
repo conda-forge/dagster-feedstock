@@ -3,10 +3,9 @@ schema_version: 1
 
 context:
   # source-of-truth
-  version: 1.10.17
+  version: 1.10.18
   build_number: 0
   # derived
-  dagster_lib_version: 0.26.${{ (version | split("."))[2] }}
   dagster_python: python >=3.9,<3.13
   dagster_epoch: ${{ dagster_epoch | default("10") }}
   dagster_core_only: ${{ dagster_epoch | default("10") == "10" }}
@@ -30,7 +29,7 @@ outputs:
       name: dagster-pipes
     source:
       url: https://pypi.org/packages/source/d/dagster-pipes/dagster_pipes-${{ version }}.tar.gz
-      sha256: 7e589e71ff61bd6cce5868a86f78eecef94672ded9ad35c866577089cf80d809
+      sha256: 1df4c94835e9cc8ba9ea9dcf3de112bf88794670a582a18272fa7d1656f14b15
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -53,10 +52,9 @@ outputs:
 
   - package:
       name: dagster-shared
-      version: ${{ dagster_lib_version }}
     source:
-      url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ dagster_lib_version }}.tar.gz
-      sha256: 1fd0c12f1107704b8990d00acfd9b6e714db6822ed50a24e0fb96df41b7bc41e
+      url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ version }}.tar.gz
+      sha256: 1070966434525ea114380255c3a205fef0583a24b5d5d935bd8d153ce51832a9
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -87,7 +85,7 @@ outputs:
       name: dagster
     source:
       url: https://pypi.org/packages/source/d/dagster/dagster-${{ version }}.tar.gz
-      sha256: a84904e775522884b440e624d858ce0e1403ff88f6c68a7c05c1a7bda7f2cdc5
+      sha256: 6da38ca6b06acf3fe5b789780f7dae82abd98d2c35fc40c30b67165aec65e60b
     build:
       number: ${{ dagster_build_number }}
       noarch: python
@@ -110,7 +108,7 @@ outputs:
           else: protobuf >=3.20.0,<6
         - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
-        - dagster-shared ${{ dagster_lib_version }}.*
+        - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
         - antlr-python-runtime
         - click >=5.0,<8.2
@@ -190,7 +188,7 @@ outputs:
       name: dagster-cloud-cli
     source:
       url: https://pypi.org/packages/source/d/dagster-cloud-cli/dagster_cloud_cli-${{ version }}.tar.gz
-      sha256: ce81528b265a3548fc5465e556bc60e1ec261a2c69b435465fd91a053418c06b
+      sha256: 9bb02cd89a7979b52624e0c6f616ca2dc1f5f5dd1476ad4d0a0e45e33a7ce420
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -235,7 +233,7 @@ outputs:
       name: dagster-graphql
     source:
       url: https://pypi.org/packages/source/d/dagster-graphql/dagster_graphql-${{ version }}.tar.gz
-      sha256: 186bb946f40de12a745dda434cf787d304e76e700db302bf650b92e399274f7f
+      sha256: 1d9cf5b12fbe49228537577bac524a2f3ee1be492d482dac8081b07cbda44ffe
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -276,7 +274,7 @@ outputs:
       name: dagster-webserver
     source:
       url: https://pypi.org/packages/source/d/dagster-webserver/dagster_webserver-${{ version }}.tar.gz
-      sha256: 01578c8f435aa9138311a11b38ec1d6b5f41d12de27d16111a2ad416094ba1a4
+      sha256: 332b2e8067544b9e463aa2f4373f50e8976c5cefc1d90efff68375f2d2a5a678
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -316,7 +314,7 @@ outputs:
       name: dagit
     source:
       url: https://pypi.org/packages/source/d/dagit/dagit-${{ version }}.tar.gz
-      sha256: 2390d05929a9e5ea88ac7af7afcc0cfbb1b627ead0f4b72964e28b1105f48eab
+      sha256: 975a876d8cb3925afe2b71a1df1188e3104e749928340df39065347c07f1d159
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -351,7 +349,7 @@ outputs:
       name: dagster-airflow
     source:
       url: https://pypi.org/packages/source/d/dagster-airflow/dagster_airflow-${{ version }}.tar.gz
-      sha256: 5fdc0b5ff583e58cae9601b6b0f01dbf01717c44acb354963d09cb5a87326db5
+      sha256: c03a830e68900939dd78837eccb7724c9cd721dc250fd0c309d6c0a5aa70d40a
     build:
       skip: dagster_core_only
       noarch: python
