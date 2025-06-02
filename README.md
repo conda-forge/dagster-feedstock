@@ -7,6 +7,19 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/dagster-feedsto
 About dagster
 -------------
 
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/create-dagster
+
+Package license: Apache-2.0
+
+Summary: CLI for creating a new dg project or workspace.
+
+Documentation: https://dagster.readthedocs.io/
+
+Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
+About dagit
+-----------
+
 Home: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
 
 Package license: Apache-2.0
@@ -57,6 +70,32 @@ Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries
 Package license: Apache-2.0
 
 Summary: Command line interface for Dagster Cloud
+
+Documentation: https://dagster.readthedocs.io/
+
+Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
+About dagster-dg-cli
+--------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dg-cli
+
+Package license: Apache-2.0
+
+Summary: Experimental API for scaffolding Dagster projects and components. Includes the dg CLI tool.
+
+Documentation: https://dagster.readthedocs.io/
+
+Dagster is a system for building modern data applications. Combining an elegant programming model and beautiful tools, Dagster allows infrastructure engineers, data engineers, and data scientists to seamlessly collaborate to process and produce the trusted, reliable data needed in today's world.
+
+About dagster-dg-core
+---------------------
+
+Home: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dg-core
+
+Package license: Apache-2.0
+
+Summary: Core libraries for the dagster-dg-cli and create-dagster packages.
 
 Documentation: https://dagster.readthedocs.io/
 
@@ -132,10 +171,13 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-create--dagster-green.svg)](https://anaconda.org/conda-forge/create-dagster) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/create-dagster.svg)](https://anaconda.org/conda-forge/create-dagster) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/create-dagster.svg)](https://anaconda.org/conda-forge/create-dagster) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/create-dagster.svg)](https://anaconda.org/conda-forge/create-dagster) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagit-green.svg)](https://anaconda.org/conda-forge/dagit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagit.svg)](https://anaconda.org/conda-forge/dagit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagit.svg)](https://anaconda.org/conda-forge/dagit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagit.svg)](https://anaconda.org/conda-forge/dagit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster-green.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster.svg)](https://anaconda.org/conda-forge/dagster) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--airflow-green.svg)](https://anaconda.org/conda-forge/dagster-airflow) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-airflow.svg)](https://anaconda.org/conda-forge/dagster-airflow) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-airflow.svg)](https://anaconda.org/conda-forge/dagster-airflow) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-airflow.svg)](https://anaconda.org/conda-forge/dagster-airflow) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--cloud--cli-green.svg)](https://anaconda.org/conda-forge/dagster-cloud-cli) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-cloud-cli.svg)](https://anaconda.org/conda-forge/dagster-cloud-cli) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-cloud-cli.svg)](https://anaconda.org/conda-forge/dagster-cloud-cli) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-cloud-cli.svg)](https://anaconda.org/conda-forge/dagster-cloud-cli) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--dg--cli-green.svg)](https://anaconda.org/conda-forge/dagster-dg-cli) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-dg-cli.svg)](https://anaconda.org/conda-forge/dagster-dg-cli) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-dg-cli.svg)](https://anaconda.org/conda-forge/dagster-dg-cli) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-dg-cli.svg)](https://anaconda.org/conda-forge/dagster-dg-cli) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--dg--core-green.svg)](https://anaconda.org/conda-forge/dagster-dg-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-dg-core.svg)](https://anaconda.org/conda-forge/dagster-dg-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-dg-core.svg)](https://anaconda.org/conda-forge/dagster-dg-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-dg-core.svg)](https://anaconda.org/conda-forge/dagster-dg-core) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--graphql-green.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-graphql.svg)](https://anaconda.org/conda-forge/dagster-graphql) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--pipes-green.svg)](https://anaconda.org/conda-forge/dagster-pipes) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-pipes.svg)](https://anaconda.org/conda-forge/dagster-pipes) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-pipes.svg)](https://anaconda.org/conda-forge/dagster-pipes) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-pipes.svg)](https://anaconda.org/conda-forge/dagster-pipes) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-dagster--shared-green.svg)](https://anaconda.org/conda-forge/dagster-shared) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/dagster-shared.svg)](https://anaconda.org/conda-forge/dagster-shared) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/dagster-shared.svg)](https://anaconda.org/conda-forge/dagster-shared) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/dagster-shared.svg)](https://anaconda.org/conda-forge/dagster-shared) |
@@ -151,41 +193,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `dagit, dagster, dagster-airflow, dagster-cloud-cli, dagster-graphql, dagster-pipes, dagster-shared, dagster-webserver` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `create-dagster, dagit, dagster, dagster-airflow, dagster-cloud-cli, dagster-dg-cli, dagster-dg-core, dagster-graphql, dagster-pipes, dagster-shared, dagster-webserver` can be installed with `conda`:
 
 ```
-conda install dagit dagster dagster-airflow dagster-cloud-cli dagster-graphql dagster-pipes dagster-shared dagster-webserver
-```
-
-or with `mamba`:
-
-```
-mamba install dagit dagster dagster-airflow dagster-cloud-cli dagster-graphql dagster-pipes dagster-shared dagster-webserver
-```
-
-It is possible to list all of the versions of `dagit` available on your platform with `conda`:
-
-```
-conda search dagit --channel conda-forge
+conda install create-dagster dagit dagster dagster-airflow dagster-cloud-cli dagster-dg-cli dagster-dg-core dagster-graphql dagster-pipes dagster-shared dagster-webserver
 ```
 
 or with `mamba`:
 
 ```
-mamba search dagit --channel conda-forge
+mamba install create-dagster dagit dagster dagster-airflow dagster-cloud-cli dagster-dg-cli dagster-dg-core dagster-graphql dagster-pipes dagster-shared dagster-webserver
+```
+
+It is possible to list all of the versions of `create-dagster` available on your platform with `conda`:
+
+```
+conda search create-dagster --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search create-dagster --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search dagit --channel conda-forge
+mamba repoquery search create-dagster --channel conda-forge
 
-# List packages depending on `dagit`:
-mamba repoquery whoneeds dagit --channel conda-forge
+# List packages depending on `create-dagster`:
+mamba repoquery whoneeds create-dagster --channel conda-forge
 
-# List dependencies of `dagit`:
-mamba repoquery depends dagit --channel conda-forge
+# List dependencies of `create-dagster`:
+mamba repoquery depends create-dagster --channel conda-forge
 ```
 
 
