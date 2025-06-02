@@ -6,9 +6,8 @@ context:
   version: 1.10.18
   build_number: 0
   # derived
-  dagster_python: python >=3.9,<3.13
+  dagster_python: python >=${{ python_min }},<3.13
   dagster_epoch: ${{ dagster_epoch | default("10") }}
-  dagster_core_only: ${{ dagster_epoch | default("10") == "10" }}
   dagster_epoch_python: |-
     python 3.${{ dagster_epoch | default("10") }}.*
   dagster_build_number: ${{ (build_number | int) * 100 + (dagster_epoch | int) }}
@@ -185,6 +184,37 @@ outputs:
 
   # other things that use the main `version`
   - package:
+      name: create-dagster
+    source:
+      url: https://pypi.org/packages/source/c/create-dagster/create_dagster-${{ version }}.tar.gz
+      sha256: 078232b9a7d078e06893f23ed964943d57e67c39541d9c98717faf85e6a0a6a3
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+      python:
+        entry_points:
+          - create-dagster = create_dagster.cli:main
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
+        - ${{ dagster_python }}
+    tests:
+      - python:
+          imports: create_dagster
+          pip_check: true
+      - script:
+          - create-dagster --help
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/create-dagster
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: CLI for creating a new dg project or workspace.
+
+  - package:
       name: dagster-cloud-cli
     source:
       url: https://pypi.org/packages/source/d/dagster-cloud-cli/dagster_cloud_cli-${{ version }}.tar.gz
@@ -228,6 +258,80 @@ outputs:
       license: Apache-2.0
       license_file: LICENSE
       summary: Command line interface for Dagster Cloud
+
+  - package:
+      name: dagster-dg-cli
+    source:
+      url: https://pypi.org/packages/source/d/dagster-dg-cli/dagster_dg_cli-${{ version }}.tar.gz
+      sha256: 666d64f448b707ef557d855b94e2431b6f9ce86e35e09b877be16ae164cd678b
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+      python:
+        entry_points:
+          - dg = dagster_dg_cli.cli:main
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
+        - ${{ dagster_python }}
+    tests:
+      - python:
+          imports: dagster_dg_cli
+          pip_check: true
+      - script:
+          - dg --help
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dg-cli
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Experimental API for scaffolding Dagster projects and components. Includes the dg CLI tool.
+
+  - package:
+      name: dagster-dg-core
+    source:
+      url: https://pypi.org/packages/source/d/dagster-dg-core/dagster_dg_core-${{ version }}.tar.gz
+      sha256: 4e988e30f1d390ccf4a1f0ec15d571a2482b14e18c4089bce515ef07c533cff0
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+    requirements:
+      host:
+        - ${{ dagster_python }}
+        - pip
+        - setuptools
+      run:
+        - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
+        - ${{ dagster_python }}
+        - click >=8,<8.2
+        - click-aliases
+        - gql-with-requests
+        - jinja2
+        - jsonschema
+        - markdown
+        - packaging
+        - python-dotenv
+        - pyyaml >=5.1
+        - rich
+        - setuptools
+        - tomlkit
+        - typer <0.17.0
+        - typing_extensions >=4.4.0,<5
+        - watchdog
+        - yaspin
+    tests:
+      - python:
+          imports: dagster_dg_core
+          pip_check: true
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dg-core
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Core libraries for the dagster-dg-cli and create-dagster packages.
 
   - package:
       name: dagster-graphql
@@ -351,7 +455,6 @@ outputs:
       url: https://pypi.org/packages/source/d/dagster-airflow/dagster_airflow-${{ version }}.tar.gz
       sha256: c03a830e68900939dd78837eccb7724c9cd721dc250fd0c309d6c0a5aa70d40a
     build:
-      skip: dagster_core_only
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
@@ -364,7 +467,6 @@ outputs:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - lazy-object-proxy
         - pendulum
-        - python >=3.8
         - setuptools <71.0.0
     tests:
       - requirements:
