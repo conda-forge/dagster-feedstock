@@ -4,7 +4,7 @@ schema_version: 1
 context:
   # source-of-truth
   version: 1.10.18
-  build_number: 0
+  build_number: 1
   # derived
   dagster_python: python >=${{ python_min }},<3.13
   dagster_epoch: ${{ dagster_epoch | default("10") }}
