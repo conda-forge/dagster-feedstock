@@ -3,8 +3,8 @@ schema_version: 1
 
 context:
   # source-of-truth
-  version: 1.10.18
-  build_number: 1
+  version: 1.10.19
+  build_number: 0
   # derived
   dagster_python: python >=${{ python_min }},<3.13
   dagster_epoch: ${{ dagster_epoch | default("10") }}
@@ -28,7 +28,7 @@ outputs:
       name: dagster-pipes
     source:
       url: https://pypi.org/packages/source/d/dagster-pipes/dagster_pipes-${{ version }}.tar.gz
-      sha256: 1df4c94835e9cc8ba9ea9dcf3de112bf88794670a582a18272fa7d1656f14b15
+      sha256: 83848206df724c45115436c2fbca53cf61d85326cd0ecd8d395746656a5110d2
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -53,7 +53,7 @@ outputs:
       name: dagster-shared
     source:
       url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ version }}.tar.gz
-      sha256: 1070966434525ea114380255c3a205fef0583a24b5d5d935bd8d153ce51832a9
+      sha256: 7dc6d903587d42bc9ba9cd86b3070dc016966979fccc52f8f40116a67cd647a8
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -84,7 +84,7 @@ outputs:
       name: dagster
     source:
       url: https://pypi.org/packages/source/d/dagster/dagster-${{ version }}.tar.gz
-      sha256: 6da38ca6b06acf3fe5b789780f7dae82abd98d2c35fc40c30b67165aec65e60b
+      sha256: 279a7bc0307dca30b7bdf2e8b013a646adc2a6c6591b02c0d663b6cadfedbb48
     build:
       number: ${{ dagster_build_number }}
       noarch: python
@@ -187,7 +187,7 @@ outputs:
       name: create-dagster
     source:
       url: https://pypi.org/packages/source/c/create-dagster/create_dagster-${{ version }}.tar.gz
-      sha256: 078232b9a7d078e06893f23ed964943d57e67c39541d9c98717faf85e6a0a6a3
+      sha256: 9ca968816c8b3637cb949d9b30397c3d51837d3ade699dbd7bba2111d3b591d8
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -218,7 +218,7 @@ outputs:
       name: dagster-cloud-cli
     source:
       url: https://pypi.org/packages/source/d/dagster-cloud-cli/dagster_cloud_cli-${{ version }}.tar.gz
-      sha256: 9bb02cd89a7979b52624e0c6f616ca2dc1f5f5dd1476ad4d0a0e45e33a7ce420
+      sha256: 9728dae7e623d79cc54cc7377a14459b3e1d421b41547da878d1389658387cfb
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -263,7 +263,7 @@ outputs:
       name: dagster-dg-cli
     source:
       url: https://pypi.org/packages/source/d/dagster-dg-cli/dagster_dg_cli-${{ version }}.tar.gz
-      sha256: 666d64f448b707ef557d855b94e2431b6f9ce86e35e09b877be16ae164cd678b
+      sha256: 5548e8c118432f9dd2ba4e67ab2ca0c94d763093899e593a82256a41221da9c9
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -294,7 +294,7 @@ outputs:
       name: dagster-dg-core
     source:
       url: https://pypi.org/packages/source/d/dagster-dg-core/dagster_dg_core-${{ version }}.tar.gz
-      sha256: 4e988e30f1d390ccf4a1f0ec15d571a2482b14e18c4089bce515ef07c533cff0
+      sha256: a9d8cc0021171bcc099b532b0bf692a5fecbbc6ca1f2fc8806a4efb821f89b3c
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -337,7 +337,7 @@ outputs:
       name: dagster-graphql
     source:
       url: https://pypi.org/packages/source/d/dagster-graphql/dagster_graphql-${{ version }}.tar.gz
-      sha256: 1d9cf5b12fbe49228537577bac524a2f3ee1be492d482dac8081b07cbda44ffe
+      sha256: bd6698c790b85164bad909dc895287f01bbd8428604c1b06d0580e5e6a599eb3
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -378,7 +378,7 @@ outputs:
       name: dagster-webserver
     source:
       url: https://pypi.org/packages/source/d/dagster-webserver/dagster_webserver-${{ version }}.tar.gz
-      sha256: 332b2e8067544b9e463aa2f4373f50e8976c5cefc1d90efff68375f2d2a5a678
+      sha256: c2dceb5a28166a4dd53a66daab393274c6f7c78b27dbd3d9ae2835e063d3047a
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -418,7 +418,7 @@ outputs:
       name: dagit
     source:
       url: https://pypi.org/packages/source/d/dagit/dagit-${{ version }}.tar.gz
-      sha256: 975a876d8cb3925afe2b71a1df1188e3104e749928340df39065347c07f1d159
+      sha256: 8cb6bca7f3613a77d1811edc15398d457b14058c0cd3cbdace8b8c26b378a8f9
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -453,7 +453,7 @@ outputs:
       name: dagster-airflow
     source:
       url: https://pypi.org/packages/source/d/dagster-airflow/dagster_airflow-${{ version }}.tar.gz
-      sha256: c03a830e68900939dd78837eccb7724c9cd721dc250fd0c309d6c0a5aa70d40a
+      sha256: ac4b34fdbe9b48ecb59bcc7b5995e940117cc59150e330518db6f41cbba2e6d3
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
