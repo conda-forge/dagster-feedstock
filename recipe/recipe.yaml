@@ -318,7 +318,7 @@ outputs:
         - pyyaml >=5.1
         - rich
         - setuptools
-        - tomlkit
+        - tomlkit <0.13.3
         - typer <0.17.0
         - typing_extensions >=4.4.0,<5
         - watchdog
