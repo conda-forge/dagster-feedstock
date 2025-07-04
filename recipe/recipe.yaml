@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   # source-of-truth
-  version: 1.11.0
+  version: "1.11.1"
   build_number: 0
   # derived
   dagster_python: python >=${{ python_min }},<3.13
