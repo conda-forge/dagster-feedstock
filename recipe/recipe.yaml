@@ -276,6 +276,7 @@ outputs:
         - pip
         - setuptools
       run:
+        - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
         - ${{ dagster_python }}
     tests:
