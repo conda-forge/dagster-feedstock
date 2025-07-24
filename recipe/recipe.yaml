@@ -6,7 +6,7 @@ context:
   version: 1.11.3
   build_number: 0
   # derived
-  dagster_python: python >=${{ python_min }},<3.13
+  dagster_python: python >=${{ python_min }},<3.14
   dagster_epoch: ${{ dagster_epoch | default("10") }}
   dagster_epoch_python: |-
     python 3.${{ dagster_epoch | default("10") }}.*
@@ -34,11 +34,11 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - ${{ dagster_python }}
+        - python >=${{ python_min }}
     tests:
       - python:
           pip_check: true
@@ -59,14 +59,14 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - ${{ dagster_python }}
-        - pyyaml >=5.1
         - packaging >=20.9
         - pydantic >=2,<3.0.0
+        - python >=${{ python_min }}.*
+        - pyyaml >=5.1
         - tomlkit
         - typing_extensions >=4.11.0,<5
     tests:
@@ -95,17 +95,16 @@ outputs:
           - dagster-daemon = dagster.daemon.cli:main
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - if: dagster_epoch == "12"
+        - if: dagster_epoch in ["12", "13"]
           then: universal_pathlib >=0.2.0
           else: universal_pathlib
-        - if: dagster_epoch in ["11", "12"]
+        - if: dagster_epoch in ["11", "12", "13"]
           then: protobuf >=4,<6
           else: protobuf >=3.20.0,<6
-        - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
@@ -118,6 +117,7 @@ outputs:
         - grpcio-health-checking >=1.44.0
         - jinja2
         - psutil >=1.0
+        - python >=${{ python_min }}.*
         - python-dotenv
         - pytz
         - pywin32-on-windows
@@ -196,12 +196,12 @@ outputs:
           - create-dagster = create_dagster.cli:main
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - ${{ dagster_python }}
+        - python >=${{ python_min }}.*
     tests:
       - python:
           imports: create_dagster
@@ -228,16 +228,16 @@ outputs:
           - dagster-plus = dagster_cloud_cli.entrypoint:app
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
         - click <8.2
         - github3.py
         - jinja2
         - packaging >=20.9
+        - python >=${{ python_min }}.*
         - pyyaml >=5.1
         - questionary
         - requests
@@ -272,13 +272,13 @@ outputs:
           - dg = dagster_dg_cli.cli:main
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - ${{ dagster_python }}
+        - python >=${{ python_min }}.*
     tests:
       - python:
           imports: dagster_dg_cli
@@ -301,13 +301,12 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
         - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
-        - ${{ dagster_python }}
         - click >=8,<8.2
         - click-aliases
         - gql-with-requests
@@ -315,6 +314,7 @@ outputs:
         - jsonschema
         - markdown
         - packaging
+        - python >=${{ python_min }}.*
         - python-dotenv
         - pyyaml >=5.1
         - rich
@@ -347,14 +347,14 @@ outputs:
           - dagster-graphql = dagster_graphql.cli:main
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - gql-with-requests >=3.0.0,<4.0.0
         - graphene >=3,<4
+        - python >=${{ python_min }}.*
         - requests
         - starlette
     tests:
@@ -389,14 +389,14 @@ outputs:
           - dagster-webserver-debug = dagster_webserver.debug:main
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster-graphql", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - click >=7.0,<9.0
+        - python >=${{ python_min }}.*
         - starlette !=0.36.0
         - uvicorn-standard
     tests:
@@ -429,12 +429,12 @@ outputs:
           - dagit-debug = dagster_webserver.debug:main
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster-webserver", upper_bound="x.x.x") }}
+        - python >=${{ python_min }}.*
     tests:
       - python:
           pip_check: true
@@ -460,14 +460,14 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
-        - ${{ dagster_python }}
         - pip
+        - python ${{ python_min }}.*
         - setuptools
       run:
-        - ${{ dagster_python }}
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - lazy-object-proxy
         - pendulum
+        - python >=${{ python_min }}.*
         - setuptools <71.0.0
     tests:
       - requirements:
