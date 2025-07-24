@@ -4,13 +4,6 @@ schema_version: 1
 context:
   # source-of-truth
   version: 1.11.3
-  build_number: 0
-  # derived
-  dagster_python: python >=${{ python_min }},<3.14
-  dagster_epoch: ${{ dagster_epoch | default("10") }}
-  dagster_epoch_python: |-
-    python 3.${{ dagster_epoch | default("10") }}.*
-  dagster_build_number: ${{ (build_number | int) * 100 + (dagster_epoch | int) }}
   # convenience
   pip_install: -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
@@ -20,7 +13,7 @@ recipe:
 
 build:
   noarch: python
-  number: ${{ build_number }}
+  number: 0
 
 outputs:
   # deps of dagster
@@ -39,10 +32,13 @@ outputs:
         - setuptools
       run:
         - python >=${{ python_min }}
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
-          pip_check: true
           imports: dagster_pipes
+          pip_check: true
+          python_version: ${{ python_min }}.*
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-pipes
       license: Apache-2.0
@@ -65,14 +61,17 @@ outputs:
       run:
         - packaging >=20.9
         - pydantic >=2,<3.0.0
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
         - pyyaml >=5.1
         - tomlkit
         - typing_extensions >=4.11.0,<5
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
-          pip_check: true
           imports: dagster_shared
+          pip_check: true
+          python_version: ${{ python_min }}.*
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/librariees/dagster-shared
       license: Apache-2.0
@@ -99,10 +98,10 @@ outputs:
         - python ${{ python_min }}.*
         - setuptools
       run:
-        - if: dagster_epoch in ["12", "13"]
+        - if: python_min in ["3.12", "3.13"]
           then: universal_pathlib >=0.2.0
           else: universal_pathlib
-        - if: dagster_epoch in ["11", "12", "13"]
+        - if: python_min in ["3.11", "3.12", "3.13"]
           then: protobuf >=4,<6
           else: protobuf >=3.20.0,<6
         - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
@@ -117,7 +116,7 @@ outputs:
         - grpcio-health-checking >=1.44.0
         - jinja2
         - psutil >=1.0
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
         - python-dotenv
         - pytz
         - pywin32-on-windows
@@ -134,11 +133,10 @@ outputs:
         - tzdata
         - watchdog >=0.8.3,<6
       run_constraints:
-        - ${{ dagster_epoch_python }}
+        - python ${{ python_min }}.*
         - pywin32 !=226
     tests:
       - python:
-          pip_check: true
           imports:
             - dagster
             - dagster.api
@@ -164,6 +162,8 @@ outputs:
             - dagster.loggers
             - dagster.seven
             - dagster.utils
+          pip_check: true
+          python_version: ${{ python_min }}.*
       - script:
           - dagster --help
           - dagster-daemon --help
@@ -201,11 +201,14 @@ outputs:
         - setuptools
       run:
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
           imports: create_dagster
           pip_check: true
+          python_version: ${{ python_min }}.*
       - script:
           - create-dagster --help
     about:
@@ -237,19 +240,21 @@ outputs:
         - github3.py
         - jinja2
         - packaging >=20.9
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
         - pyyaml >=5.1
         - questionary
         - requests
         - typer >=0.4.1
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
+          imports: dagster_cloud_cli
           pip_check: true
-          imports:
-            - dagster_cloud_cli
+          python_version: ${{ python_min }}.*
       - requirements:
           run:
-            - ${{ dagster_epoch_python }}
+            - python ${{ python_min }}.*
         script:
           - dagster-cloud --help
           - dagster-plus --help
@@ -278,11 +283,14 @@ outputs:
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
           imports: dagster_dg_cli
           pip_check: true
+          python_version: ${{ python_min }}.*
       - script:
           - dg --help
     about:
@@ -314,7 +322,7 @@ outputs:
         - jsonschema
         - markdown
         - packaging
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
         - python-dotenv
         - pyyaml >=5.1
         - rich
@@ -324,10 +332,13 @@ outputs:
         - typing_extensions >=4.4.0,<5
         - watchdog
         - yaspin
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
           imports: dagster_dg_core
           pip_check: true
+          python_version: ${{ python_min }}.*
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dg-core
       license: Apache-2.0
@@ -354,19 +365,22 @@ outputs:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - gql-with-requests >=3.0.0,<4.0.0
         - graphene >=3,<4
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
         - requests
         - starlette
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
-          pip_check: true
           imports:
             - dagster_graphql
             - dagster_graphql.client
             - dagster_graphql.schema
+          pip_check: true
+          python_version: ${{ python_min }}.*
       - requirements:
           run:
-            - ${{ dagster_epoch_python }}
+            - python ${{ python_min }}.*
         script:
           - dagster-graphql --help
     about:
@@ -396,16 +410,19 @@ outputs:
         - ${{ pin_subpackage("dagster-graphql", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - click >=7.0,<9.0
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
         - starlette !=0.36.0
         - uvicorn-standard
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
-          pip_check: true
           imports: dagster_webserver
+          pip_check: true
+          python_version: ${{ python_min }}.*
       - requirements:
           run:
-            - ${{ dagster_epoch_python }}
+            - python ${{ python_min }}.*
         script:
           - dagster-webserver --help
           - dagster-webserver-debug --help
@@ -434,14 +451,17 @@ outputs:
         - setuptools
       run:
         - ${{ pin_subpackage("dagster-webserver", upper_bound="x.x.x") }}
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - python:
-          pip_check: true
           imports: dagit
+          pip_check: true
+          python_version: ${{ python_min }}.*
       - requirements:
           run:
-            - ${{ dagster_epoch_python }}
+            - python ${{ python_min }}.*
         script:
           - dagit --help
     about:
@@ -467,8 +487,10 @@ outputs:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - lazy-object-proxy
         - pendulum
-        - python >=${{ python_min }}.*
+        - python >=${{ python_min }}
         - setuptools <71.0.0
+      run_constraints:
+        - python ${{ python_min }}.*
     tests:
       - requirements:
           run:
@@ -477,6 +499,7 @@ outputs:
             ##  >>> from airflow.hooks.base_hook import BaseHook
             ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
             - airflow <3
+            - python ${{ python_min }}.*
         script:
           - pip check
           - python -c "import dagster_airflow"

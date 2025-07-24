@@ -1,9 +1,7 @@
 # for disjoint python dependencies  e.g. `protobuf`
-dagster_epoch:
-  - "9"
-  - "10"
-  - "11"
-  - "12"
-  - "13"
-ignore_version:
-  - python
+python_min:
+  - "3.9"
+  - "3.10"
+  - "3.11"
+  - "3.12"
+  - "3.13"
