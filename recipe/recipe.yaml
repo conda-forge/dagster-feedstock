@@ -493,17 +493,20 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
-      - requirements:
-          run:
-            - pip
-            # errors with:
-            ##  >>> from airflow.hooks.base_hook import BaseHook
-            ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
-            - airflow <3
-            - python ${{ python_min }}.*
-        script:
-          - pip check
-          - python -c "import dagster_airflow"
+      # not-yet-available-on-conda-forge
+      - if: python_min not in ["3.13"]
+        then:
+          requirements:
+            run:
+              - pip
+              # errors with:
+              ##  >>> from airflow.hooks.base_hook import BaseHook
+              ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
+              - airflow <3
+              - python ${{ python_min }}.*
+          script:
+            - pip check
+            - python -c "import dagster_airflow"
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-airflow
       license: Apache-2.0
