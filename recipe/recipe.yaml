@@ -244,6 +244,7 @@ outputs:
         - pyyaml >=5.1
         - questionary
         - requests
+        - setuptools
         - typer >=0.4.1
       run_constraints:
         - python ${{ python_min }}.*
