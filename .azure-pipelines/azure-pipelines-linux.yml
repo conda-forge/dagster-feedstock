@@ -8,26 +8,31 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_dagster_epoch10:
-        CONFIG: linux_64_dagster_epoch10
+      linux_64_python_min3.10:
+        CONFIG: linux_64_python_min3.10
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-        SHORT_CONFIG: linux_64_dagster_epoch10
-      linux_64_dagster_epoch11:
-        CONFIG: linux_64_dagster_epoch11
+        SHORT_CONFIG: linux_64_python_min3.10
+      linux_64_python_min3.11:
+        CONFIG: linux_64_python_min3.11
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-        SHORT_CONFIG: linux_64_dagster_epoch11
-      linux_64_dagster_epoch12:
-        CONFIG: linux_64_dagster_epoch12
+        SHORT_CONFIG: linux_64_python_min3.11
+      linux_64_python_min3.12:
+        CONFIG: linux_64_python_min3.12
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-        SHORT_CONFIG: linux_64_dagster_epoch12
-      linux_64_dagster_epoch9:
-        CONFIG: linux_64_dagster_epoch9
+        SHORT_CONFIG: linux_64_python_min3.12
+      linux_64_python_min3.13:
+        CONFIG: linux_64_python_min3.13
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-        SHORT_CONFIG: linux_64_dagster_epoch9
+        SHORT_CONFIG: linux_64_python_min3.13
+      linux_64_python_min3.9:
+        CONFIG: linux_64_python_min3.9
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        SHORT_CONFIG: linux_64_python_min3.9
   timeoutInMinutes: 360
   variables: {}
 
