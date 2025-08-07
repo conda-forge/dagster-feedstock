@@ -286,9 +286,7 @@ outputs:
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
         - python >=${{ python_min }}
         - typer
-        - if: python_min in ["3.9"]
-          then: mcp
-          else: python
+        - ${{ "python" if python_min in ["3.9"] else "mcp" }}
       run_constraints:
         - python ${{ python_min }}.*
     tests:
