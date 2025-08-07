@@ -6,7 +6,6 @@ context:
   version: 1.11.5
   # convenience
   pip_install: -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-  dagster_dg_cli_mcp: ${{ "python" if python_min == "3.9" else "python" }}
 
 recipe:
   name: dagster-meta
@@ -285,9 +284,11 @@ outputs:
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - ${{ dagster_dg_cli_mcp }}
         - python >=${{ python_min }}
         - typer
+        - if: python_min in ["3.9"]
+          then: mcp
+          else: python
       run_constraints:
         - python ${{ python_min }}.*
     tests:
