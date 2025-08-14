@@ -118,6 +118,7 @@ outputs:
         - psutil >=1.0
         - python >=${{ python_min }}
         - python-dotenv
+        - python-tzdata
         - pytz
         - pywin32-on-windows
         - requests
@@ -130,7 +131,6 @@ outputs:
         - tomli <3
         - toposort >=1.0
         - tqdm <5
-        - tzdata
         - watchdog >=0.8.3,<6
       run_constraints:
         - python ${{ python_min }}.*
