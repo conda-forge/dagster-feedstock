@@ -1,6 +1,5 @@
 # for disjoint python dependencies  e.g. `protobuf`
 python_min:
-  - "3.9"
   - "3.10"
   - "3.11"
   - "3.12"
