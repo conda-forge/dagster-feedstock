@@ -102,8 +102,8 @@ outputs:
           then: universal_pathlib >=0.2.0
           else: universal_pathlib
         - if: python_min in ["3.11", "3.12", "3.13"]
-          then: protobuf >=4,<6
-          else: protobuf >=3.20.0,<6
+          then: protobuf >=4,<7
+          else: protobuf >=3.20.0,<7
         - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
