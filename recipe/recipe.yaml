@@ -131,7 +131,7 @@ outputs:
         - tomli <3
         - toposort >=1.0
         - tqdm <5
-        - watchdog >=0.8.3,<6
+        - watchdog >=0.8.3,<7
       run_constraints:
         - python ${{ python_min }}.*
         - pywin32 !=226
@@ -245,6 +245,7 @@ outputs:
         - questionary
         - requests
         - setuptools
+        - tomli >=1.1.0
         - typer >=0.4.1
       run_constraints:
         - python ${{ python_min }}.*
