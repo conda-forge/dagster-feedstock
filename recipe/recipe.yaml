@@ -285,9 +285,6 @@ outputs:
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - anthropic
-        - claude-code-sdk
-        - mcp
         - python >=${{ python_min }}
         - typer
       run_constraints:
