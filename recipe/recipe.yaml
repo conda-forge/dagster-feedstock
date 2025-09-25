@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   # source-of-truth
-  version: 1.11.11
+  version: "1.11.12"
   # convenience
   pip_install: -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
@@ -85,7 +85,7 @@ outputs:
       url: https://pypi.org/packages/source/d/dagster/dagster-${{ version }}.tar.gz
       sha256: 6cc6d97c6895455ee77a4173e03c7313a5504d035896143b25b9418faea2652a
     build:
-      number: ${{ dagster_build_number }}
+      number: 0
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
       python:
