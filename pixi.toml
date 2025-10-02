@@ -7,7 +7,7 @@
 
 [project]
 name = "dagster-feedstock"
-version = "3.52.2"  # conda-smithy version used to generate this file
+version = "3.52.3"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/dagster-feedstock"
 authors = ["@conda-forge/dagster"]
 channels = ["conda-forge"]
