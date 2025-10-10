@@ -59,6 +59,7 @@ outputs:
         - python ${{ python_min }}.*
         - setuptools
       run:
+        - click
         - packaging >=20.9
         - pydantic >=2,<3.0.0
         - python >=${{ python_min }}
@@ -108,7 +109,7 @@ outputs:
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
         - alembic >=1.2.1,!=1.6.3,!=1.7.0,!=1.11.0
         - antlr-python-runtime
-        - click >=5.0,<8.2
+        - click >=5.0,<9.0
         - coloredlogs >=6.1,<=14.0
         - docstring_parser
         - filelock
@@ -236,7 +237,7 @@ outputs:
         - setuptools
       run:
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
-        - click <8.2
+        - click
         - github3.py
         - jinja2
         - packaging >=20.9
@@ -318,7 +319,7 @@ outputs:
       run:
         - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
-        - click >=8,<8.2
+        - click >=8,<9
         - click-aliases
         - gql-with-requests
         - jinja2
