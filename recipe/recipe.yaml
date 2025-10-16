@@ -61,6 +61,7 @@ outputs:
       run:
         - click
         - packaging >=20.9
+        - platformdirs
         - pydantic >=2,<3.0.0
         - python >=${{ python_min }}
         - pyyaml >=5.1
