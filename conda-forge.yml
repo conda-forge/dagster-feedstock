@@ -1,12 +1,16 @@
 azure:
   store_build_artifacts: true
 bot:
-  inspection: hint-all
+  inspection: hint-grayskull
 conda_build:
-  pkg_format: '2'
+  error_overlinking: true
 conda_build_tool: rattler-build
 conda_forge_output_validation: true
 conda_install_tool: pixi
 github:
   branch_name: main
   tooling_branch_name: main
+remote_ci_setup:
+  - conda-build>=24.1
+  - conda-forge-ci-setup=4
+  - rattler-build!=0.49.0
