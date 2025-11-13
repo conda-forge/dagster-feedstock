@@ -249,6 +249,7 @@ outputs:
         - setuptools
         - tomli >=1.1.0
         - typer >=0.4.1
+        - validators
       run_constraints:
         - python ${{ python_min }}.*
     tests:
