@@ -13,4 +13,4 @@ github:
 remote_ci_setup:
   - conda-build>=24.1
   - conda-forge-ci-setup=4
-  - rattler-build!=0.49.0
+  - rattler-build!=0.49.0,!=0.50.0
