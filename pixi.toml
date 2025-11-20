@@ -5,7 +5,7 @@
 
 [workspace]
 name = "dagster-feedstock"
-version = "3.53.0"  # conda-smithy version used to generate this file
+version = "3.53.1"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/dagster-feedstock"
 authors = ["@conda-forge/dagster"]
 channels = ["conda-forge"]
@@ -15,7 +15,7 @@ requires-pixi = ">=0.59.0"
 [dependencies]
 conda-build = ">=24.1"
 conda-forge-ci-setup = "4.*"
-rattler-build = "!=0.49.0"
+rattler-build = "!=0.49.0,!=0.50.0"
 
 [tasks.inspect-all]
 cmd = "inspect_artifacts --all-packages"
