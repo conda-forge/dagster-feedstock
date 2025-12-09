@@ -10,7 +10,3 @@ conda_install_tool: pixi
 github:
   branch_name: main
   tooling_branch_name: main
-remote_ci_setup:
-  - conda-build>=24.1
-  - conda-forge-ci-setup=4
-  - rattler-build!=0.49.0,!=0.50.0,!=0.51.0,!=0.52.0,!=0.53.0
