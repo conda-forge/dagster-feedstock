@@ -100,10 +100,10 @@ outputs:
         - python ${{ python_min }}.*
         - setuptools
       run:
-        - if: python_min in ["3.12", "3.13"]
+        - if: python_min in ["3.12", "3.13", "3.14"]
           then: universal_pathlib >=0.2.0
           else: universal_pathlib
-        - if: python_min in ["3.11", "3.12", "3.13"]
+        - if: python_min in ["3.11", "3.12", "3.13", "3.14"]
           then: protobuf >=4,<7
           else: protobuf >=3.20.0,<7
         - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
@@ -499,7 +499,7 @@ outputs:
         - python ${{ python_min }}.*
     tests:
       # not-yet-available-on-conda-forge
-      - if: python_min not in ["3.13"]
+      - if: python_min not in ["3.13", "3.14"]
         then:
           requirements:
             run:
