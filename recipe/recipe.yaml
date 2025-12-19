@@ -369,7 +369,7 @@ outputs:
         - setuptools
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
-        - gql-with-requests >=3.0.0,<4.0.0
+        - gql-with-requests >=3.0.0,<5.0.0
         - graphene >=3,<4
         - python >=${{ python_min }}
         - requests
