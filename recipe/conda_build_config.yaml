@@ -4,5 +4,4 @@ python_min:
   - "3.11"
   - "3.12"
   - "3.13"
-  # see https://github.com/dagster-io/dagster/issues/32577
-  # - "3.14"
+  - "3.14"
