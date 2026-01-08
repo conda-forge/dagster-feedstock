@@ -47,6 +47,12 @@ description = "Build dagster-feedstock with variant linux_64_python_min3.13 dire
 [tasks."inspect-linux_64_python_min3.13"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python_min3.13.yaml"
 description = "List contents of dagster-feedstock packages built for variant linux_64_python_min3.13"
+[tasks."build-linux_64_python_min3.14"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python_min3.14.yaml"
+description = "Build dagster-feedstock with variant linux_64_python_min3.14 directly (without setup scripts)"
+[tasks."inspect-linux_64_python_min3.14"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python_min3.14.yaml"
+description = "List contents of dagster-feedstock packages built for variant linux_64_python_min3.14"
 
 [feature.smithy.dependencies]
 conda-smithy = "*"
