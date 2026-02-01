@@ -508,6 +508,8 @@ outputs:
               ##  >>> from airflow.hooks.base_hook import BaseHook
               ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
               - airflow <3
+              # apache-airflow-providers-fab 2.4.4 has requirement apache-airflow>=3.0.2, but you have apache-airflow 2.11.0.
+              - apache-airflow-providers-fab <2
               - python ${{ python_min }}.*
           script:
             - pip check
