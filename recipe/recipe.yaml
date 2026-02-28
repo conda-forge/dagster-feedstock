@@ -27,9 +27,9 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - python >=${{ python_min }}
       run_constraints:
@@ -55,9 +55,9 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - packaging >=20.9
         - platformdirs
@@ -95,9 +95,9 @@ outputs:
           - dagster-daemon = dagster.daemon.cli:main
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster-pipes", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
@@ -205,9 +205,9 @@ outputs:
           - create-dagster = create_dagster.cli:main
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
         - python >=${{ python_min }}
@@ -240,9 +240,9 @@ outputs:
           - dagster-plus = dagster_cloud_cli.entrypoint:app
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
         - click
@@ -290,9 +290,9 @@ outputs:
           - dg = dagster_dg_cli.cli:main
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
@@ -324,9 +324,9 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
@@ -373,9 +373,9 @@ outputs:
           - dagster-graphql = dagster_graphql.cli:main
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - gql-with-requests >=3,<5
@@ -418,9 +418,9 @@ outputs:
           - dagster-webserver-debug = dagster_webserver.debug:main
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-graphql", upper_bound="x.x.x") }}
@@ -461,9 +461,9 @@ outputs:
           - dagit-debug = dagster_webserver.debug:main
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster-webserver", upper_bound="x.x.x") }}
         - python >=${{ python_min }}
@@ -495,9 +495,9 @@ outputs:
       script: ${{ PYTHON }} ${{ pip_install }}
     requirements:
       host:
+        - hatchling >=1.19.0
         - pip
         - python ${{ python_min }}.*
-        - setuptools
       run:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - lazy-object-proxy
