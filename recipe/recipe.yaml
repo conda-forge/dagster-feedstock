@@ -116,7 +116,6 @@ outputs:
         - pywin32-on-windows
         - requests
         - rich
-        - setuptools <82
         - six
         - sqlalchemy >=1.0,<3
         - structlog
