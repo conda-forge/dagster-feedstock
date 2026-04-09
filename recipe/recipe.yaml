@@ -147,29 +147,7 @@ outputs:
       - python:
           imports:
             - dagster
-            - dagster.api
-            - dagster.check
-            - dagster.cli
-            - dagster.config
-            - dagster.core.definitions
-            - dagster.core.events
-            - dagster.core.execution
-            - dagster.core.executor
-            - dagster.core.instance
-            - dagster.core.launcher
-            - dagster.core.run_coordinator
-            - dagster.core.scheduler
-            - dagster.core.selector
-            - dagster.core.snap
-            - dagster.core.storage
-            - dagster.core.system_config
-            - dagster.core.types
-            - dagster.core.workspace
-            - dagster.daemon
-            - dagster.grpc
-            - dagster.loggers
-            - dagster.seven
-            - dagster.utils
+            - dagster.components.core
           pip_check: true
           python_version: ${{ python_min }}.*
       - script:
