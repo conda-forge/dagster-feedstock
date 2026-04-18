@@ -389,7 +389,7 @@ outputs:
       name: dagster-rest-resources
       version: ${{ dagster_libs_version }}
     source:
-      url: https://pypi.org/packages/source/d/dagster-rest-resources/dagster_rest_resources-${{ version }}.tar.gz
+      url: https://pypi.org/packages/source/d/dagster-rest-resources/dagster_rest_resources-${{ dagster_libs_version }}.tar.gz
       sha256: c1a0e8a7e5fafba9cc9b1957357df5c230d6cfc29c4dd729d405aa10e4884bc9
     build:
       noarch: python
