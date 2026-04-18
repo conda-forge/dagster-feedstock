@@ -4,6 +4,9 @@ schema_version: 1
 context:
   # source-of-truth
   version: "1.13.1"
+  # derived
+  patch_version: ${{ (version | split('.'))[2] }}
+  dagster_libs_version: 0.29.${{ patch_version }}
   # convenience
   pip_install: -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
@@ -274,7 +277,7 @@ outputs:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
         - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - dagster-rest-resources ${{ dagster_version }}.*
+        - ${{ pin_subpackage("dagster-rest-resources", upper_bound="x.x.x") }}
         - python >=${{ python_min }}
         - typer
       run_constraints:
@@ -381,6 +384,37 @@ outputs:
       license: Apache-2.0
       license_file: LICENSE
       summary: The GraphQL frontend to python dagster.
+
+  - package:
+      name: dagster-rest-resources
+      version: ${{ dagster_libs_version }}
+    source:
+      url: https://pypi.org/packages/source/d/dagster-rest-resources/dagster_rest_resources-${{ version }}.tar.gz
+      sha256: c1a0e8a7e5fafba9cc9b1957357df5c230d6cfc29c4dd729d405aa10e4884bc9
+    build:
+      noarch: python
+      script: ${{ PYTHON }} ${{ pip_install }}
+    requirements:
+      host:
+        - hatchling >=1.19.0
+        - pip
+        - python ${{ python_min }}.*
+      run:
+        - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
+        - gql-with-requests >=3.5.0
+        - pydantic >=2.12.5
+        - python >=${{ python_min }}
+        - requests >=2.33.0
+    tests:
+      - python:
+          imports: dagster_rest_resources
+          pip_check: true
+          python_version: ${{ python_min }}.*
+    about:
+      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-rest-resources
+      license: Apache-2.0
+      license_file: LICENSE
+      summary: Dagster functionality as REST-style resources
 
   - package:
       name: dagster-webserver
