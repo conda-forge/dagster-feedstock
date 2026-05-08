@@ -401,7 +401,6 @@ outputs:
         - python ${{ python_min }}.*
       run:
         - ${{ pin_subpackage("dagster-shared", upper_bound="x.x.x") }}
-        - gql-with-requests >=3.5.0
         - httpx >=0.27.0
         - pydantic >=2.12.5
         - python >=${{ python_min }}
