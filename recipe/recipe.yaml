@@ -257,44 +257,47 @@ outputs:
       license_file: LICENSE
       summary: Command line interface for Dagster Cloud
 
-  - package:
-      name: dagster-dg-cli
-    source:
-      url: https://pypi.org/packages/source/d/dagster-dg-cli/dagster_dg_cli-${{ version }}.tar.gz
-      sha256: ab37ed0d038b9696556bdd22d34abf5f31dc5b261ee9b682dbacaa4552b628ea
-    build:
-      noarch: python
-      script: ${{ PYTHON }} ${{ pip_install }}
-      python:
-        entry_points:
-          - dg = dagster_dg_cli.cli:main
-    requirements:
-      host:
-        - hatchling >=1.19.0
-        - pip
-        - python ${{ python_min }}.*
-      run:
-        - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
-        - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
-        - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
-        - ${{ pin_subpackage("dagster-rest-resources", upper_bound="x.x.x") }}
-        - githubkit
-        - python >=${{ python_min }}
-        - typer
-      run_constraints:
-        - python ${{ python_min }}.*
-    tests:
-      - python:
-          imports: dagster_dg_cli
-          pip_check: true
-          python_version: ${{ python_min }}.*
-      - script:
-          - dg --help
-    about:
-      homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dg-cli
-      license: Apache-2.0
-      license_file: LICENSE
-      summary: Experimental API for scaffolding Dagster projects and components. Includes the dg CLI tool.
+  # TODO: restore after https://github.com/conda-forge/dagster-libs-feedstock/issues/234
+  #   e.g. https://github.com/conda-forge/githubkit-feedstock is available
+  #
+  # - package:
+  #     name: dagster-dg-cli
+  #   source:
+  #     url: https://pypi.org/packages/source/d/dagster-dg-cli/dagster_dg_cli-${{ version }}.tar.gz
+  #     sha256: ab37ed0d038b9696556bdd22d34abf5f31dc5b261ee9b682dbacaa4552b628ea
+  #   build:
+  #     noarch: python
+  #     script: ${{ PYTHON }} ${{ pip_install }}
+  #     python:
+  #       entry_points:
+  #         - dg = dagster_dg_cli.cli:main
+  #   requirements:
+  #     host:
+  #       - hatchling >=1.19.0
+  #       - pip
+  #       - python ${{ python_min }}.*
+  #     run:
+  #       - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
+  #       - ${{ pin_subpackage("dagster-cloud-cli", upper_bound="x.x.x") }}
+  #       - ${{ pin_subpackage("dagster-dg-core", upper_bound="x.x.x") }}
+  #       - ${{ pin_subpackage("dagster-rest-resources", upper_bound="x.x.x") }}
+  #       - githubkit
+  #       - python >=${{ python_min }}
+  #       - typer
+  #     run_constraints:
+  #       - python ${{ python_min }}.*
+  #   tests:
+  #     - python:
+  #         imports: dagster_dg_cli
+  #         pip_check: true
+  #         python_version: ${{ python_min }}.*
+  #     - script:
+  #         - dg --help
+  #   about:
+  #     homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/libraries/dagster-dg-cli
+  #     license: Apache-2.0
+  #     license_file: LICENSE
+  #     summary: Experimental API for scaffolding Dagster projects and components. Includes the dg CLI tool.
 
   - package:
       name: dagster-dg-core
