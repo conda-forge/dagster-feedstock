@@ -8,7 +8,7 @@ context:
   patch_version: ${{ (version | split('.'))[2] }}
   dagster_libs_version: 0.29.${{ patch_version }}
   # convenience
-  pip_install: \
+  pip_install: |-
     -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check --check-build-dependencies
 
 recipe:
