@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   # source-of-truth
-  version: "1.13.24"
+  version: "1.13.25"
   # derived
   patch_version: ${{ (version | split('.'))[2] }}
   dagster_libs_version: 0.29.${{ patch_version }}
@@ -25,7 +25,7 @@ outputs:
       name: dagster-pipes
     source:
       url: https://pypi.org/packages/source/d/dagster-pipes/dagster_pipes-${{ version }}.tar.gz
-      sha256: fceb3efbc62346d3ed543544e82969bb01c9ba2bfaeb77eebb7066b881814ab3
+      sha256: b8d18fa37936f91892ee6e49532ab6309e0e10897b9fd696f43f4306871050eb
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -39,6 +39,11 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_pipes/**
+            - dagster_pipes-${{ version }}.dist-info/**
       - python:
           imports: dagster_pipes
           pip_check: true
@@ -53,7 +58,7 @@ outputs:
       name: dagster-shared
     source:
       url: https://pypi.org/packages/source/d/dagster-shared/dagster_shared-${{ version }}.tar.gz
-      sha256: af4f94702be760e840107e000646af36e8c2f8cd7fa5407b9734e7aa71e48bcc
+      sha256: adc3701f61e4a2110d27ff298001083696506453dfae18f7264c5f73326ba41d
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -73,6 +78,11 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_shared/**
+            - dagster_shared-${{ version }}.dist-info/**
       - python:
           imports: dagster_shared
           pip_check: true
@@ -88,7 +98,7 @@ outputs:
       name: dagster
     source:
       url: https://pypi.org/packages/source/d/dagster/dagster-${{ version }}.tar.gz
-      sha256: 68a7c4317c2a122c5dfeb19d0ff209246ddc8c4e49810d59b75d6684535d8dbc
+      sha256: 27b4bd21c9f97df40b660a828da5ac585474cfa1f8268fb9a5e62b3055bf7afe
     build:
       number: 0
       noarch: python
@@ -146,6 +156,11 @@ outputs:
         - python ${{ python_min }}.*
         - pywin32 !=226
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster/**
+            - dagster-${{ version }}.dist-info/**
       - python:
           imports:
             - dagster
@@ -175,7 +190,7 @@ outputs:
       name: create-dagster
     source:
       url: https://pypi.org/packages/source/c/create-dagster/create_dagster-${{ version }}.tar.gz
-      sha256: 66e5f97c159034528c416d5abcabe689372c6344764df0207157070465bf4d03
+      sha256: a7ef6fef58c15e2c546b493f254071d7ab429be58d680749144bb56d7a644bf1
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -193,6 +208,11 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - create_dagster/**
+            - create_dagster-${{ version }}.dist-info/**
       - python:
           imports: create_dagster
           pip_check: true
@@ -209,7 +229,7 @@ outputs:
       name: dagster-cloud-cli
     source:
       url: https://pypi.org/packages/source/d/dagster-cloud-cli/dagster_cloud_cli-${{ version }}.tar.gz
-      sha256: 535328d7e6702f20083fbcb0aeddd1e2863b98efbb48dd4455cc770897de7389
+      sha256: b7904a6601cadbe61e9484d958c06a2e178f1eebf2da74cbaef4a9f8b15021a2
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -238,14 +258,16 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_cloud_cli/**
+            - dagster_cloud_cli-${{ version }}.dist-info/**
       - python:
           imports: dagster_cloud_cli
           pip_check: true
           python_version: ${{ python_min }}.*
-      - requirements:
-          run:
-            - python ${{ python_min }}.*
-        script:
+      - script:
           - dagster-cloud --help
           - dagster-plus --help
     about:
@@ -258,7 +280,7 @@ outputs:
       name: dagster-dg-cli
     source:
       url: https://pypi.org/packages/source/d/dagster-dg-cli/dagster_dg_cli-${{ version }}.tar.gz
-      sha256: a6ac181eaa36280d0fb290322ddea90976002fcf7f39b4ba9adfd159688fd96d
+      sha256: 39e4f9aa86d6ed94be8f651691eba6b0a919577e865ee45de40e60afe4da40e4
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -281,6 +303,11 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_dg_cli/**
+            - dagster_dg_cli-${{ version }}.dist-info/**
       - python:
           imports: dagster_dg_cli
           pip_check: true
@@ -297,7 +324,7 @@ outputs:
       name: dagster-dg-core
     source:
       url: https://pypi.org/packages/source/d/dagster-dg-core/dagster_dg_core-${{ version }}.tar.gz
-      sha256: 4dc21cf4e16e1a0d253f637c1fac8cea1ac0b9acec2bdff7444b376734d5456d
+      sha256: f1ef13f30bd8740f5a9708c1346a821e94884c5045e2aefb44a53f065cdfc453
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -329,6 +356,11 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_dg_core/**
+            - dagster_dg_core-${{ version }}.dist-info/**
       - python:
           imports: dagster_dg_core
           pip_check: true
@@ -343,7 +375,7 @@ outputs:
       name: dagster-graphql
     source:
       url: https://pypi.org/packages/source/d/dagster-graphql/dagster_graphql-${{ version }}.tar.gz
-      sha256: 5168ed9291be998896eab7140d75600359f0c845b378a301f2965470c2e0df12
+      sha256: 94a52332761d812127b0ee87c090d9f024f357b5928359b6f1f1197ff0bac024
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -365,6 +397,11 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_graphql/**
+            - dagster_graphql-${{ version }}.dist-info/**
       - python:
           imports:
             - dagster_graphql
@@ -372,10 +409,7 @@ outputs:
             - dagster_graphql.schema
           pip_check: true
           python_version: ${{ python_min }}.*
-      - requirements:
-          run:
-            - python ${{ python_min }}.*
-        script:
+      - script:
           - dagster-graphql --help
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagster-graphql
@@ -388,7 +422,7 @@ outputs:
       version: ${{ dagster_libs_version }}
     source:
       url: https://pypi.org/packages/source/d/dagster-rest-resources/dagster_rest_resources-${{ dagster_libs_version }}.tar.gz
-      sha256: 34d1dc1c2586453467a67652304180eec76745ed9bbca651a5139fa1ab21e68b
+      sha256: 04edacc25828c853859df000540384117d30dc66c70bfbcf4b2f898b19c4b1ec
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -403,6 +437,11 @@ outputs:
         - pydantic >=2.12.5
         - python >=${{ python_min }}
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_rest_resources/**
+            - dagster_rest_resources-${{ version }}.dist-info/**
       - python:
           imports: dagster_rest_resources
           pip_check: true
@@ -417,7 +456,7 @@ outputs:
       name: dagster-webserver
     source:
       url: https://pypi.org/packages/source/d/dagster-webserver/dagster_webserver-${{ version }}.tar.gz
-      sha256: 3c9628a420654f2725440843b37f1d4a16ec83a3eb5ccd18de1ebb99fa39fe28
+      sha256: f62f8435b73dbbc0a17b0147cb24336fcf42521468de80468d692066dd00fa23
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -440,14 +479,16 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_webserver/**
+            - dagster_webserver-${{ version }}.dist-info/**
       - python:
           imports: dagster_webserver
           pip_check: true
           python_version: ${{ python_min }}.*
-      - requirements:
-          run:
-            - python ${{ python_min }}.*
-        script:
+      - script:
           - dagster-webserver --help
           - dagster-webserver-debug --help
     about:
@@ -460,7 +501,7 @@ outputs:
       name: dagit
     source:
       url: https://pypi.org/packages/source/d/dagit/dagit-${{ version }}.tar.gz
-      sha256: e50c4844f486673282822e89f268d2dce07dc1de1d5f7f1c5a8b186fd27256e1
+      sha256: b2831b3a6304beda08ace1a2b6f0fdd079179c42c9fd3fbb882cf2ab2ac64dd9
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -479,15 +520,18 @@ outputs:
       run_constraints:
         - python ${{ python_min }}.*
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagit/**
+            - dagit-${{ version }}.dist-info/**
       - python:
           imports: dagit
           pip_check: true
           python_version: ${{ python_min }}.*
-      - requirements:
-          run:
-            - python ${{ python_min }}.*
-        script:
+      - script:
           - dagit --help
+          - dagit-debug --help
     about:
       homepage: https://github.com/dagster-io/dagster/tree/master/python_modules/dagit
       license: Apache-2.0
@@ -498,7 +542,7 @@ outputs:
       name: dagster-airflow
     source:
       url: https://pypi.org/packages/source/d/dagster-airflow/dagster_airflow-${{ version }}.tar.gz
-      sha256: 406d469a058d71ea0bb097797f826aeb89d4be2992abd811add70e422c23129c
+      sha256: d6bb8ff513bb1f85e9f28e7b9bd929d221bbf1fb7457a1d2c1cfe4f14ca07da9
     build:
       noarch: python
       script: ${{ PYTHON }} ${{ pip_install }}
@@ -518,18 +562,23 @@ outputs:
           then: pendulum
       run_constraints:
         - python ${{ python_min }}.*
+
+    # newer python errors with:
+    ##  >>> from airflow.hooks.base_hook import BaseHook
+    ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
+    # apache-airflow-providers-fab 2.4.4 has requirement apache-airflow>=3.0.2, but you have apache-airflow 2.11.0.
     tests:
-      # not-yet-available-on-conda-forge
+      - package_contents:
+          strict: true
+          site_packages:
+            - dagster_airflow/**
+            - dagster_airflow-${{ version }}.dist-info/**
       - if: not match(python_min, ">=3.13")
         then:
           requirements:
             run:
               - pip
-              # errors with:
-              ##  >>> from airflow.hooks.base_hook import BaseHook
-              ##  ModuleNotFoundError: No module named 'airflow.hooks.base_hook'
               - airflow <3
-              # apache-airflow-providers-fab 2.4.4 has requirement apache-airflow>=3.0.2, but you have apache-airflow 2.11.0.
               - apache-airflow-providers-fab <2
               - python ${{ python_min }}.*
           script:
