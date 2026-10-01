@@ -441,7 +441,7 @@ outputs:
           strict: true
           site_packages:
             - dagster_rest_resources/**
-            - dagster_rest_resources-${{ version }}.dist-info/**
+            - dagster_rest_resources-${{ dagster_libs_version }}.dist-info/**
       - python:
           imports: dagster_rest_resources
           pip_check: true
