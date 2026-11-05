@@ -300,7 +300,7 @@ outputs:
         - ${{ pin_subpackage("dagster-rest-resources", upper_bound="x.x.x") }}
         - python >=${{ python_min }}
         - requests
-        - typer
+        - typer <0.26
       run_constraints:
         - python ${{ python_min }}.*
     tests:
@@ -350,7 +350,7 @@ outputs:
         - rich
         - setuptools
         - tomlkit <0.16,!=0.13.3
-        - typer >=0.15.1,<1.0
+        - typer >=0.15.1,<0.26
         - typing_extensions >=4.4.0,<5
         - watchdog
         - yaspin
