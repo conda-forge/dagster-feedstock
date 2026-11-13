@@ -122,6 +122,7 @@ outputs:
         - docstring_parser
         - filelock
         - jinja2
+        - protobuf >=4,<8
         - psutil >=1.0
         - python >=${{ python_min }}
         - python-dotenv
@@ -146,8 +147,6 @@ outputs:
           then: grpcio-health-checking >=1.44.0,!=1.82.0
         - if: match(python_min, ">=3.13")
           then: grpcio-health-checking >=1.66.2,!=1.82.0
-        - if: match(python_min, ">=3.11")
-          then: protobuf >=4,<8
         - if: match(python_min, ">=3.12")
           then: universal_pathlib >=0.2.0
         - if: match(python_min, "<3.12")
@@ -556,7 +555,6 @@ outputs:
         - ${{ pin_subpackage("dagster", upper_bound="x.x.x") }}
         - lazy-object-proxy
         - python >=${{ python_min }}
-        - setuptools <71.0.0
         - if: match(python_min, ">=3.12")
           then: pendulum >=3
         - if: match(python_min, "<3.12")
